@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Signup from '../components/Signup.astro';
 import PostCard from '../components/PostCard.astro';
 import {allPosts, seriesMap, slugify} from '../lib/posts';
+import {CHANNEL_URL} from '../lib/channel';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const posts = await allPosts();
@@ -17,11 +18,10 @@ const series = [...(await seriesMap()).entries()];
 // goes stale as the library grows.
 const heroTerminal = posts.find((p) => p.data.terminal)?.data.terminal;
 
-const CHANNEL = 'https://www.youtube.com/@CodeWithSam';
 ---
 
 <Base
-  title="Code with Sam - Interview Prep for the AI Era"
+  title="Code with Sam - Software Engineering for the AI Era"
   description="Modern software engineering interview preparation. Kafka, Java, Spring, system design and architecture, explained the way interviewers actually expect you to explain them."
 >
   <section class="hero">
@@ -41,7 +41,7 @@ const CHANNEL = 'https://www.youtube.com/@CodeWithSam';
 
       <div class="hero-actions" data-reveal>
         <a class="btn btn-primary" href="#articles">Start reading</a>
-        <a class="btn btn-ghost" href={CHANNEL} rel="noopener">Watch on YouTube</a>
+        <a class="btn btn-ghost" href={CHANNEL_URL} rel="noopener">Watch on YouTube</a>
       </div>
 
       <div class="terminal" data-reveal data-delay="1">
