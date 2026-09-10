@@ -15,8 +15,9 @@
   --surface: #ffffff;
   --ink: #12161f;
   --ink-soft: #5a6473;
-  --primary: #2563eb;
-  --primary-soft: #dce7fe;
+  --primary: #5b3ce0;        /* text and links on light: passes contrast */
+  --primary-vivid: #7c5cff;  /* fills, rules, anything on a dark surface */
+  --primary-soft: #e8e3ff;
   --warn: #d93a3a;
   --hairline: #d9dde4;
 
@@ -35,8 +36,9 @@
     --surface: #161a20;
     --ink: #e9edf2;
     --ink-soft: #9aa4b2;
-    --primary: #6b9bff;
-    --primary-soft: #1c2740;
+    --primary: #a996ff;
+    --primary-vivid: #7c5cff;
+    --primary-soft: #241c4a;
     --hairline: #262c35;
   }
 }
@@ -371,8 +373,8 @@ hr {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(107, 155, 255, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(107, 155, 255, 0.07) 1px, transparent 1px);
+    linear-gradient(rgba(124, 92, 255, 0.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 92, 255, 0.10) 1px, transparent 1px);
   background-size: 46px 46px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
 }
@@ -391,14 +393,14 @@ hr {
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #6b9bff;
+  color: #7c5cff;
   margin-bottom: 1.1rem;
 }
 .eyebrow::before {
   content: '';
   width: 28px;
   height: 2px;
-  background: #6b9bff;
+  background: #7c5cff;
 }
 
 .hero h1 {
@@ -408,7 +410,7 @@ hr {
   margin: 0 0 1.1rem;
   color: #fff;
 }
-.hero h1 .accent { color: #6b9bff; }
+.hero h1 .accent { color: #7c5cff; }
 
 .hero p.lede {
   font-size: clamp(1.05rem, 2.2vw, 1.25rem);
@@ -435,10 +437,11 @@ hr {
   transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
 }
 .btn:hover { transform: translateY(-2px); }
-.btn-primary { background: #2563eb; color: #fff; }
-.btn-primary:hover { background: #1d55d0; }
+/* Violet is dark enough to carry white text, unlike the teal it replaced. */
+.btn-primary { background: #7c5cff; color: #fff; }
+.btn-primary:hover { background: #6b48f5; }
 .btn-ghost { border-color: #39414f; color: #e9edf2; }
-.btn-ghost:hover { border-color: #6b9bff; color: #fff; }
+.btn-ghost:hover { border-color: #7c5cff; color: #fff; }
 
 /* ---------- terminal card in the hero ---------- */
 
@@ -470,7 +473,7 @@ hr {
 .terminal .c-dim { color: #6e7781; }
 .terminal .c-ok  { color: #3fb950; }
 .terminal .c-bad { color: #f85149; }
-.terminal .c-key { color: #79c0ff; }
+.terminal .c-key { color: #a996ff; }
 
 /* ---------- numbered feature cards ---------- */
 
