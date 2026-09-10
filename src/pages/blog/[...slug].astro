@@ -2,6 +2,7 @@
 import {getCollection} from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Signup from '../../components/Signup.astro';
+import {poster} from '../../lib/posts';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({data}) => !data.draft);
@@ -29,6 +30,8 @@ const others = (await getCollection('blog', ({data}) => !data.draft))
   .slice(0, 2);
 
 const CHANNEL_URL = 'https://www.youtube.com/@CodeWithSam';
+
+const art = post.data.cover ? poster(post.data.cover) : undefined;
 ---
 
 <Base title={`${post.data.title} - Code with Sam`} description={post.data.description}>
@@ -40,16 +43,38 @@ const CHANNEL_URL = 'https://www.youtube.com/@CodeWithSam';
     </div>
 
     {
-      post.data.youtube && (
-        <div class="video">
-          <iframe
-            src={`https://www.youtube-nocookie.com/embed/${post.data.youtube}`}
-            title={post.data.title}
-            loading="lazy"
-            allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"
-            allowfullscreen
-          />
-        </div>
+      /*
+        Click-to-load player.
+
+        The poster is our own still, so nothing is requested from YouTube until
+        the reader actually asks to watch. That keeps the article fast, keeps a
+        third party out of a page view that was never a video view, and means
+        the block renders identically before the episode is uploaded - only the
+        button underneath changes.
+      */
+      art && (
+        <figure class="video-preview">
+          <div class="video-shell" data-video={post.data.youtube ?? ''} data-title={post.data.title}>
+            <img src={art.full} width="1280" height="720" alt={`Thumbnail for ${post.data.title}`} />
+            {post.data.youtube ? (
+              <button type="button" class="play-btn" aria-label={`Play: ${post.data.title}`}>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" /></svg>
+              </button>
+            ) : (
+              <span class="play-btn pending" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" /></svg>
+              </span>
+            )}
+            {post.data.duration && <span class="runtime">{post.data.duration}</span>}
+          </div>
+          <figcaption>
+            {post.data.youtube ? (
+              <>Watch on <a href={`https://www.youtube.com/watch?v=${post.data.youtube}`} rel="noopener">YouTube</a>, or read on below.</>
+            ) : (
+              <>The episode is being published to <a href={CHANNEL_URL} rel="noopener">the channel</a>. Subscribe and it will find you. The write-up below stands on its own in the meantime.</>
+            )}
+          </figcaption>
+        </figure>
       )
     }
 
@@ -78,7 +103,10 @@ const CHANNEL_URL = 'https://www.youtube.com/@CodeWithSam';
           {others.map((p) => (
             <li>
               <h2>
-                <a href={`${base}/blog/${p.slug}`}>{p.data.title}</a>
+                <a href={`${base}/blog/${p.slug}`}>
+                  {p.data.title}
+                  <span class="arrow">&rarr;</span>
+                </a>
               </h2>
               <p>{p.data.description}</p>
             </li>
@@ -98,3 +126,24 @@ const CHANNEL_URL = 'https://www.youtube.com/@CodeWithSam';
 
   <Signup compact />
 </Base>
+
+<script>
+  /*
+    Replace the poster with the real player on click. Nothing here runs, and no
+    YouTube resource is fetched, unless the reader presses play.
+  */
+  document.querySelectorAll('.video-shell').forEach((shell) => {
+    const id = shell.getAttribute('data-video');
+    if (!id) return;
+    shell.querySelector('.play-btn')?.addEventListener('click', () => {
+      const frame = document.createElement('iframe');
+      frame.src =
+        'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+      frame.title = shell.getAttribute('data-title') || 'Video';
+      frame.allow =
+        'accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture';
+      frame.setAttribute('allowfullscreen', '');
+      shell.replaceChildren(frame);
+    });
+  });
+</script>

@@ -2,9 +2,23 @@
 title: 'Kafka Ordering Explained: The Mistake That Breaks Your System'
 description: 'Kafka guarantees ordering - but only within a partition. Here is what that actually means, why your consumer can still break it, and a repo you can run to watch it happen.'
 pubDate: 2026-09-10
-youtube: 'REPLACE_WITH_VIDEO_ID'
 repo: 'https://github.com/code-with-sam-dev/kafka-payments/tree/main/episode-01-ordering'
 tags: ['kafka', 'interviews']
+series: 'Kafka Payments'
+episode: 1
+cover: '/covers/kafka-ordering.jpg'
+duration: '4:18'
+terminal:
+  path: 'kafka-payments / episode-01-ordering'
+  lines:
+    - '$ docker compose up'
+    - '$ curl localhost:8080/demo/results'
+    - ''
+    - '  broken   ordered: false   COMPLETED, INITIATED, AUTHORIZED'
+    - '  correct  ordered: true    INITIATED, AUTHORIZED, COMPLETED'
+    - ''
+    - '# Same records. Same order from Kafka.'
+    - '# One consumer threw the guarantee away.'
 ---
 
 "We're using Kafka, so ordering is guaranteed."

@@ -1,0 +1,56 @@
+---
+import {fmtDate, poster} from '../lib/posts';
+
+const {post, delay = 0} = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const href = `${base}/blog/${post.slug}`;
+
+/*
+  Video preview on the card.
+
+  The poster is a still we rendered, not a YouTube thumbnail, so the card looks
+  finished before a single video is uploaded. When `youtube` is filled in the
+  play badge simply becomes truthful; nothing about the layout moves.
+*/
+const art = post.data.cover ? poster(post.data.cover) : undefined;
+const live = Boolean(post.data.youtube);
+---
+<li data-reveal data-delay={String(Math.min(delay, 3))}>
+  {art && (
+    <a class="card-poster" href={href} tabindex="-1" aria-hidden="true">
+      <img
+        src={art.src}
+        srcset={art.srcset}
+        sizes="(max-width: 760px) 100vw, 260px"
+        width="640"
+        height="360"
+        loading="lazy"
+        decoding="async"
+        alt=""
+      />
+      <span class={`play ${live ? '' : 'pending'}`}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" /></svg>
+      </span>
+      {post.data.duration && <span class="runtime">{post.data.duration}</span>}
+    </a>
+  )}
+
+  <div class="card-body">
+    <h2>
+      <a href={href}>
+        {post.data.title}
+        <span class="arrow">&rarr;</span>
+      </a>
+    </h2>
+    <p>{post.data.description}</p>
+    <div class="meta">
+      {post.data.series && post.data.episode && (
+        <span class="tag strong">{post.data.series} #{post.data.episode}</span>
+      )}
+      <span>{fmtDate(post.data.pubDate)}</span>
+      {live && <span class="tag">video</span>}
+      {post.data.repo && <span class="tag">code</span>}
+      {post.data.tags.map((t: string) => <span class="tag">{t}</span>)}
+    </div>
+  </div>
+</li>

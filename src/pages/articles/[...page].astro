@@ -1,0 +1,50 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+import {allPosts} from '../../lib/posts';
+
+export async function getStaticPaths({paginate}) {
+  // 10 per page. Enough to browse, few enough to stay fast on a phone.
+  return paginate(await allPosts(), {pageSize: 10});
+}
+
+const {page} = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<Base
+  title={`Articles${page.currentPage > 1 ? ` (page ${page.currentPage})` : ''} - Code with Sam`}
+  description="Every article: Kafka, Java, Spring, system design and architecture, written for senior backend interviews."
+>
+  <div class="section-head" data-reveal>
+    <p class="eyebrow" style="color:var(--primary)">Archive</p>
+    <h1>All articles</h1>
+    <p style="color:var(--ink-soft)">
+      {page.total} {page.total === 1 ? 'article' : 'articles'}, newest first.
+    </p>
+  </div>
+
+  <ul class="post-list">
+    {page.data.map((post, i) => <PostCard post={post} delay={i} />)}
+  </ul>
+
+  {
+    page.lastPage > 1 && (
+      <nav class="pager" data-reveal>
+        {page.url.prev ? (
+          <a class="btn btn-ghost" href={page.url.prev}>&larr; Newer</a>
+        ) : (
+          <span />
+        )}
+        <span class="pager-count">
+          Page {page.currentPage} of {page.lastPage}
+        </span>
+        {page.url.next ? (
+          <a class="btn btn-ghost" href={page.url.next}>Older &rarr;</a>
+        ) : (
+          <span />
+        )}
+      </nav>
+    )
+  }
+</Base>

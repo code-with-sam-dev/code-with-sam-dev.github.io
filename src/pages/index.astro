@@ -1,14 +1,21 @@
 ---
-import {getCollection} from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Signup from '../components/Signup.astro';
+import PostCard from '../components/PostCard.astro';
+import {allPosts, seriesMap, slugify} from '../lib/posts';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const posts = (await getCollection('blog', ({data}) => !data.draft)).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
-const fmt = (d: Date) =>
-  d.toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'});
+const posts = await allPosts();
+
+// The homepage shows a curated handful. Everything else lives in the archive,
+// so this page stays the same length whether there are 3 articles or 300.
+const LATEST_COUNT = 6;
+const latest = posts.slice(0, LATEST_COUNT);
+const series = [...(await seriesMap()).entries()];
+
+// The hero terminal follows the newest article that supplies one, so it never
+// goes stale as the library grows.
+const heroTerminal = posts.find((p) => p.data.terminal)?.data.terminal;
 
 const CHANNEL = 'https://www.youtube.com/@CodeWithSam';
 ---
@@ -42,16 +49,16 @@ const CHANNEL = 'https://www.youtube.com/@CodeWithSam';
           <i style="background:#f85149"></i>
           <i style="background:#d29922"></i>
           <i style="background:#3fb950"></i>
-          <span class="t">kafka-payments / episode-01-ordering</span>
+          <span class="t">{heroTerminal?.path ?? 'kafka-payments'}</span>
         </div>
-        <pre><code><span class="c-dim">$</span> docker compose up
-<span class="c-dim">$</span> curl <span class="c-key">localhost:8080/demo/results</span>
-
-  broken   ordered: <span class="c-bad">false</span>   COMPLETED, INITIATED, AUTHORIZED
-  correct  ordered: <span class="c-ok">true</span>    INITIATED, AUTHORIZED, COMPLETED
-
-<span class="c-dim"># Same records. Same order from Kafka.</span>
-<span class="c-dim"># One consumer threw the guarantee away.</span></code></pre>
+        <pre><code>{
+          (heroTerminal?.lines ?? [
+            '$ docker compose up',
+            '$ curl localhost:8080/demo/results',
+            '',
+            '  Every episode ships with code you can run.',
+          ]).join('\n')
+        }</code></pre>
       </div>
     </div>
   </section>
@@ -88,30 +95,50 @@ const CHANNEL = 'https://www.youtube.com/@CodeWithSam';
     </article>
   </div>
 
-  <div class="section-head" id="articles" data-reveal>
-    <p class="eyebrow" style="color:var(--primary)">Latest</p>
-    <h2>Articles</h2>
+  {
+    series.length > 0 && (
+      <>
+        <div class="section-head" data-reveal>
+          <p class="eyebrow" style="color:var(--primary)">Follow along</p>
+          <h2>Series</h2>
+        </div>
+        <div class="cards">
+          {series.map(([name, items], i) => (
+            <a
+              class="card series-card"
+              href={`${base}/series/${slugify(name)}`}
+              data-reveal
+              data-delay={String(Math.min(i, 3))}
+            >
+              <span class="num">{String(items.length).padStart(2, '0')}</span>
+              <h3>{name}</h3>
+              <p>
+                {items.length} {items.length === 1 ? 'episode' : 'episodes'}.
+                The code builds on itself from the first one.
+              </p>
+            </a>
+          ))}
+        </div>
+      </>
+    )
+  }
+
+  <div class="section-head list-head" id="articles" data-reveal>
+    <div>
+      <p class="eyebrow" style="color:var(--primary)">Latest</p>
+      <h2>Articles</h2>
+    </div>
+    {
+      posts.length > LATEST_COUNT && (
+        <a class="see-all" href={`${base}/articles`}>
+          All {posts.length} articles <span class="arrow">&rarr;</span>
+        </a>
+      )
+    }
   </div>
 
   <ul class="post-list">
-    {
-      posts.map((post, i) => (
-        <li data-reveal data-delay={String(Math.min(i, 3))}>
-          <h2>
-            <a href={`${base}/blog/${post.slug}`}>{post.data.title}</a>
-          </h2>
-          <p>{post.data.description}</p>
-          <div class="meta">
-            <span>{fmt(post.data.pubDate)}</span>
-            {post.data.youtube && <span class="tag">video</span>}
-            {post.data.repo && <span class="tag">code</span>}
-            {post.data.tags.map((t) => (
-              <span class="tag">{t}</span>
-            ))}
-          </div>
-        </li>
-      ))
-    }
+    {latest.map((post, i) => <PostCard post={post} delay={i} />)}
   </ul>
 
   {posts.length === 0 && <p><em>First article lands with episode one.</em></p>}

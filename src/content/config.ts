@@ -18,6 +18,36 @@ const blog = defineCollection({
     repo: z.string().url().optional(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
+
+    /**
+     * Series membership. An article that belongs to a playlist declares which
+     * one and where it sits, so series pages order themselves and every article
+     * can offer the next episode without any per-article wiring.
+     */
+    series: z.string().optional(),
+    episode: z.number().optional(),
+
+    /**
+     * Local poster for this article's video, e.g. '/covers/kafka-ordering.jpg'.
+     *
+     * Deliberately NOT a YouTube thumbnail URL. The poster is a still we
+     * rendered ourselves, so the preview works before the video is uploaded,
+     * does not break if a video is ever replaced or made private, and does not
+     * call Google on a page the reader has not asked to watch anything on.
+     * A sibling '<name>-card.jpg' at 640x360 is used for list cards.
+     */
+    cover: z.string().optional(),
+
+    /** Runtime, e.g. '4:18'. Shown on the poster badge. */
+    duration: z.string().optional(),
+
+    /** Optional hero terminal snippet, used when this is the newest article. */
+    terminal: z
+      .object({
+        path: z.string(),
+        lines: z.array(z.string()),
+      })
+      .optional(),
   }),
 });
 
