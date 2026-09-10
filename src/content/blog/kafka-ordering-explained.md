@@ -1,7 +1,8 @@
 ---
-title: 'Kafka Ordering Explained: The Mistake That Breaks Your System'
+title: 'Kafka Ordering Explained: Why Your Messages Still Arrive Out of Order'
 description: 'Kafka guarantees ordering - but only within a partition. Here is what that actually means, why your consumer can still break it, and a repo you can run to watch it happen.'
 pubDate: 2026-09-10
+youtube: 'Oa9vjdg232g'
 repo: 'https://github.com/code-with-sam-dev/kafka-payments/tree/main/episode-01-ordering'
 tags: ['kafka', 'interviews']
 series: 'Kafka Payments'
