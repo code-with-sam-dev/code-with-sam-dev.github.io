@@ -15,27 +15,30 @@
  *                 which puts the address straight back into the HTML. That is
  *                 the exact problem we are solving.
  *   Formspree     hides the address behind a form id, but the free tier caps
- *                 at 50 submissions a month and needs an account.
- *   Web3Forms     hides the address behind an access key, is free with no
- *                 submission cap, and needs no dashboard login.
+ *                 at 50 submissions a month.
+ *   Web3Forms     hides the address behind an access key, and the free tier
+ *                 allows 250 submissions a month.
+ *
+ * Verified on their site 2026-09-11: the free tier is 250 a month, and signup
+ * now creates an account rather than simply mailing back a key as it once did.
+ * If the volume ever approaches 250 the answer is a real inbox on a real
+ * domain, not a second relay.
  *
  * The access key is a public UUID and is meant to be visible in the markup. It
  * is not a secret: it can only ever deliver to the address it was registered
  * against, so leaking it costs nothing.
  *
- * To switch the form on:
- *   1. Go to https://web3forms.com and enter the destination inbox. They mail
- *      back an access key. The address is typed there and never here, which is
- *      the whole point: it stays out of the repository as well as the markup.
- *   2. Paste it below.
+ * Registered 2026-09-11 against Sam's inbox, form name "Code with Sam Contact".
+ * The destination address is held by Web3Forms and appears nowhere in this
+ * repository or in the built markup, which is the whole point of the exercise.
  *
- * Until then `CONTACT_FORM_ENABLED` is false and the contact page says plainly
- * that the form is not live yet, rather than rendering a form that silently
- * throws messages away. A form that looks like it works but does not is worse
- * than no form: the sender believes they have reached you.
+ * `CONTACT_FORM_ENABLED` is derived rather than hard-coded, so clearing the key
+ * turns the form off and shows an honest notice instead. A form that looks like
+ * it works but silently drops messages is worse than no form: the sender
+ * believes they have reached you.
  */
 
-export const WEB3FORMS_ACCESS_KEY = '';
+export const WEB3FORMS_ACCESS_KEY = 'e3010170-d05a-4281-bb68-7fce52b711d6';
 
 export const CONTACT_FORM_ENABLED = WEB3FORMS_ACCESS_KEY.length > 0;
 
