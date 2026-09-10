@@ -6,11 +6,11 @@ import sitemap from '@astrojs/sitemap';
 // registered, change `site` and `base` here and redeploy - nothing else in the
 // project references the domain, so the switch is a two-line change.
 const GITHUB_OWNER = 'code-with-sam-dev';
-const REPO = 'codewithsam-site';
+const REPO = 'code-with-sam-dev.github.io';
 
 export default defineConfig({
   site: `https://${GITHUB_OWNER}.github.io`,
-  base: `/${REPO}`,
+  base: '/',
   trailingSlash: 'ignore',
   integrations: [sitemap()],
   build: {format: 'directory'},

@@ -512,3 +512,11 @@ hr {
 @media (min-width: 900px) {
   .cards { grid-template-columns: repeat(3, 1fr); }
 }
+
+.site-footer .legal {
+  margin-top: 1.2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--hairline);
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+}
