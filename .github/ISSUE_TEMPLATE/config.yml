@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Watch the episodes
+    url: https://www.youtube.com/@CodewithSam-Dev
+    about: Most articles here have a video version.
+  - name: Run the code
+    url: https://github.com/code-with-sam-dev
+    about: Every technical series ships with a repository you can clone.

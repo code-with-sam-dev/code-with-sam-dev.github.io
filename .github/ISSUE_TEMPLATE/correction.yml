@@ -1,0 +1,19 @@
+name: Correction
+description: Something on the site is wrong
+labels: [correction]
+body:
+  - type: input
+    id: url
+    attributes:
+      label: Page
+      placeholder: https://code-with-sam-dev.github.io/blog/...
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What is wrong, and what is correct
+      description: A source or a reproduction is very helpful, especially for anything about Kafka behaviour.
+    validations:
+      required: true
