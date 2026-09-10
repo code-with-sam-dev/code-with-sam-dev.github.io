@@ -19,9 +19,12 @@ export type DonationMethod = {
 
 export const DONATION_METHODS: DonationMethod[] = [];
 
-/**
- * Business contact. Currently the personal address; swap to a dedicated
- * one (hello@codewithsam.com) as soon as the domain is bought, so sponsor mail
- * and personal mail are not the same inbox.
+/*
+ * `CONTACT_EMAIL` used to live here and was rendered into two pages as a
+ * `mailto:` link. It was removed on 2026-09-11: a plain address in the markup
+ * of a public site is scraped within days, and that is a personal inbox. Every
+ * route to it now goes through the contact form. See lib/contact.ts.
+ *
+ * Do not add an address back. If a dedicated business one is ever wanted, point
+ * the form's access key at it instead, which keeps it out of the HTML.
  */
-export const CONTACT_EMAIL = 'nyabangasamson@gmail.com';

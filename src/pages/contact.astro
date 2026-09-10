@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactForm from '../components/ContactForm.astro';
+import {CHANNEL_URL} from '../lib/channel';
+
+/**
+ * The site is statically generated, so there is no request at render time and
+ * `Astro.url.searchParams` is always empty in the build. The success state is
+ * therefore its own page (`/contact/sent/`) rather than a query flag, which
+ * also means it works with JavaScript switched off.
+ */
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const redirect = new URL(`${base}/contact/sent/`, Astro.site).toString();
+---
+
+<Base
+  title="Contact - Code with Sam"
+  description="Get in touch about consulting, contract work or sponsorship."
+>
+  <h1>Contact</h1>
+
+  <p class="lede">
+    For consulting, contract work, sponsorship, or a correction on something I
+    got wrong in an episode. The repositories linked from this site are a
+    working sample of how I build, so start there if you want to see the work
+    before you write.
+  </p>
+
+  <ContactForm subject="Message from the contact page" redirect={redirect} />
+
+  <h2>Other ways</h2>
+  <p>
+    Technical questions are usually better as a comment on the relevant episode
+    on <a href={CHANNEL_URL} rel="noopener">YouTube</a>, where the answer helps
+    everyone else who hits the same thing. Bugs in the code belong in the
+    repository's issues, not in a message.
+  </p>
+</Base>

@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+
+/**
+ * Where the form relay sends people after a successful submission. A real page
+ * rather than a query-string flag, because the site is statically generated.
+ */
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<Base
+  title="Message sent - Code with Sam"
+  description="Your message reached my inbox."
+>
+  <h1>Message sent</h1>
+
+  <p class="lede">
+    It is in my inbox. I read everything, and I reply to anything that needs a
+    reply, usually within a couple of days.
+  </p>
+
+  <p>
+    While you wait: <a href={`${base}/`}>the articles</a> each come with a video
+    and, where it helps, a repository you can clone and run.
+  </p>
+</Base>

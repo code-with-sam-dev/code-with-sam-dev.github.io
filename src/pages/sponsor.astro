@@ -1,9 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
 import {CHANNEL_URL} from '../lib/channel';
-import {CONTACT_EMAIL} from '../lib/support';
+import ContactForm from '../components/ContactForm.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const redirect = new URL(`${base}/contact/sent/`, Astro.site).toString();
 
 /*
   No rate card here on purpose.
@@ -87,10 +88,11 @@ const FORMATS = [
 
   <h2>Get in touch</h2>
   <p>
-    Email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> with the
-    product and what you are trying to achieve, and I will come back with
-    formats and current numbers. You can see the work first on
+    Tell me the product and what you are trying to achieve, and I will come
+    back with formats and current numbers. You can see the work first on
     <a href={CHANNEL_URL} rel="noopener">YouTube</a> and in the
     <a href={`${base}/`}>articles</a>.
   </p>
+
+  <ContactForm subject="Sponsorship enquiry" redirect={redirect} />
 </Base>

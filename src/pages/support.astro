@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Signup from '../components/Signup.astro';
 import {CHANNEL_URL} from '../lib/channel';
-import {DONATION_METHODS, CONTACT_EMAIL} from '../lib/support';
+import {DONATION_METHODS} from '../lib/support';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const GITHUB = 'https://github.com/code-with-sam-dev';
@@ -104,8 +104,8 @@ const GITHUB = 'https://github.com/code-with-sam-dev';
   <h2>Work with me</h2>
   <p>
     The repositories on this site are a working sample of how I build. For
-    consulting, contract work or sponsorship, email
-    <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+    consulting, contract work or sponsorship, use the
+    <a href={`${base}/contact`}>contact form</a>.
   </p>
 
   <Signup compact />

@@ -1,0 +1,166 @@
+---
+/**
+ * Contact form.
+ *
+ * Posts to Web3Forms rather than exposing an address. See lib/contact.ts for
+ * why that relay and not the others.
+ *
+ * Three things here are deliberate:
+ *
+ * 1. `botcheck` is a hidden field. Bots fill every input they find; humans
+ *    never see this one. Web3Forms drops any submission where it is non-empty.
+ *    This is a honeypot, not a captcha: no third-party script, nothing for the
+ *    sender to solve, and no cost to accessibility.
+ *
+ * 2. The form posts natively with no JavaScript. Web3Forms redirects back to
+ *    the `redirect` URL on success, so the page works with scripting disabled.
+ *    A fetch-based version would look smoother and would break for a minority
+ *    of readers for no real gain.
+ *
+ * 3. `reply_to` is bound to the sender's address, so replying from the inbox
+ *    goes to them and not to the relay.
+ */
+import {
+  CONTACT_FORM_ENDPOINT,
+  CONTACT_SUBJECT_PREFIX,
+  WEB3FORMS_ACCESS_KEY,
+  CONTACT_FORM_ENABLED,
+} from '../lib/contact';
+
+interface Props {
+  /** Pre-fills the subject so sponsor mail arrives already labelled. */
+  subject?: string;
+  /** Absolute URL to return to after a successful send. */
+  redirect: string;
+}
+
+const {subject = 'Message from the site', redirect} = Astro.props;
+---
+
+{
+  CONTACT_FORM_ENABLED ? (
+    <form class="contact-form" action={CONTACT_FORM_ENDPOINT} method="POST">
+      <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+      <input
+        type="hidden"
+        name="subject"
+        value={`${CONTACT_SUBJECT_PREFIX} ${subject}`}
+      />
+      <input type="hidden" name="redirect" value={redirect} />
+      <input type="hidden" name="from_name" value="Code with Sam site" />
+
+      {/* Honeypot. Hidden from people, irresistible to bots. */}
+      <input
+        type="checkbox"
+        name="botcheck"
+        class="botcheck"
+        tabindex="-1"
+        autocomplete="off"
+      />
+
+      <label>
+        <span>Your name</span>
+        <input type="text" name="name" required autocomplete="name" />
+      </label>
+
+      <label>
+        <span>Your email</span>
+        <input
+          type="email"
+          name="reply_to"
+          required
+          autocomplete="email"
+          placeholder="you@example.com"
+        />
+      </label>
+
+      <label>
+        <span>Message</span>
+        <textarea name="message" rows="6" required></textarea>
+      </label>
+
+      <button type="submit">Send</button>
+
+      <p class="small">
+        Goes straight to my inbox. I read everything, and I reply to anything
+        that needs a reply.
+      </p>
+    </form>
+  ) : (
+    <p class="contact-pending">
+      The form is not connected yet. Until it is, the fastest way to reach me is
+      a comment on the relevant video, or a message to the Code with Sam page on
+      LinkedIn.
+    </p>
+  )
+}
+
+<style>
+  .contact-form {
+    display: grid;
+    gap: 1rem;
+    max-width: 34rem;
+    margin: 1.5rem 0 0;
+  }
+
+  .contact-form label {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .contact-form span {
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .contact-form input[type='text'],
+  .contact-form input[type='email'],
+  .contact-form textarea {
+    font: inherit;
+    padding: 0.65rem 0.75rem;
+    border: 2px solid var(--hairline, #d8d8d2);
+    border-radius: 10px;
+    background: #fff;
+    color: inherit;
+    width: 100%;
+  }
+
+  .contact-form textarea {
+    resize: vertical;
+  }
+
+  .contact-form button {
+    font: inherit;
+    font-weight: 700;
+    padding: 0.7rem 1.4rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--primary, #5b3ce0);
+    color: #fff;
+    cursor: pointer;
+    justify-self: start;
+  }
+
+  /* Off-screen rather than display:none, because some bots skip hidden inputs
+     but not positioned ones. */
+  .botcheck {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+
+  .small {
+    font-size: 0.9rem;
+    opacity: 0.75;
+    margin: 0;
+  }
+
+  .contact-pending {
+    padding: 1rem 1.15rem;
+    border: 2px solid var(--hairline, #d8d8d2);
+    border-radius: 12px;
+    max-width: 34rem;
+  }
+</style>
