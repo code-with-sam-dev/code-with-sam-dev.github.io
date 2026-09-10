@@ -324,3 +324,191 @@ hr {
   font-size: 0.82rem;
   margin: 0.8rem 0 0;
 }
+
+/* ==================================================================
+   Motion and hero
+   ------------------------------------------------------------------
+   The page should arrive in pieces as you scroll rather than all at
+   once. That is the whole difference between a page that feels alive
+   and one that feels like a document.
+   ================================================================== */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+/* Stagger children so a row of cards resolves left to right. */
+[data-reveal][data-delay='1'] { transition-delay: 0.09s; }
+[data-reveal][data-delay='2'] { transition-delay: 0.18s; }
+[data-reveal][data-delay='3'] { transition-delay: 0.27s; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ---------- dark hero band ---------- */
+
+/* Full-bleed out of the centred column without a wrapper element. */
+.hero {
+  position: relative;
+  margin: -2.6rem calc(50% - 50vw) 3.5rem;
+  padding: 5.5rem calc(50vw - 50%) 4.5rem;
+  background: #12161f;
+  color: #e9edf2;
+  overflow: hidden;
+}
+
+/* Faint grid, the way a terminal or a schematic reads. Pure CSS, no image. */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(107, 155, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(107, 155, 255, 0.07) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+}
+
+.hero-inner {
+  position: relative;
+  width: min(100% - 2.5rem, var(--measure));
+  margin-inline: auto;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6b9bff;
+  margin-bottom: 1.1rem;
+}
+.eyebrow::before {
+  content: '';
+  width: 28px;
+  height: 2px;
+  background: #6b9bff;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 6.5vw, 4rem);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  margin: 0 0 1.1rem;
+  color: #fff;
+}
+.hero h1 .accent { color: #6b9bff; }
+
+.hero p.lede {
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+  color: #9aa4b2;
+  max-width: 54ch;
+  margin-bottom: 1.9rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 2px solid transparent;
+  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-primary { background: #2563eb; color: #fff; }
+.btn-primary:hover { background: #1d55d0; }
+.btn-ghost { border-color: #39414f; color: #e9edf2; }
+.btn-ghost:hover { border-color: #6b9bff; color: #fff; }
+
+/* ---------- terminal card in the hero ---------- */
+
+.terminal {
+  margin-top: 2.6rem;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #2a313d;
+  background: #0d1117;
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+}
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.7rem 0.95rem;
+  background: #161b24;
+  border-bottom: 1px solid #2a313d;
+}
+.terminal-bar i {
+  width: 11px; height: 11px; border-radius: 999px; display: block;
+}
+.terminal-bar .t { margin-left: 0.6rem; color: #6e7781; font-size: 0.8rem; }
+.terminal pre {
+  margin: 0; border: 0; border-radius: 0; background: transparent;
+  padding: 1.1rem 1.15rem; font-size: 0.9rem; line-height: 1.7;
+}
+.terminal .c-dim { color: #6e7781; }
+.terminal .c-ok  { color: #3fb950; }
+.terminal .c-bad { color: #f85149; }
+.terminal .c-key { color: #79c0ff; }
+
+/* ---------- numbered feature cards ---------- */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 1.6rem 0 2.6rem;
+}
+.card {
+  position: relative;
+  padding: 1.4rem 1.3rem 1.5rem;
+  border: 2px solid var(--hairline);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.card:hover { transform: translateY(-3px); border-color: var(--primary); }
+.card .num {
+  position: absolute;
+  top: 0.9rem; right: 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+.card h3 { margin: 0 0 0.4rem; font-size: 1.1rem; }
+.card p { margin: 0; color: var(--ink-soft); font-size: 0.96rem; }
+
+.section-head { margin: 3rem 0 0.6rem; }
+.section-head h2 { margin: 0; }
+
+/* The article column is deliberately narrow for reading, but a row of three
+   cards needs more room than a reading measure allows. Break this one section
+   out to a wider track so the cards sit side by side instead of wrapping. */
+.cards {
+  width: min(100vw - 2.5rem, 1080px);
+  margin-inline: calc(50% - min(50vw - 1.25rem, 540px));
+}
+@media (min-width: 900px) {
+  .cards { grid-template-columns: repeat(3, 1fr); }
+}

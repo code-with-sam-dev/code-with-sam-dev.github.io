@@ -30,7 +30,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
+    <link rel="icon" href={`${base}/favicon-32.png`} type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href={`${base}/apple-touch-icon.png`} />
     <link
       rel="alternate"
       type="application/rss+xml"
@@ -78,5 +79,37 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         </p>
       </div>
     </footer>
+    <script is:inline>
+      // Reveal-on-scroll. IntersectionObserver rather than scroll listeners, so
+      // the browser does the work off the main thread and long pages stay smooth.
+      const reveal = () => {
+        const items = document.querySelectorAll('[data-reveal]');
+        if (!('IntersectionObserver' in window)) {
+          items.forEach((el) => el.classList.add('is-visible'));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target); // reveal once, never re-hide
+            });
+          },
+          {rootMargin: '0px 0px -8% 0px', threshold: 0.05}
+        );
+        items.forEach((el) => io.observe(el));
+      };
+      // Anyone who has asked for less motion gets the page with none.
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('[data-reveal]').forEach((el) =>
+          el.classList.add('is-visible')
+        );
+      } else {
+        document.readyState === 'loading'
+          ? document.addEventListener('DOMContentLoaded', reveal)
+          : reveal();
+      }
+    </script>
   </body>
 </html>

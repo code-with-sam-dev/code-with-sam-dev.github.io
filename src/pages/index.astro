@@ -9,26 +9,94 @@ const posts = (await getCollection('blog', ({data}) => !data.draft)).sort(
 );
 const fmt = (d: Date) =>
   d.toLocaleDateString('en-GB', {day: 'numeric', month: 'short', year: 'numeric'});
+
+const CHANNEL = 'https://www.youtube.com/@CodeWithSam';
 ---
 
 <Base
   title="Code with Sam - Interview Prep for the AI Era"
-  description="Modern software engineering interview preparation. Kafka, Java, Spring, system design and architecture - explained the way interviewers actually expect you to explain them."
+  description="Modern software engineering interview preparation. Kafka, Java, Spring, system design and architecture, explained the way interviewers actually expect you to explain them."
 >
-  <h1>Interview prep for the AI era</h1>
-  <p>
-    What senior backend engineers are actually asked now - Kafka, Spring,
-    system design, architecture trade-offs - explained clearly, with a video
-    and runnable code for every topic.
-  </p>
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow" data-reveal>Interview prep for the AI era</p>
 
-  <Signup />
+      <h1 data-reveal>
+        Answers that hold up<br />
+        <span class="accent">under follow-up questions.</span>
+      </h1>
 
-  <h2>Articles</h2>
+      <p class="lede" data-reveal>
+        Most explanations sound right until an interviewer pushes. These go one
+        level deeper: what the guarantee actually is, where it breaks, and code
+        you can run to watch it break for yourself.
+      </p>
+
+      <div class="hero-actions" data-reveal>
+        <a class="btn btn-primary" href="#articles">Start reading</a>
+        <a class="btn btn-ghost" href={CHANNEL} rel="noopener">Watch on YouTube</a>
+      </div>
+
+      <div class="terminal" data-reveal data-delay="1">
+        <div class="terminal-bar">
+          <i style="background:#f85149"></i>
+          <i style="background:#d29922"></i>
+          <i style="background:#3fb950"></i>
+          <span class="t">kafka-payments / episode-01-ordering</span>
+        </div>
+        <pre><code><span class="c-dim">$</span> docker compose up
+<span class="c-dim">$</span> curl <span class="c-key">localhost:8080/demo/results</span>
+
+  broken   ordered: <span class="c-bad">false</span>   COMPLETED, INITIATED, AUTHORIZED
+  correct  ordered: <span class="c-ok">true</span>    INITIATED, AUTHORIZED, COMPLETED
+
+<span class="c-dim"># Same records. Same order from Kafka.</span>
+<span class="c-dim"># One consumer threw the guarantee away.</span></code></pre>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-head" data-reveal>
+    <p class="eyebrow" style="color:var(--primary)">How this works</p>
+    <h2>Three things for every topic</h2>
+  </div>
+
+  <div class="cards">
+    <article class="card" data-reveal>
+      <span class="num">01</span>
+      <h3>A short video</h3>
+      <p>
+        The concept explained visually, in a few minutes, with diagrams that
+        demonstrate rather than assert.
+      </p>
+    </article>
+    <article class="card" data-reveal data-delay="1">
+      <span class="num">02</span>
+      <h3>An article that goes deeper</h3>
+      <p>
+        The follow-up questions the video has no time for, and the trade-offs a
+        senior answer is expected to name.
+      </p>
+    </article>
+    <article class="card" data-reveal data-delay="2">
+      <span class="num">03</span>
+      <h3>Code you can run</h3>
+      <p>
+        One command with Docker. Watch the concept break, then watch it work.
+        No snippets, no missing pieces.
+      </p>
+    </article>
+  </div>
+
+  <div class="section-head" id="articles" data-reveal>
+    <p class="eyebrow" style="color:var(--primary)">Latest</p>
+    <h2>Articles</h2>
+  </div>
+
   <ul class="post-list">
     {
-      posts.map((post) => (
-        <li>
+      posts.map((post, i) => (
+        <li data-reveal data-delay={String(Math.min(i, 3))}>
           <h2>
             <a href={`${base}/blog/${post.slug}`}>{post.data.title}</a>
           </h2>
@@ -47,4 +115,8 @@ const fmt = (d: Date) =>
   </ul>
 
   {posts.length === 0 && <p><em>First article lands with episode one.</em></p>}
+
+  <div data-reveal>
+    <Signup />
+  </div>
 </Base>
