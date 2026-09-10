@@ -2,7 +2,7 @@ import {defineCollection, z} from 'astro:content';
 
 /**
  * Article schema. Everything an article needs to render, be found in search,
- * and link back to its video and code is declared here — so a post that is
+ * and link back to its video and code is declared here - so a post that is
  * missing its description or date fails the build rather than shipping broken.
  */
 const blog = defineCollection({

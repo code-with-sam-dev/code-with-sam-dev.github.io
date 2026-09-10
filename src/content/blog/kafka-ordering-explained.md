@@ -1,6 +1,6 @@
 ---
 title: 'Kafka Ordering Explained: The Mistake That Breaks Your System'
-description: 'Kafka guarantees ordering — but only within a partition. Here is what that actually means, why your consumer can still break it, and a repo you can run to watch it happen.'
+description: 'Kafka guarantees ordering - but only within a partition. Here is what that actually means, why your consumer can still break it, and a repo you can run to watch it happen.'
 pubDate: 2026-09-10
 youtube: 'REPLACE_WITH_VIDEO_ID'
 repo: 'https://github.com/code-with-sam-dev/kafka-payments/tree/main/episode-01-ordering'
@@ -28,7 +28,7 @@ will ever see B before A.
 Across partitions, Kafka promises you nothing. Two events in different
 partitions have no defined order relative to each other, and they never will,
 because there is no global clock coordinating them. That is not a limitation
-Kafka is apologising for — it is the design. Refusing to order across
+Kafka is apologising for - it is the design. Refusing to order across
 partitions is precisely what lets Kafka scale horizontally.
 
 So the interview answer is not "Kafka guarantees ordering". It is:
@@ -71,7 +71,7 @@ Here is where the sentence at the top of this article gets people into trouble.
 Kafka can deliver your messages in perfect order and your application can still
 process them out of order.
 
-Picture a consumer polling a partition. It receives A, B, C — correctly
+Picture a consumer polling a partition. It receives A, B, C - correctly
 ordered. Then, to go faster, it hands each record to a thread pool. Three
 threads run concurrently. C is small and finishes first. Then A. Then B.
 
@@ -80,7 +80,7 @@ perfectly. Your application undid it.
 
 This is the failure mode that survives code review, passes tests under light
 load, and shows up in production at volume. If ordering matters for an entity,
-the work for that entity has to be processed sequentially — typically by
+the work for that entity has to be processed sequentially - typically by
 keeping one consumer thread per partition rather than fanning out inside the
 consumer.
 
@@ -90,7 +90,7 @@ Now add failure.
 
 Event B fails. Event C succeeds. If your retry strategy simply moves on and
 comes back to B later, you have applied C before B and your business state is
-wrong — even though every individual message was eventually processed
+wrong - even though every individual message was eventually processed
 successfully.
 
 This is why "just add a dead letter topic" is an incomplete answer. Sending B
@@ -99,7 +99,7 @@ entity. Sometimes that is acceptable. For a payment, it usually is not.
 
 When ordering genuinely matters, the safest behaviour is to stop consuming that
 partition until the failed record is resolved. That costs you throughput on one
-partition and protects correctness — and being able to articulate that
+partition and protects correctness - and being able to articulate that
 trade-off is what separates a senior answer from a memorised one.
 
 ## The caveat nobody mentions
@@ -108,7 +108,7 @@ One more detail, and it catches teams late.
 
 Your key-to-partition mapping depends on the **number of partitions**. Kafka's
 default partitioner hashes the key and takes it modulo the partition count. Add
-partitions, and the modulus changes — so the same key can start landing in a
+partitions, and the modulus changes - so the same key can start landing in a
 different partition from the one it used before.
 
 Records already written stay where they are. New records for that key may go
@@ -126,7 +126,7 @@ Reading about ordering breaking is not the same as watching it break.
 
 The [companion repository](https://github.com/code-with-sam-dev/kafka-payments/tree/main/episode-01-ordering)
 runs end to end with Docker. One command brings up Kafka, produces payment
-events, and consumes them two ways — once with a naive concurrent consumer, and
+events, and consumes them two ways - once with a naive concurrent consumer, and
 once with a sequential one. You will see the same input produce the wrong order
 in the first case and the right order in the second.
 
@@ -148,4 +148,4 @@ stick when someone asks you about it under pressure.
 - **Partition count** changes key routing. Decide it deliberately.
 
 If you have been bitten by any of these in production, I would genuinely like
-to hear which one — those stories are usually more instructive than the theory.
+to hear which one - those stories are usually more instructive than the theory.

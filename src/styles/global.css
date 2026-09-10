@@ -1,5 +1,5 @@
 /*
- * Code with Sam — site styles.
+ * Code with Sam - site styles.
  *
  * Deliberately one small stylesheet rather than a framework. The site is
  * articles and a signup form; a utility framework would add a build step, a
@@ -23,7 +23,7 @@
   --measure: 68ch;
   --radius: 14px;
 
-  /* Space Grotesk for display, IBM Plex for text — same pairing as the video. */
+  /* Space Grotesk for display, IBM Plex for text - same pairing as the video. */
   --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
   --font-body: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;

@@ -16,7 +16,7 @@ const fmt = (d: Date) =>
   d.toLocaleDateString('en-GB', {day: 'numeric', month: 'long', year: 'numeric'});
 
 /**
- * "Watch next" — every article points at another one.
+ * "Watch next" - every article points at another one.
  *
  * This is the cheapest view-per-article lever there is: a reader who finishes
  * something and finds nothing to do next simply leaves. Picking the two most
@@ -31,7 +31,7 @@ const others = (await getCollection('blog', ({data}) => !data.draft))
 const CHANNEL_URL = 'https://www.youtube.com/@CodeWithSam';
 ---
 
-<Base title={`${post.data.title} — Code with Sam`} description={post.data.description}>
+<Base title={`${post.data.title} - Code with Sam`} description={post.data.description}>
   <article>
     <h1>{post.data.title}</h1>
     <div class="meta">
@@ -92,8 +92,7 @@ const CHANNEL_URL = 'https://www.youtube.com/@CodeWithSam';
       )
     }
     <p>
-      New videos land on <a href={CHANNEL_URL} rel="noopener">Code with Sam</a>
-      — subscribe there if this was useful.
+      New videos land on <a href={CHANNEL_URL} rel="noopener">Code with Sam</a> - subscribe there if this was useful.
     </p>
   </section>
 
