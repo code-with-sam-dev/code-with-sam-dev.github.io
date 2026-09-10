@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import {CHANNEL_URL} from '../lib/channel';
+import {CONTACT_EMAIL} from '../lib/support';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+/*
+  No rate card here on purpose.
+
+  Quoting a price before there are audience numbers to justify it either
+  underprices the slot permanently or gets ignored. Ask for the conversation
+  instead, and quote once analytics can back a number up.
+*/
+const FORMATS = [
+  {
+    name: 'In-video mention',
+    body:
+      'A short read at the top or in the middle of an episode, in the same voice as the rest of it. No jarring hand-off, no shouting.',
+  },
+  {
+    name: 'Description and pinned comment',
+    body:
+      'A link and a line in the description of an episode, plus the pinned comment, which is the part people actually click.',
+  },
+  {
+    name: 'Article placement',
+    body:
+      'A clearly marked sponsor block in the written version of an episode on this site. Written articles keep earning long after a video stops being recommended.',
+  },
+  {
+    name: 'Repository sponsorship',
+    body:
+      'Every episode ships with a repo engineers clone and run. A tasteful mention in the README reaches people at the moment they are actually building something.',
+  },
+];
+---
+
+<Base
+  title="Sponsor - Code with Sam"
+  description="Sponsorship and advertising on Code with Sam: formats, audience and how to get in touch."
+>
+  <h1>Sponsor Code with Sam</h1>
+  <p class="lede">
+    Code with Sam makes short, technically precise explainers for working
+    software engineers, and ships runnable code with every one. If you are
+    selling developer tooling, infrastructure, or anything an engineer chooses
+    rather than an executive, this is the audience.
+  </p>
+
+  <h2>Who watches</h2>
+  <p>
+    Backend and platform engineers. People preparing for senior interviews,
+    people debugging something in production, and people who want the version of
+    an explanation that comes with a repository attached. Topics run across
+    Kafka, Java, Spring, distributed systems, concurrency, monitoring and
+    observability, and architecture.
+  </p>
+  <p>
+    The channel launched in September 2026 and is early. That is stated plainly
+    rather than dressed up: early sponsors get an honest price and an unusually
+    engaged audience, and audience numbers are shared on request rather than
+    implied.
+  </p>
+
+  <h2>What a placement looks like</h2>
+  <div class="cards">
+    {
+      FORMATS.map((f) => (
+        <div class="card">
+          <h3>{f.name}</h3>
+          <p>{f.body}</p>
+        </div>
+      ))
+    }
+  </div>
+
+  <h2>What I will not do</h2>
+  <ul>
+    <li>Recommend a product I have not used.</li>
+    <li>Hide that a placement is paid. Sponsored segments are labelled, in the video and in the article.</li>
+    <li>Let a sponsor influence the technical content of an episode, including which trade-offs get mentioned.</li>
+    <li>Run anything aimed at engineers' employers rather than at engineers.</li>
+  </ul>
+  <p>
+    That is not posturing. The entire value of this channel to a sponsor is that
+    the audience believes what is said on it.
+  </p>
+
+  <h2>Get in touch</h2>
+  <p>
+    Email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> with the
+    product and what you are trying to achieve, and I will come back with
+    formats and current numbers. You can see the work first on
+    <a href={CHANNEL_URL} rel="noopener">YouTube</a> and in the
+    <a href={`${base}/`}>articles</a>.
+  </p>
+</Base>

@@ -1,0 +1,118 @@
+---
+import Base from '../layouts/Base.astro';
+import Signup from '../components/Signup.astro';
+import {CHANNEL_URL} from '../lib/channel';
+import {DONATION_METHODS, CONTACT_EMAIL} from '../lib/support';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const GITHUB = 'https://github.com/code-with-sam-dev';
+---
+
+<Base
+  title="Support - Code with Sam"
+  description="Ways to support Code with Sam, most of which cost nothing."
+>
+  <h1>Support the channel</h1>
+  <p class="lede">
+    Every episode is a script, a set of animations built in code, a repository
+    that has to actually run, and a write-up. It is made in evenings and
+    weekends, and it is free to watch with no paywall and no gated newsletter.
+    If it has saved you time, here is how to help it keep going.
+  </p>
+
+  <h2>Free, and worth more than you would think</h2>
+  <p>
+    None of these cost anything. All of them matter more to a channel this
+    small than a one-off contribution does.
+  </p>
+
+  <ul class="support-list">
+    <li>
+      <span class="n">1</span>
+      <div>
+        <h3><a href={CHANNEL_URL} rel="noopener">Subscribe on YouTube</a></h3>
+        <p>
+          Subscriber count is the single number that decides whether YouTube
+          shows an episode to anyone who is not already looking for it.
+        </p>
+      </div>
+    </li>
+    <li>
+      <span class="n">2</span>
+      <div>
+        <h3>Watch to the end, and comment</h3>
+        <p>
+          Watch time and comments are what the algorithm reads as "this was
+          worth someone's afternoon". A comment saying where you have seen the
+          problem in production is genuinely useful to me as well, because it
+          tells me what to make next.
+        </p>
+      </div>
+    </li>
+    <li>
+      <span class="n">3</span>
+      <div>
+        <h3><a href={GITHUB} rel="noopener">Star the repositories</a></h3>
+        <p>
+          The code is the part that separates this from every other
+          explanation. Stars are how other engineers find it.
+        </p>
+      </div>
+    </li>
+    <li>
+      <span class="n">4</span>
+      <div>
+        <h3>Send one episode to one person</h3>
+        <p>
+          A colleague preparing for an interview, or the teammate who wrote the
+          consumer that broke ordering. One share to the right person beats a
+          hundred impressions to the wrong ones.
+        </p>
+      </div>
+    </li>
+  </ul>
+
+  {
+    DONATION_METHODS.length > 0 ? (
+      <>
+        <h2>Contribute directly</h2>
+        <p>
+          Entirely optional, and nothing on this site is ever locked behind it.
+        </p>
+        <div class="cards">
+          {DONATION_METHODS.map((m) => (
+            <a class="card" href={m.url} rel="noopener">
+              <h3>{m.name}</h3>
+              <p>{m.note}</p>
+            </a>
+          ))}
+        </div>
+      </>
+    ) : (
+      <>
+        <h2>Contributing directly</h2>
+        <p>
+          Not open yet, and I would rather say so than put up a button that
+          does not work. Zimbabwe is not a supported merchant country on Stripe,
+          which rules out several of the usual options, so I am working out a
+          route that actually pays out before asking anyone for money.
+        </p>
+        <p>
+          If you want to support the work in the meantime, the four things above
+          genuinely help more at this stage. If you represent a company and want
+          to talk about sponsorship, that is <a href={`${base}/sponsor`}>a
+          separate page</a>.
+        </p>
+      </>
+    )
+  }
+
+  <h2>Hire me, or work with me</h2>
+  <p>
+    I am a software engineer, and the repositories on this site are a fair
+    sample of how I build things. For consulting, contract work or sponsorship,
+    email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+  </p>
+
+  <Signup compact />
+</Base>
