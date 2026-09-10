@@ -3,7 +3,7 @@ title: 'Kafka Ordering Explained: The Mistake That Breaks Your System'
 description: 'Kafka guarantees ordering — but only within a partition. Here is what that actually means, why your consumer can still break it, and a repo you can run to watch it happen.'
 pubDate: 2026-09-10
 youtube: 'REPLACE_WITH_VIDEO_ID'
-repo: 'https://github.com/samsonnyabanga/kafka-ordering-demo'
+repo: 'https://github.com/code-with-sam-dev/kafka-payments/tree/main/episode-01-ordering'
 tags: ['kafka', 'interviews']
 ---
 
@@ -124,15 +124,15 @@ production scale, not after.
 
 Reading about ordering breaking is not the same as watching it break.
 
-The [companion repository](https://github.com/samsonnyabanga/kafka-ordering-demo)
+The [companion repository](https://github.com/code-with-sam-dev/kafka-payments/tree/main/episode-01-ordering)
 runs end to end with Docker. One command brings up Kafka, produces payment
 events, and consumes them two ways — once with a naive concurrent consumer, and
 once with a sequential one. You will see the same input produce the wrong order
 in the first case and the right order in the second.
 
 ```bash
-git clone https://github.com/samsonnyabanga/kafka-ordering-demo
-cd kafka-ordering-demo
+git clone https://github.com/code-with-sam-dev/kafka-payments
+cd kafka-payments/episode-01-ordering
 docker compose up
 ```
 
