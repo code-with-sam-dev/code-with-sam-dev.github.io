@@ -1,0 +1,39 @@
+---
+/**
+ * Email capture.
+ *
+ * The form action is left as a placeholder on purpose: the Kit form endpoint
+ * is created inside Kit's own dashboard, which needs a login, and logins are
+ * the operator's to perform. Drop the endpoint in here and the form works —
+ * nothing else changes.
+ *
+ * Deliberately NOT a checkout. Kit Commerce depends on Stripe, and Stripe does
+ * not currently support Zimbabwe as a merchant country, so anything that takes
+ * money has to live on a different rail.
+ */
+const {compact = false} = Astro.props;
+---
+
+<section class="signup">
+  <h2>{compact ? 'Get the interview pack' : 'The Senior Backend Interview Pack'}</h2>
+  <p>
+    A free, practical pack for engineers preparing for senior backend
+    interviews — the questions that actually get asked, and how to answer them
+    like someone who has done the work.
+  </p>
+
+  <form action="REPLACE_WITH_KIT_FORM_ENDPOINT" method="post">
+    <input
+      type="email"
+      name="email_address"
+      placeholder="you@example.com"
+      aria-label="Email address"
+      required
+    />
+    <button type="submit">Send me the pack</button>
+  </form>
+
+  <p class="small">
+    New articles and videos when they land. No spam, and one click to leave.
+  </p>
+</section>

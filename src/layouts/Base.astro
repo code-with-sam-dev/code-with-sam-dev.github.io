@@ -1,0 +1,82 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Canonical-ish path, used for OG tags. */
+  path?: string;
+}
+
+const {title, description} = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph: this is what a shared link looks like on LinkedIn and X,
+         which matters more than usual given the distribution plan. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Code with Sam"
+      href={`${base}/rss.xml`}
+    />
+
+    <!-- Same typefaces as the videos, so the site and the channel match. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href={`${base}/`}>
+          <img src={`${base}/sam-mark.png`} alt="" width="38" height="38" />
+          Code with Sam
+        </a>
+        <nav class="site-nav">
+          <a href={`${base}/`}>Articles</a>
+          <a href={`${base}/about`}>About</a>
+          <a href={`${base}/rss.xml`}>RSS</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>
+          <strong>Code with Sam</strong> — modern software engineering interview
+          preparation for the AI era.
+        </p>
+        <p>
+          Every article has a video and, where it helps, a repository you can
+          clone and run.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

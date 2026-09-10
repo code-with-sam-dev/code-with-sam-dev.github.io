@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import Signup from '../components/Signup.astro';
+---
+
+<Base
+  title="About — Code with Sam"
+  description="Who is behind Code with Sam, and what the channel is for."
+>
+  <h1>About</h1>
+  <p>
+    I am Samson, a software engineer. Code with Sam is about the questions
+    senior backend engineers are actually being asked in interviews now — and
+    how to answer them the way someone who has built the thing would answer.
+  </p>
+  <p>
+    Every topic gets three things: a short video that explains it visually, an
+    article that goes deeper than the video can, and where it helps, a
+    repository you can clone and run so you can see the behaviour for yourself
+    rather than taking my word for it.
+  </p>
+
+  <h2>Why the code matters</h2>
+  <p>
+    Plenty of explanations sound right. Fewer let you reproduce the problem on
+    your own machine. The repositories here run end to end with Docker, so you
+    can watch a concept break and then watch it get fixed — which is the part
+    that makes it stick in an interview.
+  </p>
+
+  <Signup compact />
+</Base>
