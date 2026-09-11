@@ -22,6 +22,18 @@ const FIRST = 'First principles, not vendor documentation';
 
 export const sheet = {
   channel: 'Code with Sam',
+
+  /*
+    The video this sheet belongs to. Until it is published there is no watch
+    URL, so this points at the channel and the label says so. The moment the
+    video goes live, change the url and the label here and rebuild: that is the
+    only edit needed, and the footer link on every page follows.
+  */
+  video: {
+    url: 'https://www.youtube.com/@CodewithSam-Dev',
+    label: 'Watch on YouTube',
+  },
+  siteUrl: 'https://code-with-sam-dev.github.io',
   title: 'Design a Digital Wallet Payment System',
   subtitle: 'The senior engineer answer sheet',
   kicker: 'Senior Software Engineer Interview Questions: Deep Dives',

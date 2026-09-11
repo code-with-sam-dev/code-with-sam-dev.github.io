@@ -16,8 +16,20 @@ import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 import {dirname, resolve} from 'node:path';
 
+import {readFile} from 'node:fs/promises';
+
 import {sheet} from './pdf/design-sheet.data.mjs';
 import {renderHtml} from './pdf/render.mjs';
+
+/**
+ * The channel mark, inlined as a data URI.
+ *
+ * Embedded rather than linked so the PDF is self contained: nothing to fetch
+ * at print time, and nothing to break if the file is ever moved. It is the
+ * same crop the videos use, from motion/public/sam-mark.png, so the mark on
+ * the sheet and the mark in the corner of every frame are the same image.
+ */
+const AVATAR = 'public/sam-mark.png';
 
 const run = promisify(execFile);
 
@@ -92,7 +104,8 @@ async function main() {
   await mkdir(dirname(OUT_HTML), {recursive: true});
   await mkdir(dirname(OUT_PDF), {recursive: true});
 
-  const html = renderHtml(sheet);
+  const avatar = (await readFile(AVATAR)).toString('base64');
+  const html = renderHtml(sheet, {avatarDataUri: `data:image/png;base64,${avatar}`});
   await writeFile(OUT_HTML, html);
 
   // Remove any previous output first. Chrome leaves the old file in place when

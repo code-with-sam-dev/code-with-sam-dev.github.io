@@ -31,6 +31,8 @@ const esc = (s) =>
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
 
+import {architectureSvg} from './diagram.mjs';
+
 const claim = (c) => `
   <div class="claim">
     <p>${esc(c.text)}</p>
@@ -39,12 +41,12 @@ const claim = (c) => `
 
 const section = (s, index) => `
   <section class="sec">
-    <h2><span class="num">${String(index + 1).padStart(2, '0')}</span>${esc(s.title)}</h2>
+    <h2><span class="num">${String(index + 3).padStart(2, '0')}</span>${esc(s.title)}</h2>
     ${(s.body ?? []).map((p) => `<p class="body">${esc(p)}</p>`).join('')}
     ${(s.claims ?? []).map(claim).join('')}
   </section>`;
 
-export function renderHtml(sheet) {
+export function renderHtml(sheet, {avatarDataUri = ''} = {}) {
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -111,6 +113,29 @@ export function renderHtml(sheet) {
   table.page > thead, table.page > tfoot { display: table-header-group; }
   table.page > tfoot { display: table-footer-group; }
   table.page > thead th, table.page > tfoot td { border: 0; padding: 0; font-weight: 400; }
+
+  /* The channel lockup: cartoon head plus wordmark, same as the videos carry
+     in the corner of every frame. Sam asked for the cartoon specifically, for
+     consistency across his content, so the mark here is the identical crop the
+     Remotion component uses rather than a lookalike. */
+  .brand { display: flex; align-items: center; gap: 2.2mm; justify-content: flex-end; }
+  .brand img {
+    width: 7mm; height: 7mm; border-radius: 999px;
+    border: .7mm solid var(--ink); object-fit: cover; display: block;
+  }
+  .brand b {
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+    font-size: 9pt; letter-spacing: -.01em; color: var(--ink); text-transform: none;
+  }
+
+  /* The board gets its own page and the full width. It is the one thing in
+     here somebody will screenshot, so it is not squeezed beside prose. */
+  .board-page { page-break-after: always; page-break-inside: avoid; }
+  svg.board { width: 100%; height: auto; display: block; }
+  .board-note { margin: 4mm 0 0; color: var(--ink-soft); font-size: 9pt; }
+  .footmark a { color: var(--ink-soft); text-decoration: none; }
+  .footmark a:hover { text-decoration: underline; }
+  .footmark .yt { color: var(--primary); font-weight: 600; }
 
   .stamp {
     text-align: right; padding-bottom: 5mm !important;
@@ -200,10 +225,14 @@ export function renderHtml(sheet) {
 <body>
 
 <table class="page">
-<thead><tr><th class="stamp">Code with <span>Sam</span></th></tr></thead>
+<thead><tr><th class="stamp">
+  <span class="brand">${avatarDataUri ? `<img src="${avatarDataUri}" alt="">` : ''}<b>Code with Sam</b></span>
+</th></tr></thead>
 <tfoot><tr><td class="footmark"><div>
-  <span><b>${esc(sheet.channel)}</b> &middot; code-with-sam-dev.github.io</span>
-  <span>${esc(sheet.title)}</span>
+  <span><b>${esc(sheet.channel)}</b> &middot; <a href="${esc(sheet.siteUrl)}">${esc(
+    sheet.siteUrl.replace('https://', '')
+  )}</a></span>
+  <span><a class="yt" href="${esc(sheet.video.url)}">${esc(sheet.video.label)}</a></span>
 </div></td></tr></tfoot>
 <tbody><tr><td>
 
@@ -226,7 +255,15 @@ export function renderHtml(sheet) {
   </div>
   <p class="scope-note">${esc(sheet.scope.note)}</p>
 
-  <h2 style="margin-top:9mm"><span class="num">00</span>${esc(sheet.scale.title)}</h2>
+</div>
+
+<div class="board-page">
+  <h2><span class="num">01</span>The board we end up with</h2>
+  <p class="body">Every box below earns its place later in this sheet. Nothing here is decoration, and the numbers are the order a single transfer travels.</p>
+  ${architectureSvg()}
+  <p class="board-note">The four boxes along the bottom are not components. They are the failures that decide whether the rest of the design is real, and each one is answered in the sections that follow.</p>
+
+  <h2 style="margin-top:9mm"><span class="num">02</span>${esc(sheet.scale.title)}</h2>
   <table class="scale">
     ${sheet.scale.rows.map(([k, v]) => `<tr><td>${esc(k)}</td><td>${esc(v)}</td></tr>`).join('')}
   </table>

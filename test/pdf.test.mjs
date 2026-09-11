@@ -138,3 +138,37 @@ test('the published PDF refuses editing but still allows printing and screen rea
   // It must still open without anyone being asked for a password.
   assert.match(out, /User password = *\n/);
 });
+
+test('the diagram cannot restyle the page around it', async () => {
+  // An inline SVG's <style> block is not scoped to the SVG in an HTML
+  // document; it leaks. The first version of the board used .sub and .box,
+  // which silently overrode the cover subtitle and shrank it. Every class the
+  // diagram defines is prefixed so a collision cannot happen again.
+  const {architectureSvg} = await import('../tools/pdf/diagram.mjs');
+  const svg = architectureSvg();
+  const classes = [...svg.matchAll(/class="([a-z-]+)"/g)].map((m) => m[1]);
+  const unprefixed = [...new Set(classes)].filter((c) => c !== 'board' && !c.startsWith('bd-'));
+  assert.deepEqual(unprefixed, [], `diagram defines unprefixed classes: ${unprefixed}`);
+});
+
+test('the architecture board is on the document, with its flow numbered', async () => {
+  const {architectureSvg, boardGeometry} = await import('../tools/pdf/diagram.mjs');
+  assert.ok(html.includes('<svg'), 'board missing from the sheet');
+  assert.deepEqual(boardGeometry.lanes, ['clients', 'edge', 'core', 'async', 'fail']);
+  // Steps must run 1..n with none skipped, or the reader loses the path.
+  const steps = [...architectureSvg().matchAll(/class="bd-step">(\d+)</g)].map((m) => Number(m[1]));
+  assert.deepEqual([...steps].sort((a, b) => a - b), Array.from({length: steps.length}, (_, i) => i + 1));
+});
+
+test('the footer links to the site and to the video, both clickable', () => {
+  assert.ok(html.includes(`href="${sheet.siteUrl}"`), 'site link not clickable');
+  assert.ok(html.includes(`href="${sheet.video.url}"`), 'video link not clickable');
+  assert.match(sheet.video.url, /^https:\/\//);
+});
+
+test('the channel cartoon is embedded, not linked', () => {
+  // Self contained: nothing to fetch when the PDF is opened, and nothing to
+  // break if the image is ever moved in the repo.
+  const withAvatar = renderHtml(sheet, {avatarDataUri: 'data:image/png;base64,AAA'});
+  assert.match(withAvatar, /<img src="data:image\/png;base64,/);
+});
