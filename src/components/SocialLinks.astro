@@ -1,0 +1,67 @@
+---
+/**
+ * Every account the channel owns, as real links.
+ *
+ * Exists because of a cross-platform audit on 2026-09-11: the accounts were
+ * created over several days and anything published early points only at what
+ * existed then. The site is the one surface we fully control, so it carries the
+ * complete list and everything else can point here.
+ */
+import {SOCIALS} from '../lib/channel';
+
+interface Props {
+  /** A heading is right in a footer, wrong when the page already has one. */
+  heading?: string;
+}
+const {heading} = Astro.props;
+---
+
+<nav class="socials" aria-label="Code with Sam elsewhere">
+  {heading && <h2>{heading}</h2>}
+  <ul>
+    {
+      SOCIALS.map((s) => (
+        <li>
+          <a href={s.url} rel="me noopener" target="_blank">
+            <span class="label">{s.label}</span>
+            <span class="note">{s.note}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .socials h2 {
+    font-size: 1rem;
+    margin: 0 0 0.75rem;
+  }
+  .socials ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  }
+  .socials a {
+    display: grid;
+    gap: 0.1rem;
+    padding: 0.6rem 0.75rem;
+    border: 2px solid var(--hairline, #d8d8d2);
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+  }
+  .socials a:hover {
+    border-color: var(--primary, #5b3ce0);
+  }
+  .label {
+    font-weight: 600;
+  }
+  .note {
+    font-size: 0.82rem;
+    opacity: 0.7;
+  }
+</style>
