@@ -54,7 +54,7 @@ export function renderHtml(sheet) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
-  @page { size: A4; margin: 16mm 15mm 18mm; }
+  @page { size: A4; margin: 15mm 15mm 14mm; }
 
   :root {
     --bg: ${COLOR.bg};
@@ -75,6 +75,57 @@ export function renderHtml(sheet) {
     -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
   h1, h2, h3, .kicker, .big { font-family: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif; }
+
+  /*
+    Persistent channel marks, on every page.
+
+    In Chrome's print pipeline a position:fixed element is painted onto each
+    page, which is what makes a repeating watermark possible without a PDF
+    library stamping it afterwards.
+
+    Two marks, deliberately, and they mirror the video:
+      .stamp      small dark wordmark in the top right, always present, never
+                  decorative. The visual style guide specifies exactly this for
+                  the videos, so the sheet carries the same furniture.
+      .watermark  a large diagonal wordmark at very low contrast, sitting
+                  behind the text. Low enough to read through, present enough
+                  that a screenshot of any page is obviously from this channel.
+  */
+  /*
+    Repeating page furniture, done with a table rather than position:fixed.
+
+    The obvious approach, a fixed element, does not survive Chrome's paged
+    layout: the marks resolved against the wrong box and landed ON the body
+    text, in the wrong margins. A thead and tfoot are repeated on every page by
+    every print engine, which is the oldest and still the only reliable way to
+    get a running header and footer out of HTML.
+
+    Sam asked for a channel watermark, then for it not to be excessive and for
+    the sheet to still read cleanly. Those pull against each other: anything
+    set behind body copy large enough to survive a screenshot also makes the
+    text harder to read, and this is a document someone may have open during a
+    real interview. So the mark is persistent rather than loud, and it lives in
+    the running header and footer where it can never touch a line of text.
+  */
+  table.page { width: 100%; border-collapse: collapse; }
+  table.page > thead, table.page > tfoot { display: table-header-group; }
+  table.page > tfoot { display: table-footer-group; }
+  table.page > thead th, table.page > tfoot td { border: 0; padding: 0; font-weight: 400; }
+
+  .stamp {
+    text-align: right; padding-bottom: 5mm !important;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+    font-size: 8pt; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--ink);
+  }
+  .stamp span { color: var(--primary); }
+
+  .footmark {
+    padding-top: 4mm !important; border-top: 1px solid var(--hairline) !important;
+    font-size: 7.4pt; color: var(--ink-soft);
+  }
+  .footmark div { display: flex; justify-content: space-between; align-items: baseline; }
+  .footmark b { font-weight: 600; color: var(--ink); }
 
   /* ---------- cover ---------- */
   .cover { page-break-after: always; padding-top: 6mm; }
@@ -134,7 +185,9 @@ export function renderHtml(sheet) {
   .check li { margin-bottom: 2.2mm; }
 
   /* ---------- footer ---------- */
-  .links { margin: 8mm 0 0; border-top: 1px solid var(--hairline); padding-top: 5mm; }
+  /* Kept whole. A link block split across a page boundary means half of Sam's
+     accounts are on a page nobody scrolls to. */
+  .links { margin: 8mm 0 0; border-top: 1px solid var(--hairline); padding-top: 5mm; page-break-inside: avoid; }
   .links h3 { font-size: 10pt; margin: 0 0 3mm; }
   .links ul { list-style: none; margin: 0; padding: 0; column-count: 2; column-gap: 8mm; }
   .links li { margin-bottom: 1.6mm; font-size: 9.2pt; break-inside: avoid; }
@@ -145,6 +198,14 @@ export function renderHtml(sheet) {
 </style>
 </head>
 <body>
+
+<table class="page">
+<thead><tr><th class="stamp">Code with <span>Sam</span></th></tr></thead>
+<tfoot><tr><td class="footmark"><div>
+  <span><b>${esc(sheet.channel)}</b> &middot; code-with-sam-dev.github.io</span>
+  <span>${esc(sheet.title)}</span>
+</div></td></tr></tfoot>
+<tbody><tr><td>
 
 <div class="cover">
   <p class="kicker">${esc(sheet.kicker)}</p>
@@ -189,6 +250,9 @@ ${sheet.sections.map(section).join('')}
   <p class="closing">${esc(sheet.closing)}</p>
   <p class="verified">Technical claims verified ${esc(sheet.verifiedOn)} against the documentation named beside each one. Vendors change behaviour and defaults between versions, so check the version you are actually running before you rely on any of it.</p>
 </div>
+
+</td></tr></tbody>
+</table>
 
 </body>
 </html>`;

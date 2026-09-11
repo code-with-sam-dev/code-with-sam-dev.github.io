@@ -10,7 +10,8 @@
  * The intermediate HTML is written next to the PDF and kept, so a rendering
  * problem can be opened in a browser and looked at rather than guessed at.
  */
-import {writeFile, mkdir, rm} from 'node:fs/promises';
+import {writeFile, mkdir, rm, rename} from 'node:fs/promises';
+import {randomBytes} from 'node:crypto';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 import {dirname, resolve} from 'node:path';
@@ -43,6 +44,50 @@ async function chromePath() {
   return found;
 }
 
+/**
+ * Marks the PDF as not modifiable.
+ *
+ * Be clear about what this is and is not. It sets the PDF permission flags,
+ * which well behaved readers such as Preview and Acrobat honour: the document
+ * opens with no password, but editing, annotating and form filling are refused.
+ *
+ * It is NOT security. The flags live inside a file the reader fully controls,
+ * and anyone who wants to strip them can do so in seconds with the same tool
+ * used here. Treat it as a "do not scribble on this" sign, not a lock.
+ *
+ * Printing and text extraction stay allowed on purpose. Blocking extraction
+ * breaks screen readers, and punishing every blind reader to inconvenience a
+ * plagiarist is a bad trade.
+ *
+ * The owner password is random and thrown away, because nothing should ever
+ * need it: the document's source of truth is design-sheet.data.mjs in this
+ * repository, and editing means changing that file and rebuilding.
+ */
+async function restrictEditing() {
+  const tmp = `${OUT_PDF}.restricted`;
+  const owner = randomBytes(24).toString('base64url');
+  try {
+    await run('qpdf', [
+      '--encrypt', '', owner, '256',
+      '--modify=none',
+      '--annotate=n',
+      '--form=n',
+      '--print=full',
+      '--extract=y',
+      '--accessibility=y',
+      '--', OUT_PDF, tmp,
+    ]);
+    await rename(tmp, OUT_PDF);
+    console.log('Permissions set: opens freely, editing and annotation refused.');
+  } catch (error) {
+    await rm(tmp, {force: true});
+    // Not fatal. A sheet without the flag is still a correct sheet, and
+    // failing the whole build over a "do not scribble" sign would be silly.
+    console.warn(`Could not set PDF permissions (${error.message.split('\n')[0]}).`);
+    console.warn('Install qpdf to enable this. The PDF itself is fine.');
+  }
+}
+
 async function main() {
   await mkdir(dirname(OUT_HTML), {recursive: true});
   await mkdir(dirname(OUT_PDF), {recursive: true});
@@ -66,6 +111,8 @@ async function main() {
     `--print-to-pdf=${resolve(OUT_PDF)}`,
     `file://${resolve(OUT_HTML)}`,
   ]);
+
+  await restrictEditing();
 
   const {stat} = await import('node:fs/promises');
   const {size} = await stat(OUT_PDF);

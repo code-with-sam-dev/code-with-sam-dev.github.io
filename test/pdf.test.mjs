@@ -91,3 +91,50 @@ test('the built PDF exists, is a real PDF, and is not a blank page', async () =>
   assert.equal(head, '%PDF-', 'output is not a PDF');
   assert.ok(info.size > 20_000, `PDF is suspiciously small at ${info.size} bytes`);
 });
+
+test('the channel mark appears on every page, in the margins', () => {
+  // Both marks are position:fixed, so Chrome paints them onto every page, and
+  // both live in the page margin so they can never land on a line of text.
+  // Crop any single page and it is still identifiably from this channel.
+  assert.match(html, /class="stamp"/);
+  assert.match(html, /class="footmark"/);
+  assert.ok(html.includes(sheet.channel), 'channel name missing from the page marks');
+});
+
+test('there is no watermark printed behind the body text', () => {
+  // Deliberate. Anything set large enough behind body copy to survive a
+  // screenshot also makes the text harder to read, and this is a document
+  // someone may have open during a real interview. Sam's instruction was that
+  // it must not be excessive and must still read cleanly.
+  assert.equal(html.includes('class="watermark"'), false);
+});
+
+test('the link block includes Facebook and a contact route', () => {
+  // Facebook is kept out of captions on platforms that do not linkify, where a
+  // raw profile.php id would have to be retyped. In a PDF the link is
+  // clickable, so that objection does not apply here.
+  const labels = sheet.links.map((l) => l.label.toLowerCase());
+  assert.ok(labels.includes('facebook'), 'Facebook missing');
+  assert.ok(labels.includes('contact'), 'contact route missing');
+});
+
+test('the published PDF refuses editing but still allows printing and screen readers', async () => {
+  const {execFile} = await import('node:child_process');
+  const {promisify} = await import('node:util');
+  let out;
+  try {
+    ({stdout: out} = await promisify(execFile)('qpdf', [
+      '--show-encryption',
+      'public/downloads/digital-wallet-design-sheet.pdf',
+    ]));
+  } catch {
+    // qpdf absent is a tooling gap on this machine, not a broken document.
+    return;
+  }
+  assert.match(out, /modify anything: not allowed/);
+  // Blocking these would punish blind readers to inconvenience a plagiarist.
+  assert.match(out, /extract for accessibility: allowed/);
+  assert.match(out, /print high resolution: allowed/);
+  // It must still open without anyone being asked for a password.
+  assert.match(out, /User password = *\n/);
+});

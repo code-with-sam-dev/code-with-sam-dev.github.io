@@ -21,6 +21,7 @@ const LIT = 'Standard database literature, not the PostgreSQL manual';
 const FIRST = 'First principles, not vendor documentation';
 
 export const sheet = {
+  channel: 'Code with Sam',
   title: 'Design a Digital Wallet Payment System',
   subtitle: 'The senior engineer answer sheet',
   kicker: 'Senior Software Engineer Interview Questions: Deep Dives',
@@ -230,6 +231,13 @@ export const sheet = {
     ],
   },
 
+  /*
+    Every account the channel owns. Facebook is included here even though it is
+    kept OUT of captions on platforms that do not linkify, where a raw
+    profile.php id would have to be retyped by hand. In a PDF the link is
+    clickable, so that objection does not apply and leaving it out would just
+    be an omission.
+  */
   links: [
     {label: 'Site', url: 'https://code-with-sam-dev.github.io'},
     {label: 'YouTube', url: 'https://www.youtube.com/@CodewithSam-Dev'},
@@ -237,7 +245,9 @@ export const sheet = {
     {label: 'X', url: 'https://x.com/CodeWithSamDev'},
     {label: 'TikTok', url: 'https://www.tiktok.com/@codewithsamdev'},
     {label: 'Instagram', url: 'https://www.instagram.com/codewithsamdev'},
+    {label: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61594191065024'},
     {label: 'GitHub', url: 'https://github.com/code-with-sam-dev'},
+    {label: 'Contact', url: 'https://code-with-sam-dev.github.io/contact'},
   ],
 
   closing:
