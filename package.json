@@ -7,7 +7,9 @@
     "dev": "astro dev",
     "build": "astro build && npm run check:no-email",
     "check:no-email": "node tools/check-no-email.mjs",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "build:pdf": "node tools/build-pdf.mjs",
+    "test": "node --test"
   },
   "dependencies": {
     "astro": "5.14.1",
