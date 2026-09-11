@@ -197,3 +197,51 @@ test('observability is in the flow diagram but is not a numbered step', async ()
   assert.match(svg, /OBSERVABILITY/);
   assert.match(svg, /stroke-dasharray/, 'observability taps should be dashed');
 });
+
+/**
+ * The sheet and the video draw the SAME board.
+ *
+ * The board is defined once, in the video project, and exported into this repo
+ * as generated data. These tests exist so that a hand edit to that generated
+ * file, or a stale copy of it, fails here rather than being discovered by a
+ * viewer who notices the sheet and the video disagree.
+ */
+test('the board is generated data, not something edited here', async () => {
+  const {readFile} = await import('node:fs/promises');
+  const src = await readFile(new URL('../tools/pdf/board.data.mjs', import.meta.url), 'utf8');
+  assert.match(src, /GENERATED FILE\. Do not edit\./);
+  assert.match(src, /export-board-data\.mjs/, 'the file should say what regenerates it');
+});
+
+test('every box the data declares is actually drawn', async () => {
+  const {architectureSvg} = await import('../tools/pdf/diagram.mjs');
+  const {BOXES} = await import('../tools/pdf/board.data.mjs');
+  const svg = architectureSvg();
+  for (const b of BOXES) {
+    assert.ok(svg.includes(b.label), `${b.id} is in the data but not on the sheet`);
+  }
+});
+
+test('every numbered step the data declares is drawn, with its label', async () => {
+  const {architectureSvg} = await import('../tools/pdf/diagram.mjs');
+  const {CONNECTORS} = await import('../tools/pdf/board.data.mjs');
+  const svg = architectureSvg();
+  const steps = CONNECTORS.filter((c) => c.kind === 'step');
+  assert.ok(steps.length >= 10, 'the money path should have at least ten steps');
+  for (const s of steps) {
+    assert.ok(svg.includes(`>${s.step}</text>`), `step ${s.step} has no badge`);
+    if (s.note) assert.ok(svg.includes(s.note), `step ${s.step} lost its label "${s.note}"`);
+  }
+});
+
+test('the observability taps are drawn and none of them is numbered', async () => {
+  const {architectureSvg} = await import('../tools/pdf/diagram.mjs');
+  const {CONNECTORS} = await import('../tools/pdf/board.data.mjs');
+  const svg = architectureSvg();
+  const taps = CONNECTORS.filter((c) => c.kind === 'tap');
+  assert.ok(taps.length > 0);
+  for (const t of taps) {
+    assert.ok(svg.includes(t.note), `the ${t.note} tap is missing`);
+    assert.equal(t.step, undefined, 'a tap must never carry a step number');
+  }
+});
