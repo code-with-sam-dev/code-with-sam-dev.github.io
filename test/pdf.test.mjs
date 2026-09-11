@@ -61,7 +61,7 @@ test('every claim carries a source, because that is the whole point of the sheet
 test('sources are primary documentation or named explicitly as something else', () => {
   // A claim sourced to "common knowledge" is how a wrong thing gets a citation
   // shaped box drawn around it.
-  const allowed = /postgresql|kafka|youtube|gsma|literature|first principles/i;
+  const allowed = /postgresql|kafka|prometheus|youtube|gsma|literature|first principles/i;
   for (const section of sheet.sections) {
     for (const claim of section.claims ?? []) {
       assert.match(claim.source, allowed, `unrecognised source: ${claim.source}`);
@@ -154,7 +154,7 @@ test('the diagram cannot restyle the page around it', async () => {
 test('the architecture board is on the document, with its flow numbered', async () => {
   const {architectureSvg, boardGeometry} = await import('../tools/pdf/diagram.mjs');
   assert.ok(html.includes('<svg'), 'board missing from the sheet');
-  assert.deepEqual(boardGeometry.lanes, ['clients', 'edge', 'core', 'async', 'fail']);
+  assert.deepEqual(boardGeometry.lanes, ['clients', 'edge', 'core', 'async', 'obs', 'fail']);
   // Steps must run 1..n with none skipped, or the reader loses the path.
   const steps = [...architectureSvg().matchAll(/class="bd-step">(\d+)</g)].map((m) => Number(m[1]));
   assert.deepEqual([...steps].sort((a, b) => a - b), Array.from({length: steps.length}, (_, i) => i + 1));
@@ -171,4 +171,29 @@ test('the channel cartoon is embedded, not linked', () => {
   // break if the image is ever moved in the repo.
   const withAvatar = renderHtml(sheet, {avatarDataUri: 'data:image/png;base64,AAA'});
   assert.match(withAvatar, /<img src="data:image\/png;base64,/);
+});
+
+test('technology marks appear only where the design commits to that technology', async () => {
+  // Decorating a box with a logo we did not choose would assert an
+  // architectural decision through clip art. Each mark below is a choice the
+  // sheet actually argues for somewhere in the text.
+  const {technologies} = await import('../tools/pdf/diagram.mjs');
+  assert.ok(technologies.length > 0);
+  for (const t of technologies) {
+    assert.ok(t.title, `no title resolved for ${t.slug}`);
+  }
+});
+
+test('the sheet carries a trademark note, because it shows other people marks', () => {
+  assert.match(html, /property of their respective owners/i);
+  assert.match(html, /implies any endorsement/i);
+});
+
+test('observability is in the flow diagram but is not a numbered step', async () => {
+  // Observability watches every step; it is not a step the money passes
+  // through. Numbering it would teach the opposite model.
+  const {architectureSvg} = await import('../tools/pdf/diagram.mjs');
+  const svg = architectureSvg();
+  assert.match(svg, /OBSERVABILITY/);
+  assert.match(svg, /stroke-dasharray/, 'observability taps should be dashed');
 });

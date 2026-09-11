@@ -13,6 +13,36 @@
  * disagree with the box it points at.
  */
 
+import * as simpleIcons from 'simple-icons';
+
+/**
+ * Technology marks, in their own brand colours.
+ *
+ * Sam asked for real logos so the board is catchy rather than a grid of grey
+ * rectangles, and he is right that it helps: an engineer recognises the
+ * Postgres elephant faster than they read the words "relational database".
+ *
+ * Taken from simple-icons, which ships the official glyph and the official
+ * brand hex for each project. The marks are used unmodified and only to
+ * identify the technology in the box they sit in, which is what a trademark
+ * permits. There is a note to that effect on the sheet.
+ *
+ * A mark appears ONLY where the design actually commits to that technology.
+ * Decorating a box with a logo we did not choose would be asserting an
+ * architectural decision through clip art.
+ */
+function iconOf(slug) {
+  const key = 'si' + slug.charAt(0).toUpperCase() + slug.slice(1);
+  return simpleIcons[key] ?? null;
+}
+
+function icon(slug, x, y, size) {
+  const found = iconOf(slug);
+  if (!found) return '';
+  const k = size / 24;
+  return `<g transform="translate(${x} ${y}) scale(${k})"><path d="${found.path}" fill="#${found.hex}"/></g>`;
+}
+
 const C = {
   ink: '#12161F',
   inkSoft: '#5A6473',
@@ -45,6 +75,7 @@ const LANES = lanes([
   {id: 'edge', label: 'EDGE AND SECURITY', height: 96, tint: C.primarySoft, edge: C.primary},
   {id: 'core', label: 'CORE WALLET PLATFORM', height: 208, tint: '#FFFFFF', edge: C.ink},
   {id: 'async', label: 'ASYNC SERVICES', height: 96, tint: C.primarySoft, edge: C.primary},
+  {id: 'obs', label: 'OBSERVABILITY, CROSS CUTTING', height: 96, tint: '#F4F5F7', edge: C.inkSoft},
   {id: 'fail', label: 'FAILURE MODES', height: 108, tint: C.warnSoft, edge: C.warn},
 ]);
 
@@ -73,7 +104,7 @@ function laneRect(l) {
 }
 
 /** A box, vertically centred in the space below its lane label. */
-function box(laneId, col, label, sub, {fill = C.paper, stroke = C.ink, row = 0, rows = 1} = {}) {
+function box(laneId, col, label, sub, {fill = C.paper, stroke = C.ink, row = 0, rows = 1, tech = null} = {}) {
   const l = lane(laneId);
   const top = l.y + LANE_LABEL + 8;
   const avail = l.height - LANE_LABEL - 16;
@@ -92,8 +123,9 @@ function box(laneId, col, label, sub, {fill = C.paper, stroke = C.ink, row = 0, 
     svg: `
     <rect x="${col.x}" y="${y}" width="${col.width}" height="${h}" rx="8"
           fill="${fill}" stroke="${stroke}" stroke-width="1.6"/>
-    <text x="${col.x + col.width / 2}" y="${sub ? cy - 4 : cy + 5}" class="bd-box">${esc(label)}</text>
-    ${sub ? `<text x="${col.x + col.width / 2}" y="${cy + 13}" class="bd-sub">${esc(sub)}</text>` : ''}`,
+    ${tech ? icon(tech, col.x + 12, cy - 9, 18) : ''}
+    <text x="${col.x + col.width / 2 + (tech ? 9 : 0)}" y="${sub ? cy - 4 : cy + 5}" class="bd-box">${esc(label)}</text>
+    ${sub ? `<text x="${col.x + col.width / 2 + (tech ? 9 : 0)}" y="${cy + 13}" class="bd-sub">${esc(sub)}</text>` : ''}`,
   };
 }
 
@@ -115,10 +147,11 @@ function across(from, to, step) {
   const x1 = from.x + from.width;
   const x2 = to.x;
   const y = from.cy;
+  const stroke = step === null ? C.inkSoft : C.ink;
   return `
     <line x1="${x1}" y1="${y}" x2="${x2 - 3}" y2="${y}"
-          stroke="${C.ink}" stroke-width="1.5" marker-end="url(#head)"/>
-    ${badge((x1 + x2) / 2, y, step)}`;
+          stroke="${stroke}" stroke-width="1.5" marker-end="url(#head)"/>
+    ${step === null ? '' : badge((x1 + x2) / 2, y, step)}`;
 }
 
 /** Top to bottom. Straight when the columns line up, an elbow when they do not. */
@@ -143,6 +176,19 @@ function down(from, to, step) {
     ${badge((x1 + x2) / 2, my, step)}`;
 }
 
+/**
+ * A dashed, unnumbered connector into the observability lane.
+ *
+ * Unnumbered on purpose. Observability is not a step the money passes through,
+ * it is the thing watching every step, and giving it a number in the flow would
+ * teach exactly the wrong model.
+ */
+function tap(from, to) {
+  return `
+    <path d="M ${from.cx} ${from.bottom} V ${to.top - 3}" fill="none"
+          stroke="${C.inkSoft}" stroke-width="1.1" stroke-dasharray="3 3" opacity=".75"/>`;
+}
+
 export function architectureSvg() {
   const two = columns(2, {inset: 200});
   const edge = columns(2, {inset: 200});
@@ -160,13 +206,19 @@ export function architectureSvg() {
   const idem = box('core', core3[1], 'Idempotency store', 'key, request hash, result', {rows: 2, row: 0});
   const ledger = box('core', core3[2], 'Ledger', 'append only, double entry', {rows: 2, row: 0, stroke: C.primary});
 
-  const db = box('core', core3[0], 'Financial database', 'one transaction, one commit', {rows: 2, row: 1});
+  const db = box('core', core3[0], 'Financial database', 'one transaction, one commit', {rows: 2, row: 1, tech: 'postgresql'});
   const outbox = box('core', core3[1], 'Outbox table', 'written in the SAME transaction', {rows: 2, row: 1, stroke: C.primary});
   const balance = box('core', core3[2], 'Balance', 'derived, never edited', {rows: 2, row: 1});
 
   const publisher = box('async', async3[0], 'Outbox publisher', 'at least once', {stroke: C.primary});
-  const broker = box('async', async3[1], 'Message broker', 'consumers must be idempotent', {stroke: C.primary});
+  const broker = box('async', async3[1], 'Message broker', 'consumers must be idempotent', {stroke: C.primary, tech: 'apachekafka'});
   const notify = box('async', async3[2], 'Notification service', null, {stroke: C.primary});
+
+  const obs4 = columns(4, {inset: 26});
+  const metrics = box('obs', obs4[0], 'Metrics', 'scraped from each instance', {stroke: C.inkSoft, tech: 'prometheus'});
+  const dash = box('obs', obs4[1], 'Dashboards and alerts', 'alert on the invariant', {stroke: C.inkSoft, tech: 'grafana'});
+  const logs = box('obs', obs4[2], 'Structured logs', 'one correlation id, end to end', {stroke: C.inkSoft});
+  const traces = box('obs', obs4[3], 'Traces', 'a span per hop', {stroke: C.inkSoft, tech: 'opentelemetry'});
 
   const failures = [
     ['The retry', 'same key, same result'],
@@ -201,6 +253,7 @@ export function architectureSvg() {
   ${transfer.svg}${idem.svg}${ledger.svg}
   ${db.svg}${outbox.svg}${balance.svg}
   ${publisher.svg}${broker.svg}${notify.svg}
+  ${metrics.svg}${dash.svg}${logs.svg}${traces.svg}
   ${failures.map((f) => f.svg).join('')}
 
   ${down(sender, lb, 1)}
@@ -214,7 +267,19 @@ export function architectureSvg() {
   ${across(publisher, broker, 9)}
   ${across(broker, notify, 10)}
 
+  <!-- Observability taps. Dashed and deliberately UNNUMBERED: observability is
+       not a step the money travels through, it is something that watches every
+       step. Numbering it would teach the opposite. -->
+  ${tap(transfer, metrics)}
+  ${tap(ledger, logs)}
+  ${tap(publisher, traces)}
+  ${across(metrics, dash, null)}
+
 </svg>`;
 }
 
 export const boardGeometry = {width: W, height: HEIGHT, lanes: LANES.map((l) => l.id)};
+
+/** Marks actually used, so the sheet can carry the trademark note honestly. */
+export const technologies = ['postgresql', 'apachekafka', 'prometheus', 'grafana', 'opentelemetry']
+  .map((slug) => ({slug, title: iconOf(slug)?.title ?? slug}));

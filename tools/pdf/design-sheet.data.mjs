@@ -19,6 +19,7 @@ const KAFKA_DESIGN = 'Kafka 4.3, Design: Message Delivery Semantics';
 const KAFKA_PRODUCER = 'Kafka 4.3, Producer Configs';
 const LIT = 'Standard database literature, not the PostgreSQL manual';
 const FIRST = 'First principles, not vendor documentation';
+const PROM = 'Prometheus, Histograms and summaries';
 
 export const sheet = {
   channel: 'Code with Sam',
@@ -210,6 +211,34 @@ export const sheet = {
       ],
     },
     {
+      id: 'observability',
+      title: 'Proving it works, and proving what happened',
+      body: [
+        'Most candidates answer this by naming tools. Prometheus, Grafana, done. The senior answer is not which tools, it is what you measure and what you wake somebody up for.',
+        'In a payment system the thing worth alerting on is an invariant, not a symptom. CPU at 90 percent is a symptom. A ledger that does not balance is money, and it is the one page-someone-at-3am alert this design has.',
+        'The four that actually matter here: does the ledger balance, how far behind is the outbox publisher, how many transfers are stuck in a non terminal state, and how often is the idempotency key being hit. That last one is free duplicate-detection telemetry: a sudden rise means a client is retrying much more than it should be, and that is usually the first sign something upstream is broken.',
+        'And one thread through all of it. A correlation id issued at the gateway, carried on every log line, every span and every event, is what turns "it failed somewhere" into "it failed here". Without it the money is auditable and the request is not.',
+      ],
+      claims: [
+        {
+          text: 'A Prometheus summary calculates quantiles inside the instrumented program and exposes them directly. A histogram exposes bucketed counts, and the quantile is calculated on the server by histogram_quantile().',
+          source: PROM,
+        },
+        {
+          text: 'Precomputed summary quantiles cannot be aggregated across instances. The documentation is blunt about it: averaging the quantiles yields statistically nonsensical values, and it marks avg of a 95th percentile series as BAD. If you want a percentile across a fleet, you need histograms.',
+          source: PROM,
+        },
+        {
+          text: 'The accuracy of histogram_quantile is bounded by the width of the bucket the quantile falls in, so buckets chosen badly give a confident and wrong number.',
+          source: PROM,
+        },
+        {
+          text: 'Knowing the difference between those two, and why you cannot average percentiles, separates someone who has run a system from someone who has configured one.',
+          source: FIRST,
+        },
+      ],
+    },
+    {
       id: 'xa',
       title: 'Why not a distributed transaction',
       body: [
@@ -261,6 +290,9 @@ export const sheet = {
     {label: 'GitHub', url: 'https://github.com/code-with-sam-dev'},
     {label: 'Contact', url: 'https://code-with-sam-dev.github.io/contact'},
   ],
+
+  trademarks:
+    'Technology marks on the board are the property of their respective owners and appear only to identify the technology in the box they sit in. Nothing here implies any endorsement.',
 
   closing:
     'If this was useful, a like and a subscribe help more than you would think. And tell me in the comments which system you want taken apart next.',

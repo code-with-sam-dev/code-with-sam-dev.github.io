@@ -285,6 +285,7 @@ ${sheet.sections.map(section).join('')}
       .join('')}
   </ul>
   <p class="closing">${esc(sheet.closing)}</p>
+  <p class="verified">${esc(sheet.trademarks)}</p>
   <p class="verified">Technical claims verified ${esc(sheet.verifiedOn)} against the documentation named beside each one. Vendors change behaviour and defaults between versions, so check the version you are actually running before you rely on any of it.</p>
 </div>
 
