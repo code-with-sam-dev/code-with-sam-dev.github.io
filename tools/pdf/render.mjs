@@ -258,12 +258,28 @@ export function renderHtml(sheet, {avatarDataUri = ''} = {}) {
 </div>
 
 <div class="board-page">
-  <h2><span class="num">01</span>The board we end up with</h2>
-  <p class="body">Every box below earns its place later in this sheet. Nothing here is decoration, and the numbers are the order a single transfer travels.</p>
-  ${architectureSvg()}
-  <p class="board-note">The four boxes along the bottom are not components. They are the failures that decide whether the rest of the design is real, and each one is answered in the sections that follow.</p>
+  ${
+    /*
+      THE BOARD IS PER SHEET, AND OPTIONAL.
 
-  <h2 style="margin-top:9mm"><span class="num">02</span>${esc(sheet.scale.title)}</h2>
+      It was hard coded, caption and all, while there was one sheet. The
+      rebalancing sheet then rendered the DIGITAL WALLET architecture, with a
+      transfer service and a ledger, on page two of a document about consumer
+      groups. It was the wrong diagram entirely, and nothing failed.
+
+      A sheet with no diagram is worth strictly more than a sheet with someone
+      else's diagram, so a sheet that declares no board simply has no board
+      page, and numbering closes up behind it.
+    */
+    sheet.board
+      ? `<h2><span class="num">01</span>${esc(sheet.board.title)}</h2>
+  <p class="body">${esc(sheet.board.lead)}</p>
+  ${sheet.board.svg()}
+  <p class="board-note">${esc(sheet.board.note)}</p>
+
+  <h2 style="margin-top:9mm"><span class="num">02</span>${esc(sheet.scale.title)}</h2>`
+      : `<h2><span class="num">01</span>${esc(sheet.scale.title)}</h2>`
+  }
   <table class="scale">
     ${sheet.scale.rows.map(([k, v]) => `<tr><td>${esc(k)}</td><td>${esc(v)}</td></tr>`).join('')}
   </table>

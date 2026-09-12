@@ -21,8 +21,25 @@ const LIT = 'Standard database literature, not the PostgreSQL manual';
 const FIRST = 'First principles, not vendor documentation';
 const PROM = 'Prometheus, Histograms and summaries';
 
+import {architectureSvg} from './diagram.mjs';
+
 export const sheet = {
   channel: 'Code with Sam',
+
+  /**
+   * The architecture board, on its own page.
+   *
+   * Declared here rather than hard coded in the template, because the template
+   * serves every sheet and this diagram belongs to exactly one of them. The
+   * rebalancing sheet rendered this wallet board on page two before the board
+   * became per sheet.
+   */
+  board: {
+    title: 'The board we end up with',
+    lead: 'Every box below earns its place later in this sheet. Nothing here is decoration, and the numbers are the order a single transfer travels.',
+    note: 'The four boxes along the bottom are not components. They are the failures that decide whether the rest of the design is real, and each one is answered in the sections that follow.',
+    svg: architectureSvg,
+  },
 
   /*
     The video this sheet belongs to. Until it is published there is no watch

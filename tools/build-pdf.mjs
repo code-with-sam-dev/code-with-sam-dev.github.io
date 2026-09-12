@@ -18,8 +18,37 @@ import {dirname, resolve} from 'node:path';
 
 import {readFile} from 'node:fs/promises';
 
-import {sheet} from './pdf/design-sheet.data.mjs';
 import {renderHtml} from './pdf/render.mjs';
+
+/**
+ * Which sheet to build.
+ *
+ * Was hard coded to the wallet one, which was fine while there was exactly
+ * one. Sam's rule is that EVERY episode gets a sheet, so the sheet is an
+ * argument now:
+ *
+ *     npm run build:pdf                     the wallet sheet, as before
+ *     npm run build:pdf kafka-rebalancing   episode 3
+ *
+ * Each sheet is a data module in tools/pdf/, and the output filename is
+ * derived from the same name, so adding a sheet means adding one file.
+ */
+const SHEETS = {
+  'digital-wallet': {
+    data: './pdf/design-sheet.data.mjs',
+    out: 'public/downloads/digital-wallet-design-sheet.pdf',
+  },
+  'kafka-rebalancing': {
+    data: './pdf/kafka-rebalancing.data.mjs',
+    out: 'public/downloads/kafka-rebalancing-design-sheet.pdf',
+  },
+};
+
+const NAME = process.argv[2] ?? 'digital-wallet';
+if (!SHEETS[NAME]) {
+  console.error(`Unknown sheet "${NAME}". Known: ${Object.keys(SHEETS).join(', ')}`);
+  process.exit(1);
+}
 
 /**
  * The channel mark, inlined as a data URI.
@@ -33,8 +62,8 @@ const AVATAR = 'public/sam-mark.png';
 
 const run = promisify(execFile);
 
-const OUT_PDF = 'public/downloads/digital-wallet-design-sheet.pdf';
-const OUT_HTML = 'tools/pdf/.build/design-sheet.html';
+const OUT_PDF = SHEETS[NAME].out;
+const OUT_HTML = `tools/pdf/.build/${NAME}.html`;
 
 /** Where Chrome lives on this machine, in order of preference. */
 const CHROME = [
@@ -104,6 +133,7 @@ async function main() {
   await mkdir(dirname(OUT_HTML), {recursive: true});
   await mkdir(dirname(OUT_PDF), {recursive: true});
 
+  const {sheet} = await import(SHEETS[NAME].data);
   const avatar = (await readFile(AVATAR)).toString('base64');
   const html = renderHtml(sheet, {avatarDataUri: `data:image/png;base64,${avatar}`});
   await writeFile(OUT_HTML, html);

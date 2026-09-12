@@ -3,7 +3,21 @@ import assert from 'node:assert/strict';
 import {readFile, stat} from 'node:fs/promises';
 
 import {sheet} from '../tools/pdf/design-sheet.data.mjs';
+import {sheet as kafkaRebalancing} from '../tools/pdf/kafka-rebalancing.data.mjs';
 import {renderHtml} from '../tools/pdf/render.mjs';
+
+/**
+ * Every sheet, not just the first one.
+ *
+ * These checks were written against the wallet sheet while it was the only
+ * one. Sam's rule is that EVERY episode gets a sheet, so a second sheet that
+ * quietly skipped all of them would be worse than no tests: it would look
+ * covered. The list is what makes a new sheet inherit the rules.
+ */
+const SHEETS = [
+  ['digital wallet', sheet],
+  ['kafka rebalancing', kafkaRebalancing],
+];
 
 /*
   The design sheet is the first thing on this channel that a viewer keeps. It
@@ -16,21 +30,28 @@ import {renderHtml} from '../tools/pdf/render.mjs';
 
 const html = renderHtml(sheet);
 
-test('no em dashes anywhere in the document', () => {
+test('no em dashes anywhere in any document', () => {
   // Sam's standing rule, and the one most easily broken by prose written fast.
-  assert.equal(html.includes('—'), false, 'em dash found in the design sheet');
+  for (const [name, s] of SHEETS) {
+    assert.equal(renderHtml(s).includes('—'), false, `em dash found in the ${name} sheet`);
+  }
 });
 
-test('nothing identifies Sam personally', () => {
+test('nothing identifies Sam personally, in any sheet', () => {
   const banned = [/samson/i, /nyabanga/i, /@gmail\.com/i, /\bmailto:/i];
-  for (const pattern of banned) {
-    assert.equal(pattern.test(html), false, `design sheet leaks ${pattern}`);
+  for (const [name, s] of SHEETS) {
+    const rendered = renderHtml(s);
+    for (const pattern of banned) {
+      assert.equal(pattern.test(rendered), false, `${name} sheet leaks ${pattern}`);
+    }
   }
 });
 
 test('every link is a full https URL, never a bare hostname', () => {
-  for (const link of sheet.links) {
-    assert.match(link.url, /^https:\/\//, `${link.label} is not a full https URL`);
+  for (const [name, s] of SHEETS) {
+    for (const link of s.links) {
+      assert.match(link.url, /^https:\/\//, `${name}: ${link.label} is not a full https URL`);
+    }
   }
 });
 
@@ -243,5 +264,95 @@ test('the observability taps are drawn and none of them is numbered', async () =
   for (const t of taps) {
     assert.ok(svg.includes(t.note), `the ${t.note} tap is missing`);
     assert.equal(t.step, undefined, 'a tap must never carry a step number');
+  }
+});
+
+/**
+ * The rules every sheet inherits, applied to every sheet.
+ *
+ * The sourcing rule is the whole reason these sheets are worth keeping: a
+ * claim with no source is a rumour with nice typography, and this sheet may be
+ * open on someone's second screen during a real interview.
+ */
+test('every claim in every sheet carries a source', () => {
+  for (const [name, s] of SHEETS) {
+    for (const section of s.sections) {
+      for (const claim of section.claims ?? []) {
+        assert.ok(
+          claim.source && claim.source.trim().length > 0,
+          `${name}/${section.id}: a claim has no source: "${claim.text.slice(0, 60)}"`,
+        );
+      }
+    }
+  }
+});
+
+test('every sheet says which day it was verified, and against what', () => {
+  for (const [name, s] of SHEETS) {
+    assert.match(s.verifiedOn, /^\d{4}-\d{2}-\d{2}$/, `${name} has no verification date`);
+  }
+});
+
+test('a sheet for a published episode links to that episode, not the channel', () => {
+  // The wallet sheet shipped pointing at the channel because the video was not
+  // up yet. Once a video exists, the sheet has to point at it: a reader with
+  // the PDF open is one click from watching, or is not.
+  assert.match(kafkaRebalancing.video.url, /youtu\.be\/[A-Za-z0-9_-]{11}$/,
+    'the rebalancing sheet does not link to its own video');
+});
+
+test('the rebalancing sheet states the Kafka version it was checked against', () => {
+  // This episode is unusually version sensitive: the protocol changed in 4.0
+  // and the classic one is being deprecated. A sheet that does not date its
+  // claims will be quietly wrong within a year.
+  const rendered = renderHtml(kafkaRebalancing);
+  assert.match(rendered, /Kafka 4\.3/, 'no Kafka version stated anywhere in the sheet');
+});
+
+test('the rebalancing sheet gets the opt-in direction right', () => {
+  // The easy error, and the one a viewer running a 4.x broker will correct:
+  // server side the new protocol is on by default, and it is the CLIENT that
+  // must opt in. Saying it is simply "off by default" is wrong.
+  const rendered = renderHtml(kafkaRebalancing);
+  assert.match(rendered, /group\.protocol=consumer/, 'the opt-in setting is not named');
+  assert.ok(!/the new protocol is off by default/i.test(rendered),
+    'states the opt-in backwards');
+});
+
+test('the Apache trademark notice is present where the Kafka mark is used', () => {
+  assert.match(kafkaRebalancing.trademarks, /Apache Software Foundation/);
+  assert.ok(/not?(hing)?\s+(here\s+)?impl(y|ies)/i.test(kafkaRebalancing.trademarks),
+    'the notice does not disclaim endorsement');
+});
+
+/**
+ * A sheet must never render another sheet's diagram.
+ *
+ * This shipped: the rebalancing sheet rendered the digital wallet
+ * architecture, a transfer service and a ledger and an outbox, on page two of
+ * a document about consumer groups. The board was hard coded into the template
+ * while there was only one sheet to serve, and nothing failed when a second
+ * arrived.
+ */
+test('no sheet renders a diagram belonging to a different subject', () => {
+  const foreign = {
+    'kafka rebalancing': [/Transfer service/i, /Idempotency store/i, /Ledger/i, /Outbox table/i],
+    'digital wallet': [/Consumer group/i, /Rebalance protocol/i],
+  };
+  for (const [name, s] of SHEETS) {
+    const rendered = renderHtml(s);
+    for (const pattern of foreign[name] ?? []) {
+      assert.ok(!pattern.test(rendered), `${name} sheet renders ${pattern}, which is another sheet's board`);
+    }
+  }
+});
+
+test('a sheet that declares no board simply has no board page', () => {
+  // Better no diagram than the wrong one.
+  for (const [name, s] of SHEETS) {
+    if (s.board) {
+      assert.equal(typeof s.board.svg, 'function', `${name} board has no svg`);
+      assert.ok(s.board.title && s.board.lead, `${name} board is missing its copy`);
+    }
   }
 });

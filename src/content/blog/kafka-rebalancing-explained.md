@@ -4,6 +4,7 @@ description: 'Every consumer reports healthy, the dashboard is green, and the la
 pubDate: 2026-09-12
 youtube: 'VKOBY2vv1K0'
 repo: 'https://github.com/code-with-sam-dev/kafka-payments'
+sheet: '/downloads/kafka-rebalancing-design-sheet.pdf'
 tags: ['kafka', 'interviews']
 series: 'Kafka Payments'
 episode: 3
