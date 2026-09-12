@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Signup from '../components/Signup.astro';
+import ShortsMarquee from '../components/ShortsMarquee.astro';
 import PostCard from '../components/PostCard.astro';
 import {allPosts, seriesMap, slugify} from '../lib/posts';
 import {CHANNEL_URL} from '../lib/channel';
@@ -157,6 +158,8 @@ const first = sessions[0];
   {posts.length === 0 && <p><em>First article lands with episode one.</em></p>}
 
   <div data-reveal>
+    <ShortsMarquee />
+
     <Signup />
   </div>
   <script src="../lib/terminal.player.ts"></script>
