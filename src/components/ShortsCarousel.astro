@@ -50,7 +50,7 @@ import YouTubeMark from './YouTubeMark.astro';
               </div>
               <div class="shorts-meta">
                 <p class="shorts-title">{s.title}</p>
-                <p class="shorts-from">From the {s.from} episode</p>
+                <p class="shorts-from">{s.from}</p>
                 <a href={shortUrl(s)} rel="noopener" target="_blank" tabindex={i === 0 ? undefined : -1}>
                   Watch on YouTube
                 </a>
@@ -154,6 +154,11 @@ import YouTubeMark from './YouTubeMark.astro';
         if (!id) return;
         playing = true;
         stop();
+        // A 180px frame is the right size for a poster and far too small to
+        // watch anything in. Growing the slide on play is the whole fix: the
+        // layout goes vertical, the player takes a readable width, and the
+        // carousel stops moving under the viewer.
+        root.classList.add('is-playing');
         const el = document.createElement('iframe');
         el.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
         el.title = frame.dataset.title ?? 'Short';
@@ -161,6 +166,10 @@ import YouTubeMark from './YouTubeMark.astro';
         el.allowFullscreen = true;
         el.loading = 'lazy';
         frame.replaceChildren(el);
+        // Nothing else on the slide should still invite a second click.
+        root.querySelectorAll('.shorts-play').forEach((other) => {
+          (other as HTMLElement).hidden = true;
+        });
       }),
     );
 
@@ -217,6 +226,22 @@ import YouTubeMark from './YouTubeMark.astro';
     display: flex;
     align-items: center;
     gap: 1.5rem;
+  }
+
+  /* Watching state: the player gets real estate, the text moves below it. */
+  .shorts.is-playing .shorts-slide {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .shorts.is-playing .shorts-frame {
+    width: min(340px, 80vw);
+  }
+
+  .shorts.is-playing .shorts-meta {
+    text-align: center;
+    max-width: 34rem;
   }
 
   .shorts-frame {
