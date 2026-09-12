@@ -3,7 +3,7 @@ title: 'Kafka Partitions Explained: Why More Consumers Do Not Always Make You Fa
 description: 'You added consumers and nothing got faster. One of them is running, healthy, and doing nothing at all. Here is why partitions, not consumers, set your limit, and what it costs to change it.'
 pubDate: 2026-09-11
 youtube: 'BTEAzv90W4E'
-repo: 'https://github.com/code-with-sam-dev/kafka-payments/tree/main/episode-02-partitions'
+repo: 'https://github.com/code-with-sam-dev/kafka-payments'
 tags: ['kafka', 'interviews']
 series: 'Kafka Payments'
 episode: 2

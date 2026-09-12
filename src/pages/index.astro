@@ -14,9 +14,22 @@ const LATEST_COUNT = 6;
 const latest = posts.slice(0, LATEST_COUNT);
 const series = [...(await seriesMap()).entries()];
 
-// The hero terminal follows the newest article that supplies one, so it never
-// goes stale as the library grows.
-const heroTerminal = posts.find((p) => p.data.terminal)?.data.terminal;
+// The hero terminal cycles through every article that supplies one, newest
+// first, so the panel keeps moving and never goes stale as the library grows.
+const FALLBACK_SESSION = {
+  path: 'kafka-payments',
+  lines: [
+    '$ docker compose up',
+    '$ curl localhost:8080/demo/results',
+    '',
+    '  Every episode ships with code you can run.',
+  ],
+};
+const heroSessions = posts.map((p) => p.data.terminal).filter(Boolean);
+const sessions = heroSessions.length > 0 ? heroSessions : [FALLBACK_SESSION];
+// Rendered server side so the panel is never empty: without JavaScript, or
+// before it runs, the first session simply sits there as it always did.
+const first = sessions[0];
 
 ---
 
@@ -44,21 +57,20 @@ const heroTerminal = posts.find((p) => p.data.terminal)?.data.terminal;
         <a class="btn btn-ghost" href={CHANNEL_URL} rel="noopener">Watch on YouTube</a>
       </div>
 
-      <div class="terminal" data-reveal data-delay="1">
+      <div
+        class="terminal"
+        data-reveal
+        data-delay="1"
+        data-terminal
+        data-sessions={JSON.stringify(sessions)}
+      >
         <div class="terminal-bar">
           <i style="background:#f85149"></i>
           <i style="background:#d29922"></i>
           <i style="background:#3fb950"></i>
-          <span class="t">{heroTerminal?.path ?? 'kafka-payments'}</span>
+          <span class="t" data-terminal-path>{first.path}</span>
         </div>
-        <pre><code>{
-          (heroTerminal?.lines ?? [
-            '$ docker compose up',
-            '$ curl localhost:8080/demo/results',
-            '',
-            '  Every episode ships with code you can run.',
-          ]).join('\n')
-        }</code></pre>
+        <pre><code data-terminal-body>{first.lines.join('\n')}</code></pre>
       </div>
     </div>
   </section>
@@ -146,4 +158,5 @@ const heroTerminal = posts.find((p) => p.data.terminal)?.data.terminal;
   <div data-reveal>
     <Signup />
   </div>
+  <script src="../lib/terminal.player.ts"></script>
 </Base>
