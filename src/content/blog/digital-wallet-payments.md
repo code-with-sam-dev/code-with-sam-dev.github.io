@@ -10,17 +10,18 @@ episode: 1
 cover: '/covers/digital-wallet.jpg'
 duration: '13:38'
 terminal:
-  path: 'digital-wallet / transfer'
+  path: 'digital-wallet / demo'
   lines:
-    - 'BEGIN;'
-    - '  SELECT * FROM wallets WHERE id IN (?, ?) ORDER BY id FOR UPDATE;'
-    - '  INSERT INTO transfers ...'
-    - '  INSERT INTO ledger_entries ...   -- debits = credits'
-    - '  INSERT INTO idempotency ...'
-    - '  INSERT INTO outbox ...'
-    - 'COMMIT;'
+    - '$ docker compose up --build'
+    - '$ curl -X POST localhost:8080/demo/lost-update'
     - ''
-    - '# One boundary. All of it, or none of it.'
+    - '  transfersAccepted     2'
+    - '  ledgerSaysReceived    20000'
+    - '  balanceSaysReceived   10000'
+    - '  valueConserved        true'
+    - ''
+    - '# Two transfers succeeded. One of them moved nothing,'
+    - '# and the totals still add up. That is the hard part.'
 ---
 
 A customer sends one hundred dollars. The system removes one hundred dollars
