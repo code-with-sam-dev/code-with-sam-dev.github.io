@@ -4,6 +4,7 @@ import Signup from '../components/Signup.astro';
 import PostCard from '../components/PostCard.astro';
 import {allPosts, seriesMap, slugify} from '../lib/posts';
 import {CHANNEL_URL} from '../lib/channel';
+import YouTubeMark from '../components/YouTubeMark.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const posts = await allPosts();
@@ -54,7 +55,7 @@ const first = sessions[0];
 
       <div class="hero-actions" data-reveal>
         <a class="btn btn-primary" href="#articles">Start reading</a>
-        <a class="btn btn-ghost" href={CHANNEL_URL} rel="noopener">Watch on YouTube</a>
+        <a class="btn btn-ghost" href={CHANNEL_URL} rel="noopener"><YouTubeMark size={20} /> Watch on YouTube</a>
       </div>
 
       <div

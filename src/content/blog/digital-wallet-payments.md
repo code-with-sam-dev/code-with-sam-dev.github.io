@@ -4,6 +4,7 @@ description: 'A customer sends $100, the money leaves their wallet, and the syst
 pubDate: 2026-09-12
 youtube: 'fdrbDnkAruU'
 repo: 'https://github.com/code-with-sam-dev/digital-wallet'
+sheet: '/downloads/digital-wallet-design-sheet.pdf'
 tags: ['system design', 'payments', 'postgresql', 'interviews']
 series: 'Tricky Senior Engineer Interview Questions'
 episode: 1

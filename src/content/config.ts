@@ -16,6 +16,11 @@ const blog = defineCollection({
     youtube: z.string().optional(),
     /** Full URL of the companion GitHub repo, if the article has one. */
     repo: z.string().url().optional(),
+    // The episode's PDF design sheet. Sam, 2026-09-13: every episode gets one,
+    // and the article must link to it. The sheet is the lead magnet, the thing
+    // a reader keeps after the video ends, so a sheet nobody can find is a
+    // sheet that was not worth making.
+    sheet: z.string().optional(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
 

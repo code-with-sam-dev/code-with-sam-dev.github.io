@@ -1,6 +1,7 @@
 ---
 import {getCollection} from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import YouTubeMark from '../../components/YouTubeMark.astro';
 import Signup from '../../components/Signup.astro';
 import {poster} from '../../lib/posts';
 import {CHANNEL_URL} from '../../lib/channel';
@@ -44,6 +45,25 @@ const art = post.data.cover ? poster(post.data.cover) : undefined;
 
     {
       /*
+        The design sheet.
+
+        It sits with the metadata rather than at the foot of the article because
+        a reader who wants the diagram wants it before reading, not after. Free
+        and with no email gate, which is the whole reason anyone keeps it.
+      */
+      post.data.sheet && (
+        <a class="sheet" href={post.data.sheet} download>
+          <span class="sheet-icon">PDF</span>
+          <span class="sheet-text">
+            <strong>The design sheet</strong>
+            <small>The full architecture and the verified references. Free, no email.</small>
+          </span>
+        </a>
+      )
+    }
+
+    {
+      /*
         Click-to-load player.
 
         The poster is our own still, so nothing is requested from YouTube until
@@ -69,7 +89,7 @@ const art = post.data.cover ? poster(post.data.cover) : undefined;
           </div>
           <figcaption>
             {post.data.youtube ? (
-              <>Watch on <a href={`https://www.youtube.com/watch?v=${post.data.youtube}`} rel="noopener">YouTube</a>, or read on below.</>
+              <>Watch on <a href={`https://www.youtube.com/watch?v=${post.data.youtube}`} rel="noopener"><YouTubeMark size={16} /> YouTube</a>, or read on below.</>
             ) : (
               <>The episode is being published to <a href={CHANNEL_URL} rel="noopener">the channel</a>. Subscribe and it will find you. The write-up below stands on its own in the meantime.</>
             )}

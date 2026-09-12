@@ -795,3 +795,58 @@ hr {
   .support-list li { transition: none; }
   .support-list li:hover { transform: none; }
 }
+
+
+/* ---------- the episode design sheet ---------- */
+
+/*
+  Sits under the article metadata rather than at the foot, because a reader who
+  wants the diagram wants it BEFORE reading, not after. It is the channel's lead
+  magnet: the thing someone keeps once the video is over.
+*/
+.sheet {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 1.4rem 0 0;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  max-width: 34rem;
+}
+
+.sheet:hover {
+  border-color: var(--primary);
+}
+
+.sheet-icon {
+  flex: none;
+  background: var(--primary);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+}
+
+.sheet-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.sheet-text small {
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+}
+
+
+/* The YouTube mark sits on the text baseline rather than floating above it. */
+.btn svg,
+.video-note a svg {
+  vertical-align: -0.18em;
+  margin-right: 0.35rem;
+}
