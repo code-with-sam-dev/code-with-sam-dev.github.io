@@ -1,0 +1,140 @@
+---
+/**
+ * The case for learning one thing a day, and the three ways to keep coming
+ * back.
+ *
+ * Sam's ask, 2026-09-12: a quote encouraging people to learn something a day
+ * and the benefits over the long run, then bookmark, subscribe and sign up.
+ *
+ * THE LINE THAT DECIDES WHAT THIS SAYS. It would be easy to write "learn 1%
+ * a day and you will be 37 times better in a year". That number is real
+ * arithmetic, 1.01^365, and it is not a real claim about learning: nobody
+ * compounds skill at a fixed daily rate, and putting it on the page would be
+ * the same kind of unsupported promise the thumbnail tests exist to stop.
+ *
+ * So the argument here is the honest one, which is also the more persuasive
+ * one to an engineer: the value is in the RETURNING, not in a growth rate.
+ * Three asks, in the order of how much they cost the reader.
+ */
+import {CHANNEL_URL} from '../lib/channel';
+import YouTubeMark from './YouTubeMark.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<section class="oneaday" aria-labelledby="oneaday-heading">
+  <blockquote>
+    <p id="oneaday-heading">
+      One thing a day is not a small amount of learning. It is the only amount
+      that survives a busy week.
+    </p>
+  </blockquote>
+
+  <p class="oneaday-lede">
+    Nobody becomes a senior engineer in a weekend of study, and nobody stays one
+    by stopping. What actually separates engineers over a few years is not how
+    hard they pushed in any one month. It is whether they kept turning up at
+    all.
+  </p>
+
+  <p>
+    An hour a day for a year is more time than most people spend on any course
+    they ever pay for, and it costs nothing except the decision to come back
+    tomorrow. Twenty minutes a day still gets you there, more slowly and far
+    more reliably, because twenty minutes survives the weeks when everything is
+    on fire and an hour does not.
+  </p>
+
+  <p>
+    The compounding is real, but it is not arithmetic. It is that each thing you
+    understand makes the next thing cheaper to understand. The first time you
+    read about consumer rebalancing it is new. By the time you meet it again in
+    a different system, it is a variation on something you already know, and you
+    learn it in a tenth of the time.
+  </p>
+
+  <h3>Three ways to keep coming back</h3>
+  <ol class="oneaday-asks">
+    <li>
+      <strong>Bookmark this page.</strong> Costs nothing and takes a second.
+      <kbd>Ctrl</kbd> + <kbd>D</kbd>, or <kbd>Cmd</kbd> + <kbd>D</kbd> on a Mac.
+      One new thing is added here most weeks.
+    </li>
+    <li>
+      <strong>Subscribe on YouTube.</strong> Every article here has a video, and
+      subscribing is how the next one finds you rather than the other way round.
+      <a class="btn btn-primary" href={CHANNEL_URL} rel="noopener">
+        <YouTubeMark size={16} /> Subscribe on YouTube
+      </a>
+    </li>
+    <li>
+      <strong>Get it by email.</strong> If you would rather not rely on an
+      algorithm deciding what you see, the newsletter sends new work as it
+      lands. <a href="#signup">Sign up below</a>, one click to leave, always.
+    </li>
+  </ol>
+
+  <p class="oneaday-close">
+    If you only do one of these, make it the bookmark. It is the one that
+    depends on nobody but you.
+  </p>
+</section>
+
+<style>
+  .oneaday {
+    margin: 3.5rem 0;
+    padding: 1.75rem;
+    border: 1px solid var(--hairline, #e4e4e0);
+    border-radius: 14px;
+  }
+
+  .oneaday blockquote {
+    margin: 0 0 1.25rem;
+    padding: 0 0 0 1.1rem;
+    border-left: 4px solid var(--accent, #d93a3a);
+  }
+
+  .oneaday blockquote p {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .oneaday-lede {
+    font-size: 1.05rem;
+  }
+
+  .oneaday h3 {
+    margin: 1.75rem 0 0.75rem;
+  }
+
+  .oneaday-asks {
+    margin: 0;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .oneaday-asks .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.4rem;
+  }
+
+  .oneaday kbd {
+    padding: 0.1rem 0.35rem;
+    border: 1px solid var(--hairline, #d4d4d0);
+    border-bottom-width: 2px;
+    border-radius: 5px;
+    font-size: 0.85em;
+    font-family: inherit;
+  }
+
+  .oneaday-close {
+    margin-bottom: 0;
+    color: var(--ink-soft, #5b6472);
+  }
+</style>

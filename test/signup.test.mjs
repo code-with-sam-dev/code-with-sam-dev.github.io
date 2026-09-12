@@ -110,3 +110,34 @@ test('the privacy policy agrees with whether signup is live', async () => {
     assert.match(privacy, /\bKit\b/, 'the live newsletter processor is not disclosed');
   }
 });
+
+/**
+ * The "one thing a day" section.
+ *
+ * Sam asked for a quote encouraging daily learning, then bookmark, subscribe
+ * and newsletter. The risk in writing that section is the compound-interest
+ * cliche: "1% better every day makes you 37 times better in a year" is real
+ * arithmetic and a false claim about learning, and it is exactly the kind of
+ * unsupported promise the rest of this channel refuses to make.
+ */
+test('the daily learning section makes no growth-rate promise', async () => {
+  const home = await readFile('dist/index.html', 'utf8');
+  const i = home.indexOf('One thing a day');
+  assert.ok(i > -1, 'the section is not on the page');
+  const section = home.slice(i, i + 4000);
+  assert.ok(!/\b(1|one)\s*%\s*(better|a day|every day)/i.test(section),
+    'ships the 1% compounding cliche as if it were a fact about learning');
+  assert.ok(!/\b3[0-9](\.\d+)?\s*(x|times)\b/i.test(section),
+    'ships a multiplier nobody can support');
+});
+
+test('it offers all three ways back, and the newsletter link resolves', async () => {
+  const home = await readFile('dist/index.html', 'utf8');
+  const i = home.indexOf('One thing a day');
+  const section = home.slice(i, i + 4000);
+  assert.match(section, /[Bb]ookmark/, 'no bookmark ask');
+  assert.match(section, /Subscribe on YouTube/, 'no subscribe ask');
+  assert.match(section, /href="#signup"/, 'no newsletter link');
+  // An anchor that points at nothing scrolls nowhere and looks broken.
+  assert.match(home, /id="signup"/, 'the #signup anchor does not exist on the page');
+});

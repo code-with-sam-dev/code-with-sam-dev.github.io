@@ -32,6 +32,20 @@ export const SHORTS: Short[] = [
 export const shortUrl = (s: Short): string => `https://www.youtube.com/shorts/${s.id}`;
 
 /**
+ * The poster for a Short, served from THIS domain.
+ *
+ * Deliberately not i.ytimg.com. Hot-linking YouTube's thumbnail would call
+ * Google on every page load, for every visitor, before anyone has asked to
+ * watch anything, which would make the privacy policy's "nothing is loaded
+ * from YouTube until you press play" untrue. These are cropped to 9:16 and
+ * committed, so the page stays fast and the promise stays true.
+ */
+export const shortPoster = (s: Short): string => `/shorts/${s.id}.jpg`;
+
+/** How long each Short holds before the carousel steps on. Sam's number. */
+export const HOLD_MS = 5000;
+
+/**
  * A YouTube id is exactly 11 characters of an unreserved alphabet. Checking
  * the shape here is cheap and catches a truncated paste, which would otherwise
  * ship as a link to nothing.

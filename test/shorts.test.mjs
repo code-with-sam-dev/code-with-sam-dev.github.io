@@ -39,7 +39,7 @@ async function htmlFiles(dir = 'dist', found = []) {
 const home = await readFile('dist/index.html', 'utf8');
 
 test('the homepage actually renders the Shorts section', () => {
-  assert.match(home, /class="[^"]*shorts-marquee/, 'no marquee on the page');
+  assert.match(home, /class="[^"]*shorts\b/, 'no Shorts section on the page');
   for (const id of ids) {
     assert.ok(home.includes(id), `Short ${id} is declared but not rendered`);
   }
@@ -53,17 +53,39 @@ test('every Short link points at YouTube and opens safely', () => {
   }
 });
 
-test('the animation stops for anyone who asked it to', () => {
-  // A section that scrolls forever is a genuine accessibility problem, and it
-  // is one line of CSS to respect the setting.
-  const css = home.match(/<style[^>]*>[\s\S]*?<\/style>/g)?.join('') ?? '';
-  const all = css + home;
-  assert.match(all, /prefers-reduced-motion/, 'the marquee never stops');
+test('it holds each Short rather than sliding continuously', () => {
+  // Sam rejected the marquee for the right reason: "it's moving too fast",
+  // and a title you cannot finish reading is a title nobody reads. The
+  // carousel holds for a set number of milliseconds and then steps.
+  assert.match(home, /data-hold="\d{4,}"/, 'no hold interval, so this is still a marquee');
+  const hold = Number(home.match(/data-hold="(\d+)"/)[1]);
+  assert.ok(hold >= 4000, `holds only ${hold}ms, which is not long enough to read`);
 });
 
-test('the track is duplicated so the loop has no visible gap', () => {
-  // A single copy scrolls off and leaves empty space before it wraps. The
-  // standard fix is two copies, with the second hidden from screen readers so
-  // the list is not announced twice.
-  assert.match(home, /aria-hidden="true"/, 'no duplicated track for a seamless loop');
+test('it stops for anyone who asked for reduced motion', () => {
+  const all = (home.match(/<style[^>]*>[\s\S]*?<\/style>/g)?.join('') ?? '') + home;
+  assert.match(all, /prefers-reduced-motion/, 'nothing respects reduced motion');
+});
+
+test('the previews are served from this domain, not hot-linked', () => {
+  // Hot-linking i.ytimg.com would call Google on every page load and make the
+  // privacy policy's "nothing loads from YouTube until you press play" false.
+  assert.ok(!/i\.ytimg\.com/.test(home), 'a preview is hot-linked from YouTube');
+  for (const id of ids) {
+    assert.ok(home.includes(`/shorts/${id}.jpg`), `Short ${id} has no local poster`);
+  }
+});
+
+test('no YouTube iframe exists until someone presses play', () => {
+  assert.ok(!/<iframe[^>]*youtube/i.test(home), 'a YouTube iframe ships in the HTML');
+  assert.match(home, /shorts-play/, 'there is no play control at all');
+});
+
+test('every declared Short has a poster file on disk', async () => {
+  // A missing poster renders as a broken image in a section whose entire job
+  // is to look like something worth pressing.
+  const {access} = await import('node:fs/promises');
+  for (const id of ids) {
+    await access(`public/shorts/${id}.jpg`);
+  }
 });
