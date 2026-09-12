@@ -850,3 +850,11 @@ hr {
   vertical-align: -0.18em;
   margin-right: 0.35rem;
 }
+
+/* The signup section when email capture is not wired up. */
+.signup-alt {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin: 1rem 0 0.5rem;
+}

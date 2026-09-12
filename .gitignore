@@ -4,3 +4,9 @@ dist/
 .DS_Store
 *.log
 .claude/
+
+# Internal working notes. The AdSense audit is a list of this site's own
+# weaknesses and the order they will be fixed in. Publishing it would hand
+# that list to anyone reading the repo, so it stays on the machine.
+ADSENSE_READINESS_AUDIT.md
+ADSENSE_PLAN.md

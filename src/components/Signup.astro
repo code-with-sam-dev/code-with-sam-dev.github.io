@@ -1,15 +1,27 @@
 ---
 /**
- * Email capture.
+ * Email capture, or an honest alternative when capture is not wired up.
  *
- * The form action is left as a placeholder on purpose: the Kit form endpoint
- * is created inside Kit's own dashboard, which needs a login, and logins are
- * the operator's to perform. Drop the endpoint in here and the form works - * nothing else changes.
+ * The form used to post to the literal string REPLACE_WITH_KIT_FORM_ENDPOINT on
+ * six of twelve pages including the homepage. It looked like a working signup.
+ * It discarded every address given to it. A signup that silently loses people's
+ * email is worse than no signup, so the form now renders ONLY when an endpoint
+ * is configured; see lib/signup.ts.
+ *
+ * When it is not configured the section still earns its place, by pointing at
+ * the two routes that DO work: the channel and the feed. Nothing here asks for
+ * something it cannot honour.
  *
  * Deliberately NOT a checkout. Kit Commerce depends on Stripe, and Stripe does
  * not currently support Zimbabwe as a merchant country, so anything that takes
  * money has to live on a different rail.
  */
+import {SIGNUP_ENDPOINT, signupIsLive} from '../lib/signup';
+import {CHANNEL_URL} from '../lib/channel';
+import YouTubeMark from './YouTubeMark.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const live = signupIsLive();
 const {compact = false} = Astro.props;
 ---
 
@@ -21,18 +33,36 @@ const {compact = false} = Astro.props;
     like someone who has done the work.
   </p>
 
-  <form action="REPLACE_WITH_KIT_FORM_ENDPOINT" method="post">
-    <input
-      type="email"
-      name="email_address"
-      placeholder="you@example.com"
-      aria-label="Email address"
-      required
-    />
-    <button type="submit">Send me the pack</button>
-  </form>
-
-  <p class="small">
-    New articles and videos when they land. No spam, and one click to leave.
-  </p>
+  {
+    live ? (
+      <>
+        <form action={SIGNUP_ENDPOINT} method="post">
+          <input
+            type="email"
+            name="email_address"
+            placeholder="you@example.com"
+            aria-label="Email address"
+            required
+          />
+          <button type="submit">Send me the pack</button>
+        </form>
+        <p class="small">
+          New articles and videos when they land. No spam, and one click to leave.
+        </p>
+      </>
+    ) : (
+      <>
+        <div class="signup-alt">
+          <a class="btn btn-primary" href={CHANNEL_URL} rel="noopener">
+            <YouTubeMark size={18} /> Subscribe on YouTube
+          </a>
+          <a class="btn btn-ghost" href={`${base}/rss.xml`}>Follow the articles</a>
+        </div>
+        <p class="small">
+          Email sign up is not open yet. Until it is, the channel and the feed
+          are the two ways to get new work as it lands.
+        </p>
+      </>
+    )
+  }
 </section>
