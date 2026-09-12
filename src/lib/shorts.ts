@@ -21,6 +21,32 @@ export type Short = {
 };
 
 export const SHORTS: Short[] = [
+  // Kafka Rebalancing, episode 3. Newest first.
+  {
+    id: 'KBSz9wxCzRA',
+    title: 'Senior Java interview: what is wrong with this loop?',
+    from: 'Java gotchas',
+  },
+  {
+    id: 'SbVU6EiJBw4',
+    title: 'Static membership does not reserve your partitions',
+    from: 'Kafka Rebalancing',
+  },
+  {
+    id: 't3NI1p30b-s',
+    title: 'Which rebalance protocol are you actually on?',
+    from: 'Kafka Rebalancing',
+  },
+  {
+    id: '0yIv3scYAMY',
+    title: 'Your consumer is alive. It got kicked out anyway.',
+    from: 'Kafka Rebalancing',
+  },
+  {
+    id: 'wpME6KCRI4g',
+    title: 'A rebalance made the payment run twice',
+    from: 'Kafka Rebalancing',
+  },
   {id: 'mYygHIg4SOs', title: 'Your p95 dashboard is lying to you', from: 'Digital Wallet'},
   {id: 'JpWDt7XTRd4', title: 'Both writes succeeded. The money vanished.', from: 'Digital Wallet'},
   {id: 'K1jAVd3M_l8', title: 'Your API just charged them twice', from: 'Digital Wallet'},
@@ -37,8 +63,13 @@ export const shortUrl = (s: Short): string => `https://www.youtube.com/shorts/${
  * Deliberately not i.ytimg.com. Hot-linking YouTube's thumbnail would call
  * Google on every page load, for every visitor, before anyone has asked to
  * watch anything, which would make the privacy policy's "nothing is loaded
- * from YouTube until you press play" untrue. These are cropped to 9:16 and
- * committed, so the page stays fast and the promise stays true.
+ * from YouTube until you press play" untrue. These are committed here instead,
+ * so the page stays fast and the promise stays true.
+ *
+ * From 2026-09-13 they are OUR OWN renders, straight out of Remotion, rather
+ * than YouTube's copy of them. Same picture, one less round trip, and it can
+ * never drift from the thumbnail actually on the video, because it is the same
+ * file that was uploaded.
  */
 export const shortPoster = (s: Short): string => `/shorts/${s.id}.jpg`;
 
