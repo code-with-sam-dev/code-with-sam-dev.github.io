@@ -3,6 +3,7 @@ title: 'Design a Digital Wallet: The $100 Transfer That Disappears'
 description: 'A customer sends $100, the money leaves their wallet, and the system crashes. Idempotency keys, a double entry ledger, the lost update, one atomic transaction and the transactional outbox, worked end to end.'
 pubDate: 2026-09-12
 youtube: 'fdrbDnkAruU'
+repo: 'https://github.com/code-with-sam-dev/digital-wallet'
 tags: ['system design', 'payments', 'postgresql', 'interviews']
 series: 'Tricky Senior Engineer Interview Questions'
 episode: 1
@@ -215,3 +216,31 @@ the Prometheus documentation on histograms and summaries.
 
 The full architecture diagram and the verified reference list are in the
 **Digital Wallet Design Sheet**, free and with no email required.
+
+## Run it
+
+Everything above is executable:
+
+```bash
+git clone https://github.com/code-with-sam-dev/digital-wallet
+cd digital-wallet
+docker compose up --build
+```
+
+Then watch the lost update happen, and then watch it not happen:
+
+```bash
+curl -X POST localhost:8080/demo/lost-update \
+  -H 'Content-Type: application/json' -d '{"from":1,"to":2,"amountMinor":10000}'
+
+curl -X POST localhost:8080/demo/safe-race \
+  -H 'Content-Type: application/json' -d '{"from":1,"to":2,"amountMinor":10000}'
+```
+
+The broken path writes ledger entries exactly like the correct one. The only
+differences are the row lock and writing a relative delta instead of an absolute
+value calculated in application code, so the demonstration isolates one variable
+rather than changing five things and claiming the difference proves something.
+
+Prometheus and a provisioned Grafana dashboard come up with it, including the
+alert that fires when the ledger stops balancing.
