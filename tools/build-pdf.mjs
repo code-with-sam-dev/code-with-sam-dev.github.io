@@ -42,9 +42,126 @@ const SHEETS = {
     data: './pdf/kafka-rebalancing.data.mjs',
     out: 'public/downloads/kafka-rebalancing-design-sheet.pdf',
   },
+  'kafka-offsets': {
+    data: './pdf/kafka-offsets.data.mjs',
+    out: 'public/downloads/kafka-offsets-design-sheet.pdf',
+  },
+  'kafka-idempotency': {
+    data: './pdf/kafka-idempotency.data.mjs',
+    out: 'public/downloads/kafka-idempotency-design-sheet.pdf',
+  },
+  'kafka-retries': {
+    data: './pdf/kafka-retries.data.mjs',
+    out: 'public/downloads/kafka-retries-design-sheet.pdf',
+  },
+  'kafka-transactions': {
+    data: './pdf/kafka-transactions.data.mjs',
+    out: 'public/downloads/kafka-transactions-design-sheet.pdf',
+  },
+  'kafka-observability': {
+    data: './pdf/kafka-observability.data.mjs',
+    out: 'public/downloads/kafka-observability-design-sheet.pdf',
+  },
+  'kafka-pipeline': {
+    data: './pdf/kafka-pipeline.data.mjs',
+    out: 'public/downloads/kafka-pipeline-design-sheet.pdf',
+  },
+  'kafka-challenge': {
+    data: './pdf/kafka-challenge.data.mjs',
+    out: 'public/downloads/kafka-challenge-design-sheet.pdf',
+  },
+
+  // The Claude Code series. Sam, 2026-09-13: "PDF sheets are important for
+  // each episode." Same pattern as the Kafka sheets, with one difference that
+  // matters: every claim is dated on the page, because this subject changes
+  // with every release and a sheet outlives the version it describes.
+  'cc-01-harness': {
+    data: './pdf/cc-01-harness.data.mjs',
+    out: 'public/downloads/claude-code-01-harness.pdf',
+  },
+  'cc-02-context': {
+    data: './pdf/cc-02-context.data.mjs',
+    out: 'public/downloads/claude-code-02-context.pdf',
+  },
+  'cc-03-sessions': {
+    data: './pdf/cc-03-sessions.data.mjs',
+    out: 'public/downloads/claude-code-03-sessions.pdf',
+  },
+  'cc-04-blast-radius': {
+    data: './pdf/cc-04-blast-radius.data.mjs',
+    out: 'public/downloads/claude-code-04-blast-radius.pdf',
+  },
+  'cc-05-model-effort': {
+    data: './pdf/cc-05-model-effort.data.mjs',
+    out: 'public/downloads/claude-code-05-model-effort.pdf',
+  },
+  'cc-06-skills': {
+    data: './pdf/cc-06-skills.data.mjs',
+    out: 'public/downloads/claude-code-06-skills.pdf',
+  },
+  'cc-07-mcp': {
+    data: './pdf/cc-07-mcp.data.mjs',
+    out: 'public/downloads/claude-code-07-mcp.pdf',
+  },
+  'cc-08-subagents': {
+    data: './pdf/cc-08-subagents.data.mjs',
+    out: 'public/downloads/claude-code-08-subagents.pdf',
+  },
+  'cc-09-working-day': {
+    data: './pdf/cc-09-working-day.data.mjs',
+    out: 'public/downloads/claude-code-09-working-day.pdf',
+  },
+  'cc-10-token-economy': {
+    data: './pdf/cc-10-token-economy.data.mjs',
+    out: 'public/downloads/claude-code-10-token-economy.pdf',
+  },
+  'cc-11-chrome': {
+    data: './pdf/cc-11-chrome.data.mjs',
+    out: 'public/downloads/claude-code-advanced-01-chrome.pdf',
+  },
+  'cc-12-anywhere': {
+    data: './pdf/cc-12-anywhere.data.mjs',
+    out: 'public/downloads/claude-code-advanced-02-anywhere.pdf',
+  },
+  'cc-13-limits': {
+    data: './pdf/cc-13-limits.data.mjs',
+    out: 'public/downloads/claude-code-advanced-03-limits.pdf',
+  },
+  'cc-14-schedule': {
+    data: './pdf/cc-14-schedule.data.mjs',
+    out: 'public/downloads/claude-code-advanced-04-schedule.pdf',
+  },
+  'cc-16-two-models': {
+    data: './pdf/cc-16-two-models.data.mjs',
+    out: 'public/downloads/claude-code-advanced-06-two-models.pdf',
+  },
 };
 
 const NAME = process.argv[2] ?? 'digital-wallet';
+
+/**
+ * "all" builds every sheet, one child process each.
+ *
+ * A child per sheet rather than a loop in here, because the output paths are
+ * resolved once at module scope and threading them through would be a rewrite
+ * of a script that works. Nine sheets is also the point at which building them
+ * one command at a time stops being reasonable, and a sheet that only gets
+ * rebuilt when somebody remembers it is a sheet that goes stale.
+ */
+if (NAME === 'all') {
+  const {spawnSync} = await import('node:child_process');
+  let failed = 0;
+  for (const key of Object.keys(SHEETS)) {
+    const result = spawnSync(process.execPath, [process.argv[1], key], {stdio: 'inherit'});
+    if (result.status !== 0) {
+      console.error(`FAILED: ${key}`);
+      failed += 1;
+    }
+  }
+  console.log(failed === 0 ? `All ${Object.keys(SHEETS).length} sheets built.` : `${failed} sheet(s) failed.`);
+  process.exit(failed === 0 ? 0 : 1);
+}
+
 if (!SHEETS[NAME]) {
   console.error(`Unknown sheet "${NAME}". Known: ${Object.keys(SHEETS).join(', ')}`);
   process.exit(1);

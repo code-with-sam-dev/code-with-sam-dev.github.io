@@ -1,13 +1,23 @@
 ---
 title: 'Kafka Transactions and the Transactional Outbox: Where Atomicity Stops'
 description: 'The payment committed. The process died. The event was never published. Both orderings leak, and the fix is not the one most people reach for first.'
+youtube: '0EAjor8XNy8'
 pubDate: 2026-09-13
 repo: 'https://github.com/code-with-sam-dev/kafka-payments'
+sheet: '/downloads/kafka-transactions-design-sheet.pdf'
 tags: ['kafka', 'interviews']
 series: 'Kafka Payments'
 episode: 7
 duration: '12:12'
-draft: true
+draft: false
+terminal:
+  path: 'kafka-payments / episode-07-outbox'
+  lines:
+    - '$ psql -c ''select count(*) from outbox where sent is null'''
+    - ''
+    - '   count'
+    - '  ------'
+    - '      41   the relay stopped. the rows did not.'
 ---
 
 A payment commits successfully in Postgres. The application now needs to

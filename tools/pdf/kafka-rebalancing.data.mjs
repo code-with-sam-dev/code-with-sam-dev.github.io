@@ -274,6 +274,10 @@ export const sheet = {
     {label: 'TikTok', url: 'https://www.tiktok.com/@codewithsamdev'},
     {label: 'Instagram', url: 'https://www.instagram.com/codewithsamdev'},
     {label: 'GitHub', url: 'https://github.com/code-with-sam-dev'},
+    {
+      label: 'Runnable code',
+      url: 'https://github.com/code-with-sam-dev/kafka-payments/tree/main/episode-03-rebalancing',
+    },
   ],
 
   trademarks:

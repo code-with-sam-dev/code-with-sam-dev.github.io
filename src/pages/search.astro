@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import PostCard from '../components/PostCard.astro';
+import SearchFilters from '../components/SearchFilters.astro';
+import {allPosts} from '../lib/posts';
+import {facetsFor, toIndexed} from '../lib/searchIndex';
+
+const posts = await allPosts();
+const indexed = posts.map(toIndexed);
+const facets = facetsFor(indexed);
+---
+
+<Base
+  title="Search - Code with Sam"
+  description="Search every article on Kafka, Java, Spring, system design and architecture, and filter by series, topic, year and what each one includes."
+>
+  <div class="section-head" data-reveal>
+    <p class="eyebrow" style="color:var(--primary)">Find it</p>
+    <h1>Search the archive</h1>
+    <p style="color:var(--ink-soft)">
+      Every article, searchable in the browser. Nothing you type leaves this page.
+    </p>
+  </div>
+
+  <SearchFilters posts={indexed} facets={facets} />
+
+  <ul class="post-list" data-results>
+    {posts.map((post, i) => <PostCard post={post} delay={i} />)}
+  </ul>
+
+  <p class="empty-state" data-empty hidden>
+    Nothing matches that yet. Try fewer words, or clear a filter.
+    {' '}
+    <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/contact`}>Tell me what you were looking for</a>
+    {' '}
+    and it may become the next episode.
+  </p>
+</Base>
+
+<style>
+  /* This element is the page's, so its rule is too. */
+  .empty-state {
+    border: 2px dashed var(--hairline);
+    border-radius: 14px;
+    padding: 1.5rem;
+    text-align: center;
+    color: var(--ink-soft);
+  }
+</style>

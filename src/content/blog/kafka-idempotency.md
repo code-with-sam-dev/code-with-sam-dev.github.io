@@ -1,13 +1,23 @@
 ---
 title: 'Kafka Idempotency: How to Survive Duplicate Messages'
 description: 'The duplicate is expected. The question is what your consumer does with it. And the implementation that passes code review is the one that fails under load.'
+youtube: 'lwHhlEyNdJ8'
 pubDate: 2026-09-13
 repo: 'https://github.com/code-with-sam-dev/kafka-payments'
+sheet: '/downloads/kafka-idempotency-design-sheet.pdf'
 tags: ['kafka', 'interviews']
 series: 'Kafka Payments'
 episode: 5
 duration: '12:45'
-draft: true
+draft: false
+terminal:
+  path: 'kafka-payments / episode-05-idempotency'
+  lines:
+    - '$ curl -X POST /payments -H ''Idempotency-Key: PAY-7781'''
+    - '$ curl -X POST /payments -H ''Idempotency-Key: PAY-7781'''
+    - ''
+    - '  201 Created'
+    - '  200 OK   (same result, charged once)'
 ---
 
 Episode 4 ended with the same payment event arriving again after a crash.

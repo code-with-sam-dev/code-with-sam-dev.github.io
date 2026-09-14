@@ -1,13 +1,24 @@
 ---
 title: 'Kafka Offsets Explained: What "Exactly Once" Really Means'
 description: 'An offset is not where your consumer is. It is recorded progress, and you decide when to record it. That decision, and nothing in Kafka, is what makes your system at most once or at least once.'
+youtube: 'RwctwkYUi7Q'
 pubDate: 2026-09-13
 repo: 'https://github.com/code-with-sam-dev/kafka-payments'
+sheet: '/downloads/kafka-offsets-design-sheet.pdf'
 tags: ['kafka', 'interviews']
 series: 'Kafka Payments'
 episode: 4
 duration: '11:07'
-draft: true
+draft: false
+terminal:
+  path: 'kafka-payments / episode-04-offsets'
+  lines:
+    - '$ kafka-consumer-groups --describe --group payments'
+    - ''
+    - '  PARTITION  CURRENT-OFFSET  LOG-END  LAG'
+    - '  payments-0            40        42    2'
+    - ''
+    - '  Processing 42. Saved 40. Both are true.'
 ---
 
 Most explanations say an offset tells you where your consumer is.

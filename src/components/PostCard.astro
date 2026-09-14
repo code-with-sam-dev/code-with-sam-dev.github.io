@@ -15,7 +15,7 @@ const href = `${base}/blog/${post.slug}`;
 const art = post.data.cover ? poster(post.data.cover) : undefined;
 const live = Boolean(post.data.youtube);
 ---
-<li data-reveal data-delay={String(Math.min(delay, 3))}>
+<li data-reveal data-delay={String(Math.min(delay, 3))} data-slug={post.slug}>
   {art && (
     <a class="card-poster" href={href} tabindex="-1" aria-hidden="true">
       <img

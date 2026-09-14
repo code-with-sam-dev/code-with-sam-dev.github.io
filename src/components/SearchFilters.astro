@@ -1,0 +1,456 @@
+---
+import type {Facet, IndexedPost} from '../lib/searchIndex';
+
+interface Props {
+  posts: IndexedPost[];
+  facets: Facet[];
+}
+const {posts, facets} = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+{/*
+  Search and filters, working without JavaScript and better with it.
+
+  WITHOUT JS the full list below is already rendered as ordinary links, so the
+  page is complete and indexable. The controls are hidden until the script
+  runs, because a search box that does nothing is worse than no search box.
+
+  THE DROPDOWNS ARE MULTI-SELECT AND DYNAMIC. Their options come from the
+  articles, with counts, so a new tag appears by publishing and a dead tag
+  disappears by deletion. Nothing here has a hand maintained list to go stale.
+*/}
+
+<section class="finder" data-finder hidden>
+  <div class="finder-row">
+    <label class="finder-search">
+      <span class="sr-only">Search articles</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="finder-icon">
+        <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2" />
+        <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+      <input
+        type="search"
+        id="finder-input"
+        placeholder="Search articles, e.g. idempotency, rebalancing, outbox"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <button type="button" class="finder-clear" data-clear-text hidden aria-label="Clear search">&times;</button>
+    </label>
+
+    {facets.map((facet) => (
+      <details class="drop" data-facet={facet.key}>
+        <summary>
+          <span class="drop-label">{facet.label}</span>
+          <span class="drop-count" data-selected-count hidden></span>
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="drop-chevron">
+            <path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </summary>
+        <div class="drop-menu" role="group" aria-label={facet.label}>
+          {facet.options.map((option) => (
+            <label class="drop-option">
+              <input type="checkbox" value={option.value} data-facet-key={facet.key} />
+              <span class="drop-option-label">{option.value}</span>
+              <span class="drop-option-count" data-option-count={option.value}>{option.count}</span>
+            </label>
+          ))}
+        </div>
+      </details>
+    ))}
+  </div>
+
+  <div class="finder-status">
+    <p data-result-count aria-live="polite"></p>
+    <button type="button" class="btn btn-ghost btn-sm" data-reset hidden>Clear all</button>
+  </div>
+
+  <ul class="chips" data-chips hidden></ul>
+</section>
+
+<script is:inline define:vars={{posts, base}}>
+  // The index is inlined rather than fetched. It is a few dozen articles, so
+  // one round trip saved is worth more than the caching a separate file would
+  // buy, and there is no window where the page is interactive and the search
+  // is not.
+  window.__POSTS__ = posts;
+  window.__BASE__ = base;
+</script>
+
+<script>
+  import {matches, type IndexedPost, type Query} from '../lib/filter';
+
+  const posts: IndexedPost[] = (window as any).__POSTS__ ?? [];
+  const base: string = (window as any).__BASE__ ?? '';
+
+  const finder = document.querySelector<HTMLElement>('[data-finder]');
+  const input = document.querySelector<HTMLInputElement>('#finder-input');
+  const list = document.querySelector<HTMLElement>('[data-results]');
+  const empty = document.querySelector<HTMLElement>('[data-empty]');
+  const countEl = document.querySelector<HTMLElement>('[data-result-count]');
+  const resetBtn = document.querySelector<HTMLButtonElement>('[data-reset]');
+  const clearText = document.querySelector<HTMLButtonElement>('[data-clear-text]');
+  const chips = document.querySelector<HTMLElement>('[data-chips]');
+
+  if (finder && input && list) {
+    finder.hidden = false;
+
+    const query: Query = {text: '', selected: {}};
+
+    /** Read the URL first, so a filtered view can be shared and bookmarked. */
+    const fromUrl = new URLSearchParams(location.search);
+    query.text = fromUrl.get('q') ?? '';
+    input.value = query.text;
+    for (const [key, value] of fromUrl.entries()) {
+      if (key === 'q') continue;
+      query.selected[key] = value.split(',').filter(Boolean);
+    }
+
+    document.querySelectorAll<HTMLInputElement>('[data-facet-key]').forEach((box) => {
+      const key = box.dataset.facetKey!;
+      box.checked = (query.selected[key] ?? []).includes(box.value);
+      box.addEventListener('change', () => {
+        const values = new Set(query.selected[key] ?? []);
+        box.checked ? values.add(box.value) : values.delete(box.value);
+        query.selected[key] = [...values];
+        apply();
+      });
+    });
+
+    let typingTimer: number | undefined;
+    input.addEventListener('input', () => {
+      // A short debounce. The index is in memory so filtering is instant, but
+      // rewriting the URL on every keystroke fills the history with noise.
+      window.clearTimeout(typingTimer);
+      query.text = input.value;
+      render();
+      typingTimer = window.setTimeout(() => pushUrl(), 250);
+    });
+
+    clearText?.addEventListener('click', () => {
+      input.value = '';
+      query.text = '';
+      input.focus();
+      apply();
+    });
+
+    resetBtn?.addEventListener('click', () => {
+      input.value = '';
+      query.text = '';
+      query.selected = {};
+      document.querySelectorAll<HTMLInputElement>('[data-facet-key]').forEach((b) => (b.checked = false));
+      apply();
+    });
+
+    // Escape closes an open dropdown, which is what every other dropdown does.
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        document.querySelectorAll<HTMLDetailsElement>('.drop[open]').forEach((d) => (d.open = false));
+      }
+    });
+
+    // Clicking away closes them too.
+    document.addEventListener('click', (event) => {
+      document.querySelectorAll<HTMLDetailsElement>('.drop[open]').forEach((drop) => {
+        if (!drop.contains(event.target as Node)) drop.open = false;
+      });
+    });
+
+    function apply() {
+      render();
+      pushUrl();
+    }
+
+    function pushUrl() {
+      const params = new URLSearchParams();
+      if (query.text.trim()) params.set('q', query.text.trim());
+      for (const [key, values] of Object.entries(query.selected)) {
+        if (values.length) params.set(key, values.join(','));
+      }
+      const url = params.toString() ? `?${params}` : location.pathname;
+      history.replaceState(null, '', url);
+    }
+
+    function render() {
+      const visible = new Set(posts.filter((p) => matches(p, query)).map((p) => p.slug));
+
+      list!.querySelectorAll<HTMLElement>('[data-slug]').forEach((card) => {
+        card.hidden = !visible.has(card.dataset.slug!);
+      });
+
+      // COUNTS UPDATE AS YOU FILTER, which is the difference between a filter
+      // that helps and one that leads you into an empty result. Each option
+      // shows how many articles you would get if you added it to what is
+      // already selected.
+      document.querySelectorAll<HTMLInputElement>('[data-facet-key]').forEach((box) => {
+        const key = box.dataset.facetKey!;
+        const trial: Query = {
+          text: query.text,
+          selected: {...query.selected, [key]: [...new Set([...(query.selected[key] ?? []), box.value])]},
+        };
+        const n = posts.filter((p) => matches(p, trial)).length;
+        const label = document.querySelector(`[data-option-count="${CSS.escape(box.value)}"]`);
+        if (label) label.textContent = String(n);
+        box.closest('.drop-option')?.classList.toggle('is-empty', n === 0 && !box.checked);
+      });
+
+      document.querySelectorAll<HTMLElement>('.drop').forEach((drop) => {
+        const key = (drop as HTMLElement).dataset.facet!;
+        const n = (query.selected[key] ?? []).length;
+        const badge = drop.querySelector<HTMLElement>('[data-selected-count]');
+        if (badge) {
+          badge.textContent = String(n);
+          badge.hidden = n === 0;
+        }
+        drop.classList.toggle('is-active', n > 0);
+      });
+
+      const active = Object.values(query.selected).flat().length + (query.text.trim() ? 1 : 0);
+      if (resetBtn) resetBtn.hidden = active === 0;
+      if (clearText) clearText.hidden = !query.text;
+      if (countEl) {
+        // Pluralise on the TOTAL, not the match count: "1 of 4 article" is
+        // what pluralising on the matches gives you, and it reads as a bug.
+        const noun = posts.length === 1 ? 'article' : 'articles';
+        countEl.textContent = active === 0
+          ? `${posts.length} ${noun}`
+          : `${visible.size} of ${posts.length} ${noun}`;
+      }
+      if (empty) empty.hidden = visible.size > 0;
+
+      renderChips();
+    }
+
+    function renderChips() {
+      if (!chips) return;
+      chips.innerHTML = '';
+      const entries = Object.entries(query.selected).flatMap(([key, values]) =>
+        values.map((value) => ({key, value})),
+      );
+      chips.hidden = entries.length === 0;
+
+      for (const {key, value} of entries) {
+        const li = document.createElement('li');
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'chip';
+        button.innerHTML = `${value} <span aria-hidden="true">&times;</span>`;
+        button.setAttribute('aria-label', `Remove filter ${value}`);
+        button.addEventListener('click', () => {
+          query.selected[key] = (query.selected[key] ?? []).filter((v) => v !== value);
+          document
+            .querySelectorAll<HTMLInputElement>(`[data-facet-key="${key}"]`)
+            .forEach((b) => {
+              if (b.value === value) b.checked = false;
+            });
+          apply();
+        });
+        li.appendChild(button);
+        chips.appendChild(li);
+      }
+    }
+
+    render();
+  }
+</script>
+
+{/*
+  THE STYLES LIVE HERE, NOT IN THE PAGE.
+
+  They were written in search.astro first and none of them applied: Astro
+  scopes a component's styles to the elements that component renders, and this
+  markup is rendered here. The page got the rules and the elements got nothing,
+  which showed up as an unstyled search icon filling half the viewport.
+
+  A component that ships its own markup ships its own styles. The .empty-state
+  rule is the exception and stays on the page, because that element is the
+  page's.
+*/}
+
+<style>
+  /*
+    The finder.
+
+    Built to look like part of the page rather than a widget bolted on: same
+    hairline, same radius, same ink as every other surface on the site.
+  */
+  /*
+    `hidden` must actually hide.
+
+    The site's .btn and list rules set `display`, and a display rule beats the
+    [hidden] attribute, so "Clear all" and the chip list rendered as empty
+    white pills with nothing in them while reporting hidden === true. Caught by
+    looking at the page rather than at the property.
+  */
+  .finder [hidden] { display: none !important; }
+
+  .finder {
+    margin: 0 0 2rem;
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .finder-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: stretch;
+  }
+
+  .finder-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1 1 22rem;
+    min-width: 0;
+    background: var(--surface);
+    border: 2px solid var(--hairline);
+    border-radius: 12px;
+    padding: 0 0.75rem;
+    transition: border-color 0.15s ease;
+  }
+  .finder-search:focus-within { border-color: var(--primary); }
+
+  .finder-icon { width: 20px; height: 20px; color: var(--ink-soft); flex: none; }
+
+  #finder-input {
+    flex: 1 1 auto;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font: inherit;
+    color: var(--ink);
+    padding: 0.7rem 0.5rem;
+  }
+  /* Safari draws its own clear button; ours is consistent across browsers. */
+  #finder-input::-webkit-search-cancel-button { display: none; }
+
+  .finder-clear {
+    border: 0;
+    background: transparent;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--ink-soft);
+    cursor: pointer;
+    padding: 0 0.25rem;
+  }
+  .finder-clear:hover { color: var(--ink); }
+
+  .drop { position: relative; flex: 0 0 auto; }
+
+  .drop > summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--surface);
+    border: 2px solid var(--hairline);
+    border-radius: 12px;
+    padding: 0.7rem 0.85rem;
+    font-weight: 600;
+    color: var(--ink);
+    user-select: none;
+    white-space: nowrap;
+  }
+  .drop > summary::-webkit-details-marker { display: none; }
+  .drop > summary:hover { border-color: var(--ink-soft); }
+  .drop.is-active > summary { border-color: var(--primary); color: var(--primary); }
+
+  .drop-chevron { width: 16px; height: 16px; }
+  .drop[open] .drop-chevron { transform: rotate(180deg); }
+
+  .drop-count {
+    background: var(--primary);
+    color: #fff;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    line-height: 1;
+    padding: 0.2rem 0.42rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .drop-menu {
+    position: absolute;
+    z-index: 30;
+    top: calc(100% + 0.35rem);
+    left: 0;
+    min-width: 15rem;
+    max-height: 20rem;
+    overflow-y: auto;
+    background: var(--surface);
+    border: 2px solid var(--hairline);
+    border-radius: 12px;
+    padding: 0.35rem;
+    /* Heavier in dark mode, where a 10% shadow is invisible. */
+    box-shadow: 0 12px 28px rgb(0 0 0 / 0.28);
+  }
+
+  .drop-option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 0.6rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+  }
+  /* No --paper token exists; the hover tint is derived from the ink so it
+     works on both grounds instead of guessing a light grey. */
+  .drop-option:hover { background: color-mix(in srgb, var(--ink) 8%, transparent); }
+  .drop-option input { accent-color: var(--primary); width: 1rem; height: 1rem; }
+  .drop-option-label { flex: 1 1 auto; }
+  .drop-option-count {
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.85rem;
+  }
+  /* An option that would return nothing is dimmed, not hidden: seeing that a
+     combination is empty is information, and removing the row would make the
+     list jump around as you tick things. */
+  .drop-option.is-empty { opacity: 0.4; }
+
+  .finder-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+  .finder-status p { margin: 0; }
+
+  .btn-sm { padding: 0.35rem 0.7rem; font-size: 0.85rem; }
+
+  .chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .chip {
+    border: 2px solid var(--hairline);
+    background: var(--surface);
+    border-radius: 999px;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--ink);
+  }
+  .chip:hover { border-color: var(--danger, #d93a3a); color: var(--danger, #d93a3a); }
+
+
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 620px) {
+    .drop { flex: 1 1 calc(50% - 0.3rem); }
+    .drop > summary { justify-content: space-between; }
+    .drop-menu { min-width: 100%; }
+  }
+</style>

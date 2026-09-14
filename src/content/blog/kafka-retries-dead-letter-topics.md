@@ -1,13 +1,23 @@
 ---
 title: 'Kafka Retries and Dead Letter Topics: Stop Retrying Everything'
 description: 'A retry is a prediction that something relevant may be different on the next attempt. If nothing can change, retrying is not resilience. It is repetition.'
+youtube: 'imD0PIR_Qdc'
 pubDate: 2026-09-13
 repo: 'https://github.com/code-with-sam-dev/kafka-payments'
+sheet: '/downloads/kafka-retries-design-sheet.pdf'
 tags: ['kafka', 'interviews']
 series: 'Kafka Payments'
 episode: 6
 duration: '11:31'
-draft: true
+draft: false
+terminal:
+  path: 'kafka-payments / episode-06-retries'
+  lines:
+    - '$ kafka-console-consumer --topic payments.DLT'
+    - ''
+    - '  attempts=5  outcome=still failing'
+    - ''
+    - '  Nothing is broken. Nothing is going to change.'
 ---
 
 Processing fails. So we retry. It fails again. We retry again. And again.

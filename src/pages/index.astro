@@ -17,8 +17,18 @@ const LATEST_COUNT = 6;
 const latest = posts.slice(0, LATEST_COUNT);
 const series = [...(await seriesMap()).entries()];
 
-// The hero terminal cycles through every article that supplies one, newest
-// first, so the panel keeps moving and never goes stale as the library grows.
+// The hero terminal cycles through every article that supplies one, in a
+// SHUFFLED order rather than newest first.
+//
+// Sam, 2026-09-14, looking at the homepage: "it needs to be random than
+// following a particular order". Newest first meant the same two or three
+// panels led every single visit, so the older topics were effectively
+// invisible no matter how good they were, and the panel felt static to anyone
+// who came back. Shuffling spreads the exposure across the whole library.
+//
+// The shuffle happens at BUILD time, so the markup stays deterministic for a
+// given deploy and there is no hydration mismatch. Each deploy reorders it,
+// and the player already advances through the list once the page is open.
 const FALLBACK_SESSION = {
   path: 'kafka-payments',
   lines: [
@@ -28,7 +38,15 @@ const FALLBACK_SESSION = {
     '  Every episode ships with code you can run.',
   ],
 };
-const heroSessions = posts.map((p) => p.data.terminal).filter(Boolean);
+const shuffle = <T,>(xs: T[]): T[] => {
+  const a = [...xs];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+const heroSessions = shuffle(posts.map((p) => p.data.terminal).filter(Boolean));
 const sessions = heroSessions.length > 0 ? heroSessions : [FALLBACK_SESSION];
 // Rendered server side so the panel is never empty: without JavaScript, or
 // before it runs, the first session simply sits there as it always did.

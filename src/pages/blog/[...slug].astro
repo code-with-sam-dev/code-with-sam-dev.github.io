@@ -1,6 +1,7 @@
 ---
 import {getCollection} from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import CopyCode from '../../components/CopyCode.astro';
 import YouTubeMark from '../../components/YouTubeMark.astro';
 import Signup from '../../components/Signup.astro';
 import {poster} from '../../lib/posts';
@@ -110,6 +111,7 @@ const art = post.data.cover ? poster(post.data.cover) : undefined;
     }
 
     <Content />
+    <CopyCode />
   </article>
 
   <hr />

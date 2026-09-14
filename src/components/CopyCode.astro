@@ -1,0 +1,105 @@
+---
+/**
+ * A copy button on every code block.
+ *
+ * Sam, 2026-09-14: "prompts need to be shown as code, you know what i mean and
+ * they should be copiable."
+ *
+ * He is right, and it matters more for this channel than for most. A prompt is
+ * an ARTEFACT here, the same as a snippet of Java: the whole point of printing
+ * one is that a reader uses it. A prompt a reader has to retype by hand is a
+ * prompt most readers will not use, and the article has then taught something
+ * nobody applies.
+ *
+ * It runs over every <pre> Astro renders, so it covers the Java, the JSON, the
+ * terminal frames and the prompts without any per-article wiring. A new article
+ * gets it for free, which is the only way a rule like this survives.
+ *
+ * NO CLIPBOARD LIBRARY. navigator.clipboard is available everywhere this site
+ * is read, and the fallback path matters more than the polish: on a page served
+ * without HTTPS, or where the permission is refused, the button says so rather
+ * than silently doing nothing, because a copy button that lies is worse than no
+ * copy button.
+ */
+---
+
+<script>
+  const label = (btn: HTMLButtonElement, text: string, ms = 1600) => {
+    btn.textContent = text;
+    window.setTimeout(() => {
+      btn.textContent = 'Copy';
+    }, ms);
+  };
+
+  document.querySelectorAll('pre').forEach((pre) => {
+    if (pre.dataset.copyReady) return;
+    pre.dataset.copyReady = '1';
+
+    const wrap = document.createElement('div');
+    wrap.className = 'code-wrap';
+    pre.parentNode?.insertBefore(wrap, pre);
+    wrap.appendChild(pre);
+
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'copy-btn';
+    btn.textContent = 'Copy';
+    // The block is already readable; the button is for the mouse and for
+    // screen readers, and should not be announced as part of the code.
+    btn.setAttribute('aria-label', 'Copy this code to the clipboard');
+    wrap.appendChild(btn);
+
+    btn.addEventListener('click', async () => {
+      const text = pre.innerText.replace(/\n+$/, '');
+      try {
+        await navigator.clipboard.writeText(text);
+        label(btn, 'Copied');
+      } catch {
+        // Tell the truth rather than pretend it worked.
+        label(btn, 'Press Cmd+C', 2400);
+        const r = document.createRange();
+        r.selectNodeContents(pre);
+        const sel = window.getSelection();
+        sel?.removeAllRanges();
+        sel?.addRange(r);
+      }
+    });
+  });
+</script>
+
+<style is:global>
+  .code-wrap {
+    position: relative;
+  }
+
+  .copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.3rem 0.6rem;
+    font: inherit;
+    font-size: 0.78rem;
+    line-height: 1;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    cursor: pointer;
+    /* Out of the way until wanted: a button sitting at full strength over every
+       snippet competes with the code for attention. */
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  .code-wrap:hover .copy-btn,
+  .copy-btn:focus-visible {
+    opacity: 1;
+  }
+
+  /* Touch has no hover, so on a phone it is simply always visible. */
+  @media (hover: none) {
+    .copy-btn {
+      opacity: 0.85;
+    }
+  }
+</style>

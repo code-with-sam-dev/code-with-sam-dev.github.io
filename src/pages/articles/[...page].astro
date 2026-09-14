@@ -21,6 +21,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <h1>All articles</h1>
     <p style="color:var(--ink-soft)">
       {page.total} {page.total === 1 ? 'article' : 'articles'}, newest first.
+      {' '}
+      <a href={`${base}/search`}>Search and filter them</a>.
     </p>
   </div>
 
