@@ -1,5 +1,8 @@
 ---
 title: 'Clearing Is Free. Compacting Is Not.'
+youtube: 'E7Wt3i29QtA'
+cover: '/covers/cc-token-economy.jpg'
+start: 1100
 description: 'You asked a one line question at the end of a long day and it drew down your usage like an hour of work. That is not unfair billing, and the fix is a habit that costs nothing.'
 pubDate: 2026-09-13
 sheet: '/downloads/claude-code-10-token-economy.pdf'

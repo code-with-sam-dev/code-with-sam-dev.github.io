@@ -2,6 +2,7 @@
 title: 'Build a Production-Grade Kafka Payment Pipeline'
 description: 'One payment, five deliberate failures. No single feature makes the pipeline reliable. Reliability is the overlap between eight of them.'
 youtube: 'yTuNwzZP7mg'
+cover: '/covers/kafka-pipeline.jpg'
 pubDate: 2026-09-13
 repo: 'https://github.com/code-with-sam-dev/kafka-payments'
 sheet: '/downloads/kafka-pipeline-design-sheet.pdf'

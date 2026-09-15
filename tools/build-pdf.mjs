@@ -135,6 +135,14 @@ const SHEETS = {
     data: './pdf/cc-16-two-models.data.mjs',
     out: 'public/downloads/claude-code-advanced-06-two-models.pdf',
   },
+
+  // Modern Java. Same pattern, with the perishability note the Claude Code
+  // sheets carry, for the same reason: a version claim is true for months and
+  // a sheet lives for years.
+  'modern-java': {
+    data: './pdf/modern-java.data.mjs',
+    out: 'public/downloads/modern-java-design-sheet.pdf',
+  },
 };
 
 const NAME = process.argv[2] ?? 'digital-wallet';

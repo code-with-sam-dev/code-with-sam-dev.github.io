@@ -2,6 +2,7 @@
 title: 'Kafka Observability: What Should You Actually Watch?'
 description: 'Every service is green and payments are twenty minutes late. No single metric tells you where the system is broken, and the layer most teams build is the least useful one.'
 youtube: 'i4drWVqZNgQ'
+cover: '/covers/kafka-observability.jpg'
 pubDate: 2026-09-13
 repo: 'https://github.com/code-with-sam-dev/kafka-payments'
 sheet: '/downloads/kafka-observability-design-sheet.pdf'

@@ -1,5 +1,7 @@
 ---
 title: 'They Agreed. So What?'
+youtube: 'UcoEisshMWE'
+cover: '/covers/cc-two-models.jpg'
 description: 'You asked Claude, then asked ChatGPT whether it was right, and it said yes. Two models agreed. That is not two checks, and the difference matters more than any workflow tip.'
 pubDate: 2026-09-13
 sheet: '/downloads/claude-code-advanced-06-two-models.pdf'

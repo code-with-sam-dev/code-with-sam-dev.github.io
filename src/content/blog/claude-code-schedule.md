@@ -1,5 +1,8 @@
 ---
 title: 'You Typed /loop And Walked Away'
+youtube: 'E7Wt3i29QtA'
+cover: '/covers/cc-schedule.jpg'
+start: 863
 description: 'Where is that actually running, and what happens to it when you close the terminal? Three answers, and picking the wrong one is not a small mistake.'
 pubDate: 2026-09-13
 sheet: '/downloads/claude-code-advanced-04-schedule.pdf'

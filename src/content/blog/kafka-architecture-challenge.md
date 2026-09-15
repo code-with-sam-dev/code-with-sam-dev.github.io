@@ -2,6 +2,7 @@
 title: 'Senior Kafka Architecture Challenge: Would Your Design Survive?'
 description: 'Nine changes to one architecture. The first-order answer is easy. The interview is decided by the second-order effect, and by knowing what not to build.'
 youtube: 'rBu085eXOCo'
+cover: '/covers/kafka-challenge.jpg'
 pubDate: 2026-09-13
 repo: 'https://github.com/code-with-sam-dev/kafka-payments'
 sheet: '/downloads/kafka-challenge-design-sheet.pdf'

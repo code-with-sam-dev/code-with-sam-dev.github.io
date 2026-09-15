@@ -14,6 +14,16 @@ const blog = defineCollection({
     updatedDate: z.coerce.date().optional(),
     /** YouTube video id, embedded near the top of the article. */
     youtube: z.string().optional(),
+    /**
+     * Seconds into the video where this article's topic begins.
+     *
+     * Several articles are the written version of ONE SECTION of a longer
+     * video rather than of a video of their own. Linking those to 0:00 sends
+     * the reader to a twenty three minute film and asks them to go hunting,
+     * which is worse than no link. With a start they land on the part they
+     * just read about.
+     */
+    start: z.number().optional(),
     /** Full URL of the companion GitHub repo, if the article has one. */
     repo: z.string().url().optional(),
     // The episode's PDF design sheet. Sam, 2026-09-13: every episode gets one,

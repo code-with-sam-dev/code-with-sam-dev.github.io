@@ -1,5 +1,8 @@
 ---
 title: 'Your Laptop Is Shut. Is It Still Running?'
+youtube: 'E7Wt3i29QtA'
+cover: '/covers/cc-anywhere.jpg'
+start: 824
 description: 'That question has three completely different answers, and which one applies to you was decided before you left the house. All three look identical on your phone.'
 pubDate: 2026-09-13
 sheet: '/downloads/claude-code-advanced-02-anywhere.pdf'

@@ -1,5 +1,8 @@
 ---
 title: 'It Never Tried To Log In'
+youtube: 'E7Wt3i29QtA'
+cover: '/covers/cc-limits.jpg'
+start: 1182
 description: 'You are on a train, the session is on the laptop at your desk, and it just stopped at a login page. The reason is not the one people assume, and one of these limits is not a limit at all.'
 pubDate: 2026-09-13
 sheet: '/downloads/claude-code-advanced-03-limits.pdf'

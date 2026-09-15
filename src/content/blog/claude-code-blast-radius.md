@@ -1,5 +1,8 @@
 ---
 title: 'You Can Undo What Changed A File'
+youtube: 'E7Wt3i29QtA'
+cover: '/covers/cc-blast-radius.jpg'
+start: 170
 description: 'You have an undo, you have pressed it, and it worked. That experience quietly taught you something dangerous. There is a specific, knowable list of things no undo reaches, and by the time you notice, they have already happened.'
 pubDate: 2026-09-13
 sheet: '/downloads/claude-code-04-blast-radius.pdf'

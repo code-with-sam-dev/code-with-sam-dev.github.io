@@ -75,7 +75,7 @@ const art = post.data.cover ? poster(post.data.cover) : undefined;
       */
       art && (
         <figure class="video-preview">
-          <div class="video-shell" data-video={post.data.youtube ?? ''} data-title={post.data.title}>
+          <div class="video-shell" data-video={post.data.youtube ?? ''} data-start={String(post.data.start ?? 0)} data-title={post.data.title}>
             <img src={art.full} width="1280" height="720" alt={`Thumbnail for ${post.data.title}`} />
             {post.data.youtube ? (
               <button type="button" class="play-btn" aria-label={`Play: ${post.data.title}`}>
@@ -90,7 +90,7 @@ const art = post.data.cover ? poster(post.data.cover) : undefined;
           </div>
           <figcaption>
             {post.data.youtube ? (
-              <>Watch on <a href={`https://www.youtube.com/watch?v=${post.data.youtube}`} rel="noopener"><YouTubeMark size={16} /> YouTube</a>, or read on below.</>
+              <>Watch on <a href={`https://www.youtube.com/watch?v=${post.data.youtube}${post.data.start ? `&t=${post.data.start}s` : ''}`} rel="noopener"><YouTubeMark size={16} /> YouTube</a>, or read on below.</>
             ) : (
               <>The episode is being published to <a href={CHANNEL_URL} rel="noopener">the channel</a>. Subscribe and it will find you. The write-up below stands on its own in the meantime.</>
             )}
@@ -157,10 +157,12 @@ const art = post.data.cover ? poster(post.data.cover) : undefined;
   document.querySelectorAll('.video-shell').forEach((shell) => {
     const id = shell.getAttribute('data-video');
     if (!id) return;
+    const start = shell.getAttribute('data-start');
     shell.querySelector('.play-btn')?.addEventListener('click', () => {
       const frame = document.createElement('iframe');
       frame.src =
-        'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+        'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0' +
+        (start && start !== '0' ? '&start=' + start : '');
       frame.title = shell.getAttribute('data-title') || 'Video';
       frame.allow =
         'accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture';

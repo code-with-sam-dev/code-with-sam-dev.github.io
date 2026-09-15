@@ -1,5 +1,8 @@
 ---
 title: 'Something In Your Conversation Is Being Deleted'
+youtube: 'E7Wt3i29QtA'
+cover: '/covers/cc-context.jpg'
+start: 547
 description: 'Not by you, and not at random. There is a fixed order, and the thing that goes first is not the thing you would have picked. Here is what is in your context window, what it costs, and the four controls you actually have.'
 pubDate: 2026-09-13
 sheet: '/downloads/claude-code-02-context.pdf'

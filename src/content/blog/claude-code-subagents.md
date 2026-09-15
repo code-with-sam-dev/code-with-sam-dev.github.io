@@ -1,5 +1,8 @@
 ---
 title: 'Five Agents Finished Slower Than One'
+youtube: 'E7Wt3i29QtA'
+cover: '/covers/cc-subagents.jpg'
+start: 966
 description: 'You split the work across five agents expecting a fifth of the time. It took longer and cost several times as much. That is predictable, and there is a specific documented behaviour that explains a lot of it.'
 pubDate: 2026-09-13
 sheet: '/downloads/claude-code-08-subagents.pdf'

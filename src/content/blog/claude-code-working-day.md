@@ -1,5 +1,8 @@
 ---
 title: 'Claude Stops When The Work Looks Done'
+youtube: 'E7Wt3i29QtA'
+cover: '/covers/cc-working-day.jpg'
+start: 1055
 description: 'One sentence in the documentation explains more about the difference between a good day and a bad one than anything else in it. Without a check it can run, "looks done" is the only signal available, and you became the verification loop.'
 pubDate: 2026-09-13
 sheet: '/downloads/claude-code-09-working-day.pdf'

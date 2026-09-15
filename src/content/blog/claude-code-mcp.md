@@ -1,5 +1,8 @@
 ---
 title: 'Six Servers. What Did That Actually Cost You?'
+youtube: 'E7Wt3i29QtA'
+cover: '/covers/cc-mcp.jpg'
+start: 589
 description: 'Most people assume the answer is context. That used to be the right worry and mostly is not any more. The thing that replaced it is more serious and gets discussed far less.'
 pubDate: 2026-09-13
 sheet: '/downloads/claude-code-07-mcp.pdf'

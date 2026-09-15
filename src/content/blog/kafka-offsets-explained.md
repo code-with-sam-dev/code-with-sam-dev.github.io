@@ -2,6 +2,7 @@
 title: 'Kafka Offsets Explained: What "Exactly Once" Really Means'
 description: 'An offset is not where your consumer is. It is recorded progress, and you decide when to record it. That decision, and nothing in Kafka, is what makes your system at most once or at least once.'
 youtube: 'RwctwkYUi7Q'
+cover: '/covers/kafka-offsets.jpg'
 pubDate: 2026-09-13
 repo: 'https://github.com/code-with-sam-dev/kafka-payments'
 sheet: '/downloads/kafka-offsets-design-sheet.pdf'

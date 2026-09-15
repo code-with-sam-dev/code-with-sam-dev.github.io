@@ -2,6 +2,7 @@
 title: 'Kafka Idempotency: How to Survive Duplicate Messages'
 description: 'The duplicate is expected. The question is what your consumer does with it. And the implementation that passes code review is the one that fails under load.'
 youtube: 'lwHhlEyNdJ8'
+cover: '/covers/kafka-idempotency.jpg'
 pubDate: 2026-09-13
 repo: 'https://github.com/code-with-sam-dev/kafka-payments'
 sheet: '/downloads/kafka-idempotency-design-sheet.pdf'

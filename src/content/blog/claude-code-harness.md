@@ -1,5 +1,8 @@
 ---
 title: 'Same Prompt, Same Project, Worse Answer'
+youtube: 'E7Wt3i29QtA'
+cover: '/covers/cc-harness.jpg'
+start: 50
 description: 'On Monday it produced exactly the right change. On Friday, something confidently wrong. Nothing about the prompt changed. The answer is not prompt engineering, and it is the thing that separates people who get a lot out of this tool from people who quietly give up.'
 pubDate: 2026-09-13
 sheet: '/downloads/claude-code-01-harness.pdf'
