@@ -300,7 +300,7 @@ export const sheet = {
     ],
   },
 
-  links: [...CHANNEL_LINKS, repoLink('episode-08-observability')],
+  links: [...CHANNEL_LINKS, repoLink('episode-08-observability')].filter(Boolean),
   trademarks: APACHE_TRADEMARK,
   closing: CLOSING,
 };

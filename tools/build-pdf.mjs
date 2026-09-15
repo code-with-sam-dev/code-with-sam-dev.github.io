@@ -143,6 +143,19 @@ const SHEETS = {
     data: './pdf/modern-java.data.mjs',
     out: 'public/downloads/modern-java-design-sheet.pdf',
   },
+
+  // The craft sheets: episodes about how to work rather than about a
+  // technology. Their shared module carries an ATTRIBUTION notice rather than
+  // a trademark one, because a craft sheet quotes research instead of naming a
+  // product.
+  'while-ai-writes': {
+    data: './pdf/while-ai-writes.data.mjs',
+    out: 'public/downloads/while-the-ai-writes-the-code.pdf',
+  },
+  'tdd-java': {
+    data: './pdf/tdd-java.data.mjs',
+    out: 'public/downloads/tdd-for-java-design-sheet.pdf',
+  },
 };
 
 const NAME = process.argv[2] ?? 'digital-wallet';

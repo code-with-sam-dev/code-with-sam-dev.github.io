@@ -21,11 +21,36 @@ export const CHANNEL_LINKS = [
   {label: 'GitHub', url: 'https://github.com/code-with-sam-dev'},
 ];
 
-/** The series repo, same for every episode, with the module named per sheet. */
-export const repoLink = (module) => ({
-  label: 'Runnable code',
-  url: `https://github.com/code-with-sam-dev/kafka-payments/tree/main/${module}`,
-});
+/**
+ * Episode modules that ACTUALLY EXIST in the kafka-payments repository today.
+ *
+ * This list is the fix for SEVEN broken links that shipped inside downloadable
+ * design sheets. Every sheet from episode 4 onward pointed at a module
+ * directory that has never been pushed, so the one thing a reader keeps after
+ * the video ended handed them a 404.
+ *
+ * The failure was structural rather than careless: the link was DERIVED from
+ * the sheet name, so it always looked right and was never checked against the
+ * repository. Deriving a URL guarantees it is well formed. It guarantees
+ * nothing about whether it resolves.
+ *
+ * Add a module here on the day it is pushed, not on the day it is written.
+ */
+const PUBLISHED_MODULES = new Set(['episode-01-ordering', 'episode-03-rebalancing']);
+
+/**
+ * The series repo, with the module named per sheet, or NOTHING.
+ *
+ * A missing link costs a reader one click of curiosity. A link that 404s costs
+ * the channel its credibility, which is the entire product.
+ */
+export const repoLink = (module) =>
+  PUBLISHED_MODULES.has(module)
+    ? {
+        label: 'Runnable code',
+        url: `https://github.com/code-with-sam-dev/kafka-payments/tree/main/${module}`,
+      }
+    : null;
 
 export const APACHE_TRADEMARK =
   'Apache Kafka and the Kafka logo are trademarks of the Apache Software Foundation. ' +

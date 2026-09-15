@@ -264,7 +264,7 @@ export const sheet = {
     ],
   },
 
-  links: [...CHANNEL_LINKS, repoLink('episode-10-challenge')],
+  links: [...CHANNEL_LINKS, repoLink('episode-10-challenge')].filter(Boolean),
   trademarks: APACHE_TRADEMARK,
   closing: CLOSING,
 };

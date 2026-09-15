@@ -232,7 +232,7 @@ export const sheet = {
     ],
   },
 
-  links: [...CHANNEL_LINKS, repoLink('episode-06-retries')],
+  links: [...CHANNEL_LINKS, repoLink('episode-06-retries')].filter(Boolean),
   trademarks: APACHE_TRADEMARK,
   closing: CLOSING,
 };

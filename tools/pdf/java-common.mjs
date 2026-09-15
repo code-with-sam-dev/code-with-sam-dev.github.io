@@ -19,10 +19,30 @@ export const CHANNEL_LINKS = [
   {label: 'GitHub', url: 'https://github.com/code-with-sam-dev'},
 ];
 
-export const repoLink = (module) => ({
-  label: 'Runnable code',
-  url: `https://github.com/code-with-sam-dev/modern-java/tree/main/${module}`,
-});
+/**
+ * Companion repositories that ACTUALLY EXIST on GitHub today.
+ *
+ * This list is the fix for a link that shipped broken. The Modern Java sheet
+ * went out linking to code-with-sam-dev/modern-java/tree/main/src, which has
+ * never existed: the repo is written but unpublished, because its Docker path
+ * has never been built and this channel does not claim what it has not run.
+ *
+ * So a sheet asks for a repo link and gets one only if the repo is published.
+ * Add a name here on the day it goes public, not on the day it is written.
+ */
+const PUBLISHED_REPOS = new Set(['kafka-payments']);
+
+/**
+ * The runnable code link, or NOTHING.
+ *
+ * Returns null for an unpublished repo, and every sheet filters nulls out of
+ * its link block. A missing link costs a reader one click of curiosity. A link
+ * that 404s costs the channel its credibility, which is the entire product.
+ */
+export const repoLink = (repo) =>
+  PUBLISHED_REPOS.has(repo)
+    ? {label: 'Runnable code', url: `https://github.com/code-with-sam-dev/${repo}`}
+    : null;
 
 export const ORACLE_TRADEMARK =
   'Java and OpenJDK are trademarks or registered trademarks of Oracle and/or its ' +

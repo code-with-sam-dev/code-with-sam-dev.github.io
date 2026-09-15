@@ -231,7 +231,7 @@ export const sheet = {
     ],
   },
 
-  links: [...CHANNEL_LINKS, repoLink('episode-07-transactions')],
+  links: [...CHANNEL_LINKS, repoLink('episode-07-transactions')].filter(Boolean),
   trademarks: APACHE_TRADEMARK,
   closing: CLOSING,
 };

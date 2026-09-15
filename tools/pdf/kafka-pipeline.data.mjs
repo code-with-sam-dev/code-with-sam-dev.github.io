@@ -248,7 +248,7 @@ export const sheet = {
     ],
   },
 
-  links: [...CHANNEL_LINKS, repoLink('episode-09-pipeline')],
+  links: [...CHANNEL_LINKS, repoLink('episode-09-pipeline')].filter(Boolean),
   trademarks: APACHE_TRADEMARK,
   closing: CLOSING,
 };

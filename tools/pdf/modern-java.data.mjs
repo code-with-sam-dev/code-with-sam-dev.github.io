@@ -228,7 +228,7 @@ export const sheet = {
     ],
   },
 
-  links: [...CHANNEL_LINKS, repoLink('src')],
+  links: [...CHANNEL_LINKS, repoLink('java-demos')].filter(Boolean),
   trademarks: ORACLE_TRADEMARK,
   closing: CLOSING,
 };

@@ -225,7 +225,7 @@ export const sheet = {
     ],
   },
 
-  links: [...CHANNEL_LINKS, repoLink('episode-04-offsets')],
+  links: [...CHANNEL_LINKS, repoLink('episode-04-offsets')].filter(Boolean),
   trademarks: APACHE_TRADEMARK,
   closing: CLOSING,
 };

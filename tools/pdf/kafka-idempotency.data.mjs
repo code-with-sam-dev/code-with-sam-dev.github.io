@@ -229,7 +229,7 @@ export const sheet = {
     ],
   },
 
-  links: [...CHANNEL_LINKS, repoLink('episode-05-idempotency')],
+  links: [...CHANNEL_LINKS, repoLink('episode-05-idempotency')].filter(Boolean),
   trademarks: APACHE_TRADEMARK,
   closing: CLOSING,
 };
