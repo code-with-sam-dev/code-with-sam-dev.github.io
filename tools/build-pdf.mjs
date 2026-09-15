@@ -156,6 +156,10 @@ const SHEETS = {
     data: './pdf/tdd-java.data.mjs',
     out: 'public/downloads/tdd-for-java-design-sheet.pdf',
   },
+  'distributed-transactions': {
+    data: './pdf/distributed-transactions.data.mjs',
+    out: 'public/downloads/distributed-transactions-design-sheet.pdf',
+  },
 };
 
 const NAME = process.argv[2] ?? 'digital-wallet';
