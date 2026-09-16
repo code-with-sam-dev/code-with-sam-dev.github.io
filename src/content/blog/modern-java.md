@@ -2,7 +2,7 @@
 title: 'Modern Java: Everything That Actually Shipped'
 description: 'Sixteen features, each compiled on Java 8, 11, 17, 21, 25 and 26. The compile errors on the older releases are left in, because a compiler refusing a file is the most honest way to show when a feature arrived.'
 pubDate: 2026-09-15
-youtube: 'vH5UEcoJXcY'
+youtube: 'w3nZ5_VGTWw'
 tags: ['java', 'modern-java', 'interviews', 'code']
 series: 'Modern Java'
 episode: 1

@@ -19,7 +19,7 @@ import {CHANNEL_LINKS, repoLink, ORACLE_TRADEMARK, CLOSING, SRC, PERISHABLE_NOTE
 
 export const sheet = {
   channel: 'Code with Sam',
-  video: {url: 'https://www.youtube.com/watch?v=vH5UEcoJXcY', label: 'Watch on YouTube'},
+  video: {url: 'https://www.youtube.com/watch?v=w3nZ5_VGTWw', label: 'Watch on YouTube'},
   siteUrl: 'https://code-with-sam-dev.github.io',
   title: 'Modern Java',
   subtitle: 'Everything that actually shipped',
