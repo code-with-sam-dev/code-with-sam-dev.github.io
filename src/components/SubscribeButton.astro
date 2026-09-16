@@ -1,0 +1,45 @@
+---
+/**
+ * The subscribe call to action, drawn rather than borrowed.
+ *
+ * Sam, 2026-09-16: "Can you add the Subscribe button here next to Watch on
+ * YouTube", with a picture of the familiar red pill and a bell.
+ *
+ * DRAWN, NOT COPIED, which is the same reasoning as every topic mark on this
+ * channel: the rounded rectangle, the type and the bell are ours. YouTube's
+ * exact button artwork is a trademark, and reproducing it pixel for pixel would
+ * be using somebody else's asset to look official.
+ *
+ * RED, THOUGH, and deliberately so. Sam's earlier rule for the YouTube mark
+ * applies just as hard here: "remember to make it red, not purple, when asking
+ * people to view the full video on YouTube." A viewer recognises the action by
+ * its colour before reading the word, and a violet subscribe button reads as a
+ * newsletter signup.
+ *
+ * THE LINK CARRIES sub_confirmation=1, which opens the subscribe dialog
+ * directly rather than dropping the visitor on the channel page to find the
+ * button themselves. One less step on the only action this page is asking for.
+ */
+import {CHANNEL_URL} from '../lib/channel';
+
+interface Props {
+  class?: string;
+}
+const {class: cls = ''} = Astro.props;
+---
+
+<a
+  class:list={['btn', 'btn-subscribe', cls]}
+  href={`${CHANNEL_URL}?sub_confirmation=1`}
+  rel="noopener"
+  aria-label="Subscribe to Code with Sam on YouTube"
+>
+  Subscribe
+  <svg width="17" height="17" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+    <path
+      d="M10 2.2a1.15 1.15 0 0 1 1.15 1.15v.35a4.6 4.6 0 0 1 3.45 4.45v2.6l1.1 1.9a.6.6 0 0 1-.52.9H4.82a.6.6 0 0 1-.52-.9l1.1-1.9v-2.6A4.6 4.6 0 0 1 8.85 3.7v-.35A1.15 1.15 0 0 1 10 2.2z"
+      fill="currentColor"
+    />
+    <path d="M8.2 15.1h3.6a1.8 1.8 0 0 1-3.6 0z" fill="currentColor" />
+  </svg>
+</a>

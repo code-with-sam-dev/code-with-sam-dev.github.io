@@ -653,6 +653,19 @@ hr {
 .btn-ghost { border-color: #39414f; color: #e9edf2; }
 .btn-ghost:hover { border-color: #7c5cff; color: #fff; }
 
+/*
+  The subscribe pill. Red rather than the house violet, because a viewer reads
+  the colour before the word and a violet one reads as a newsletter signup.
+  Drawn here rather than borrowed: the shape, the type and the bell are ours.
+*/
+.btn-subscribe {
+  background: #cc0000;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+.btn-subscribe:hover { background: #b00000; color: #fff; }
+.btn-subscribe svg { margin-left: 0.1rem; }
+
 /* ---------- terminal card in the hero ---------- */
 
 .terminal {
