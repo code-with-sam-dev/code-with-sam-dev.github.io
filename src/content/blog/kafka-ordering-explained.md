@@ -9,6 +9,7 @@ series: 'Kafka Payments'
 episode: 1
 cover: '/covers/kafka-ordering.jpg'
 duration: '4:18'
+sheet: '/downloads/kafka-ordering-design-sheet.pdf'
 terminal:
   path: 'kafka-payments / episode-01-ordering'
   lines:

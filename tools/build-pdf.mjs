@@ -156,6 +156,30 @@ const SHEETS = {
     data: './pdf/tdd-java.data.mjs',
     out: 'public/downloads/tdd-for-java-design-sheet.pdf',
   },
+  'kafka-ordering': {
+    data: './pdf/kafka-ordering.data.mjs',
+    out: 'public/downloads/kafka-ordering-design-sheet.pdf',
+  },
+  'kafka-partitions': {
+    data: './pdf/kafka-partitions.data.mjs',
+    out: 'public/downloads/kafka-partitions-design-sheet.pdf',
+  },
+  'java-quadratic-loop': {
+    data: './pdf/java-quadratic-loop.data.mjs',
+    out: 'public/downloads/java-quadratic-loop-design-sheet.pdf',
+  },
+  'two-ai-tools': {
+    data: './pdf/two-ai-tools.data.mjs',
+    out: 'public/downloads/two-ai-tools-design-sheet.pdf',
+  },
+  'cc-flagship': {
+    data: './pdf/cc-flagship.data.mjs',
+    out: 'public/downloads/claude-code-flagship-design-sheet.pdf',
+  },
+  'codex-flagship': {
+    data: './pdf/codex-flagship.data.mjs',
+    out: 'public/downloads/codex-flagship-design-sheet.pdf',
+  },
   'ejb-to-spring': {
     data: './pdf/ejb-to-spring.data.mjs',
     out: 'public/downloads/ejb-to-spring-design-sheet.pdf',

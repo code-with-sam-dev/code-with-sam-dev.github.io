@@ -9,6 +9,7 @@ series: 'Kafka Payments'
 episode: 2
 cover: '/covers/kafka-partitions.jpg'
 duration: '5:51'
+sheet: '/downloads/kafka-partitions-design-sheet.pdf'
 terminal:
   path: 'kafka-payments / episode-02-partitions'
   lines:

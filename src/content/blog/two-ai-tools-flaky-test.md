@@ -8,6 +8,7 @@ series: 'The Lazy Software Engineer'
 episode: 1
 cover: '/covers/lazy-engineer.jpg'
 duration: '10:48'
+sheet: '/downloads/two-ai-tools-design-sheet.pdf'
 draft: false
 ---
 

@@ -8,6 +8,7 @@ series: 'AI Engineering Agents'
 episode: 2
 cover: '/covers/claude-code-flagship.jpg'
 duration: '23:53'
+sheet: '/downloads/claude-code-flagship-design-sheet.pdf'
 draft: false
 terminal:
   path: '~/projects/payments-service'

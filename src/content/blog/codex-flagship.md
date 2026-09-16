@@ -8,6 +8,7 @@ series: 'AI Engineering Agents'
 episode: 1
 cover: '/covers/codex-flagship.jpg'
 duration: '14:42'
+sheet: '/downloads/codex-flagship-design-sheet.pdf'
 draft: false
 terminal:
   path: 'payments-service / review'
