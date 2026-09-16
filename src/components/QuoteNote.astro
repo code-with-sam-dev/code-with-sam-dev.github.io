@@ -1,0 +1,222 @@
+---
+/**
+ * Sam's quote, on a small sticky note in the top left of the hero.
+ *
+ * His asks, 2026-09-16, in the order they arrived: the quote alone at the top
+ * of the page, in italics and quotation marks, on a flashcard or sticky note;
+ * then "can the sticky be the first thing they see"; then "doesn't have to be
+ * this big"; then paper, in pink, with the one behind it in green; then the
+ * article face rather than the display face; and finally "even if it goes
+ * here, very small but readable", pointing at the empty grid area above the
+ * hero eyebrow.
+ *
+ * WHY THE PAPER PAINTS ITS OWN COLOURS rather than following the theme. This
+ * site is light by default and dark by preference, and a quote card that took
+ * the page's surface colour would be one more panel among the panels. A sticky
+ * note is a physical object: warm paper with dark ink on it in any room. That
+ * is what makes it read as something a person left there by hand rather than
+ * as another section of a website.
+ *
+ * THE BACK NOTE IS A SIBLING, NOT A ::before ON THE PAPER. It was a pseudo
+ * element with z-index -1 first, and it rendered GREEN IN FRONT OF THE PINK:
+ * the paper is rotated, a transform creates a stacking context, and inside one
+ * a negative z-index child paints above its parent's own background rather
+ * than behind it. Two elements in a plain relative wrapper have no such trap.
+ *
+ * DRAWN, NOT DECORATED WITH SOMEONE ELSE'S ART. The clip is our own SVG path,
+ * for the same reason the topic marks and the subscribe pill are drawn.
+ *
+ * It carries no attribution line. Sam asked for the quote alone, and a byline
+ * is the kind of thing the identity rules keep off this site anyway.
+ */
+---
+
+<aside class="quote-note" aria-label="A note">
+  <div class="note-stack">
+    <div class="note-back" aria-hidden="true"></div>
+
+    <figure class="note-paper">
+      <blockquote>
+        <p>
+          &ldquo;Small lessons, learned consistently, eventually create
+          extraordinary growth&rdquo;
+        </p>
+      </blockquote>
+    </figure>
+
+    <svg class="note-clip" viewBox="0 0 40 96" aria-hidden="true" focusable="false">
+      <path
+        d="M28 74V22a10 10 0 0 0-20 0v56a16 16 0 0 0 32 0V26"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="5"
+        stroke-linecap="round"
+      />
+    </svg>
+  </div>
+</aside>
+
+<style>
+  /* PAPER, NOT A COLOURED RECTANGLE. Four things stacked, in this order:
+     the creases, a fibre grain from fractal noise multiplied over the colour,
+     and the colour itself. The noise is an inline SVG filter, so nothing is
+     fetched and the texture holds at any size instead of tiling visibly.
+
+     THE CREASES ARE LIGHT, NOT LINES. A wrinkle is not a drawn stroke, it is a
+     bright edge where the paper catches the light with a thin shadow just
+     behind it. Each one is a soft gradient carrying both, at its own angle,
+     because creases that all run the same way read as printed stripes. They
+     are WIDE and FAINT on purpose: the first pass made them narrow and strong
+     and they read as scratches across the paper rather than as folds in it. */
+  .note-back,
+  .note-paper {
+    background-image:
+      linear-gradient(104deg, transparent 14%, rgba(255, 255, 255, 0.34) 19%, rgba(0, 0, 0, 0.045) 22.5%, transparent 27%),
+      linear-gradient(-72deg, transparent 35%, rgba(255, 255, 255, 0.28) 40.5%, rgba(0, 0, 0, 0.04) 44%, transparent 49%),
+      linear-gradient(158deg, transparent 54%, rgba(255, 255, 255, 0.24) 59.5%, rgba(0, 0, 0, 0.035) 63%, transparent 68%),
+      linear-gradient(88deg, transparent 68%, rgba(255, 255, 255, 0.2) 73%, rgba(0, 0, 0, 0.03) 76%, transparent 81%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E"),
+      linear-gradient(168deg, #ffdcea 0%, #ffc8dc 58%, #ffb8d2 100%);
+    background-blend-mode: normal, normal, normal, normal, multiply, normal;
+  }
+
+  /* AN EDGE THAT IS NOT STRAIGHT. Real paper that has been handled does not
+     have four true sides, and a perfectly rectangular note is the single thing
+     that gives away that it is a div. The jitter is two or three pixels, which
+     is enough to read as paper and small enough never to reach the text.
+
+     The shadow has to be a FILTER, not a box-shadow: box-shadow is drawn from
+     the border box, so against a clipped shape it would cast a rectangle the
+     paper no longer fills. drop-shadow follows the clipped outline. */
+  .note-paper,
+  .note-back {
+    clip-path: polygon(
+      0.6% 1.4%, 24% 0.4%, 51% 1.8%, 77% 0.2%, 99.4% 1.6%,
+      98.8% 26%, 99.6% 52%, 98.4% 76%, 99.2% 98.4%,
+      74% 99.6%, 48% 98.2%, 22% 99.8%, 0.8% 98.6%,
+      1.6% 74%, 0.4% 49%, 1.8% 24%
+    );
+  }
+
+  .quote-note {
+    /* IN THE EMPTY GRID TO THE LEFT of the headline column, which is the space
+       Sam pointed at. Anchored to the content column rather than to the
+       viewport, so it keeps the same gap at every width instead of drifting
+       into the text on a laptop.
+
+       It sat above the eyebrow first and covered it. The hero clips its own
+       overflow, so there was no horizontal scrollbar to give that away: it
+       just quietly hid the line under it. */
+    position: absolute;
+    right: calc(100% + 84px);
+    top: -4px;
+    z-index: 2;
+    margin: 0;
+  }
+
+  .note-stack {
+    position: relative;
+    width: 232px;
+  }
+
+  .note-paper {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 14px 15px 13px;
+    color: #4a2036;
+    /* A tight contact shadow plus a soft cast one. A single large blur reads
+       as a floating rectangle; two read as paper resting on a surface. */
+    filter:
+      drop-shadow(0 1px 1px rgba(0, 0, 0, 0.32))
+      drop-shadow(0 10px 16px rgba(0, 0, 0, 0.42));
+    /* The skew is a fraction of a degree. It stops the note being a rectangle
+       that happens to be rotated, which is what the eye reads as flat. */
+    transform: rotate(-1.6deg) skewY(-0.45deg);
+    transition: transform 0.25s ease;
+  }
+
+  /* The second note in the stack, just showing past the edge. Green, on Sam's
+     instruction. */
+  .note-back {
+    position: absolute;
+    inset: 7px -9px -7px 6px;
+    transform: rotate(3deg) skewY(0.5deg);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E"),
+      linear-gradient(168deg, #d9f3cb 0%, #bfe7ae 100%);
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.45));
+  }
+
+  .note-paper:hover {
+    transform: rotate(-0.6deg) skewY(-0.2deg) translateY(-2px);
+  }
+
+  .note-clip {
+    position: absolute;
+    z-index: 2;
+    top: -14px;
+    left: 18px;
+    width: 14px;
+    height: 34px;
+    color: #a8b0bb;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+  }
+
+  /* The colour has to be restated on the blockquote, not only on the paper.
+     The global blockquote rule sets its own, so `inherit` on the paragraph
+     picked up the page's soft grey and the quote rendered washed out. */
+  .note-paper blockquote {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    color: #4a2036;
+    font-size: inherit;
+  }
+
+  .note-paper p {
+    margin: 0;
+    /* The article body face, on Sam's instruction, not the display face. A
+       note is something someone wrote; the display face is the channel's
+       headline voice. */
+    font-family: var(--font-body);
+    font-style: italic;
+    font-weight: 450;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    letter-spacing: 0.005em;
+    text-align: left;
+    text-wrap: balance;
+    color: inherit;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .note-paper,
+    .note-paper:hover {
+      transition: none;
+      transform: rotate(-1.6deg) skewY(-0.45deg);
+    }
+  }
+
+  /* Below the width where the margin is wide enough to hold it, the note
+     rejoins the flow above the eyebrow rather than being clipped by the edge
+     of the hero. 1360px, not 900px, and measured rather than guessed: the
+     margin has to hold the note AND the gap that pushes it left, and at 1300
+     it did not, so the note sat flush against the viewport edge with its left
+     side cut off. The hero clips its own overflow, so nothing scrolled and
+     nothing gave that away. */
+  @media (max-width: 1360px) {
+    .quote-note {
+      position: static;
+      display: flex;
+      justify-content: center;
+      margin: 0 0 30px;
+    }
+    .note-stack {
+      width: 260px;
+    }
+    .note-clip {
+      top: -13px;
+    }
+  }
+</style>

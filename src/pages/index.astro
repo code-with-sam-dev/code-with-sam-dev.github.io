@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Signup from '../components/Signup.astro';
 import ShortsCarousel from '../components/ShortsCarousel.astro';
 import OneThingADay from '../components/OneThingADay.astro';
+import QuoteNote from '../components/QuoteNote.astro';
 import PostCard from '../components/PostCard.astro';
 import {allPosts, seriesMap, slugify} from '../lib/posts';
 import {CHANNEL_URL} from '../lib/channel';
@@ -76,6 +77,8 @@ const first = sessions[0];
 >
   <section class="hero">
     <div class="hero-inner">
+      <QuoteNote />
+
       <p class="eyebrow" data-reveal>Interview prep for the AI era</p>
 
       <h1 data-reveal>
