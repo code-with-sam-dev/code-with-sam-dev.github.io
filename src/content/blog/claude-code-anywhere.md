@@ -10,7 +10,7 @@ tags: ['claude-code', 'ai', 'workflow']
 series: 'Claude Code Advanced'
 episode: 2
 duration: '9:15'
-draft: true
+draft: false
 ---
 
 Your laptop is shut and you are on a train. Is your task still running?

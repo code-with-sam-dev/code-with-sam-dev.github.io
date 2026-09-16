@@ -10,7 +10,7 @@ tags: ['claude-code', 'ai', 'interviews']
 series: 'Claude Code'
 episode: 5
 duration: '7:04'
-draft: true
+draft: false
 ---
 
 You had a hard problem, so you switched to the biggest model and turned the

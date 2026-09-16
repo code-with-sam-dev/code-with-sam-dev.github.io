@@ -10,7 +10,7 @@ tags: ['claude-code', 'ai', 'interviews']
 series: 'Claude Code'
 episode: 6
 duration: '7:53'
-draft: true
+draft: false
 ---
 
 Same hundred page document. In one place it costs you nothing. In another it

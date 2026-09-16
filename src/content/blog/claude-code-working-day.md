@@ -10,7 +10,7 @@ tags: ['claude-code', 'ai', 'interviews']
 series: 'Claude Code'
 episode: 9
 duration: '9:33'
-draft: true
+draft: false
 ---
 
 One sentence in the documentation explains more than anything else in it:

@@ -2,8 +2,11 @@
 title: 'Distributed Transactions: What @Transactional Actually Covers'
 description: 'Rolled back, and the customer is still charged. The measured cost of a remote call inside the boundary, why Kafka is not an XA resource, and the sentence in Spring own documentation that settles the argument.'
 pubDate: 2026-09-15
+youtube: 'jTa3lUnbWfU'
+cover: '/covers/distributed-transactions.jpg'
+duration: '13:38'
 tags: ['java', 'spring', 'kafka', 'distributed-systems', 'interviews']
-draft: true
+draft: false
 ---
 
 A method writes to the database, charges a card over HTTP, and writes to the

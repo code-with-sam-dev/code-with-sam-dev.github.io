@@ -10,7 +10,7 @@ tags: ['claude-code', 'ai', 'interviews']
 series: 'Claude Code'
 episode: 3
 duration: '7:21'
-draft: true
+draft: false
 ---
 
 This morning you opened yesterday's work with `--continue`, and it went worse

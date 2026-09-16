@@ -10,7 +10,7 @@ tags: ['claude-code', 'ai', 'interviews']
 series: 'Claude Code'
 episode: 2
 duration: '6:37'
-draft: true
+draft: false
 ---
 
 Something in your conversation is being deleted, right now, while you work.

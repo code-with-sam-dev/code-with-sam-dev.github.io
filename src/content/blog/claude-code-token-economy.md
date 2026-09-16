@@ -10,7 +10,7 @@ tags: ['claude-code', 'ai', 'interviews']
 series: 'Claude Code'
 episode: 10
 duration: '8:47'
-draft: true
+draft: false
 ---
 
 You asked a one line question. A quick one, at the end of a long day. And it

@@ -17,6 +17,21 @@ const LATEST_COUNT = 6;
 const latest = posts.slice(0, LATEST_COUNT);
 const series = [...(await seriesMap()).entries()];
 
+/*
+  STANDALONE EPISODES: a video of its own, belonging to no series.
+
+  Sam, 2026-09-16, looking at the homepage: "who said only videos with series
+  appear here... If possible, put them in a seperate category or something on
+  the site. Not to leave them out completely."
+
+  He is right that they were under represented. They were never absent, every
+  article is in the list below, but the Series band is the part of the page that
+  says WHAT THIS CHANNEL COVERS, and a topic with no series was invisible there
+  no matter how good it was. A one off deep dive is not a lesser thing than a
+  ten part series, so it gets its own band rather than being left to the feed.
+*/
+const standalone = posts.filter((p) => !p.data.series && p.data.youtube);
+
 // The hero terminal cycles through every article that supplies one, in a
 // SHUFFLED order rather than newest first.
 //
@@ -149,6 +164,31 @@ const first = sessions[0];
                 {items.length} {items.length === 1 ? 'episode' : 'episodes'}.
                 The code builds on itself from the first one.
               </p>
+            </a>
+          ))}
+        </div>
+      </>
+    )
+  }
+
+  {
+    standalone.length > 0 && (
+      <>
+        <div class="section-head" data-reveal>
+          <p class="eyebrow" style="color:var(--primary)">One video, all the way down</p>
+          <h2>Topics taken apart</h2>
+        </div>
+        <div class="cards">
+          {standalone.map((post, i) => (
+            <a
+              class="card series-card"
+              href={`${base}/blog/${post.slug}`}
+              data-reveal
+              data-delay={String(Math.min(i, 3))}
+            >
+              <span class="num">{post.data.duration ?? ''}</span>
+              <h3>{post.data.title}</h3>
+              <p>{post.data.description}</p>
             </a>
           ))}
         </div>

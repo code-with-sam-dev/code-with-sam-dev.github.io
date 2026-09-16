@@ -10,7 +10,7 @@ tags: ['claude-code', 'ai', 'interviews']
 series: 'Claude Code'
 episode: 1
 duration: '6:49'
-draft: true
+draft: false
 ---
 
 The same prompt, in the same project, by the same developer. On Monday it

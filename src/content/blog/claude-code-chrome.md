@@ -10,7 +10,7 @@ tags: ['claude-code', 'ai', 'testing']
 series: 'Claude Code Advanced'
 episode: 1
 duration: '9:00'
-draft: true
+draft: false
 ---
 
 You built the UI. The code compiles, the tests pass, the diff looks right.

@@ -10,7 +10,7 @@ tags: ['claude-code', 'ai', 'security']
 series: 'Claude Code'
 episode: 7
 duration: '7:52'
-draft: true
+draft: false
 ---
 
 You connected six MCP servers. Your ticket system, your docs, your database, a

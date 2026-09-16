@@ -10,7 +10,7 @@ tags: ['claude-code', 'ai', 'interviews']
 series: 'Claude Code'
 episode: 4
 duration: '7:39'
-draft: true
+draft: false
 ---
 
 You have an undo. You have pressed it, it worked, and that experience has

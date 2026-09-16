@@ -10,7 +10,7 @@ tags: ['claude-code', 'ai', 'security']
 series: 'Claude Code Advanced'
 episode: 3
 duration: '9:30'
-draft: true
+draft: false
 ---
 
 You are on a train. A Remote Control session is running on the laptop at your

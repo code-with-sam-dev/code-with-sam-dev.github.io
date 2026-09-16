@@ -10,7 +10,7 @@ tags: ['claude-code', 'ai', 'interviews']
 series: 'Claude Code'
 episode: 8
 duration: '8:35'
-draft: true
+draft: false
 ---
 
 You split the work across five agents, expecting it to finish in a fifth of the
