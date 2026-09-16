@@ -180,20 +180,18 @@ const first = sessions[0];
           <p class="eyebrow" style="color:var(--primary)">One video, all the way down</p>
           <h2>Topics taken apart</h2>
         </div>
-        <div class="cards">
-          {standalone.map((post, i) => (
-            <a
-              class="card series-card"
-              href={`${base}/blog/${post.slug}`}
-              data-reveal
-              data-delay={String(Math.min(i, 3))}
-            >
-              <span class="num">{post.data.duration ?? ''}</span>
-              <h3>{post.data.title}</h3>
-              <p>{post.data.description}</p>
-            </a>
-          ))}
-        </div>
+        {/*
+          THE SAME CARD AS THE ARTICLE FEED, poster and all. Sam, 2026-09-16:
+          "Topics taken apart needs YouTube preview as well".
+
+          He is right and the first version was inconsistent: these are the
+          channel's biggest single videos, and they were the only place on the
+          page showing a video with no picture of it. A band that is meant to
+          say WHAT THIS CHANNEL COVERS cannot be the one band with no covers.
+        */}
+        <ul class="post-list">
+          {standalone.map((post, i) => <PostCard post={post} delay={i} />)}
+        </ul>
       </>
     )
   }
