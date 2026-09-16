@@ -135,6 +135,10 @@ const SHEETS = {
     data: './pdf/cc-14-schedule.data.mjs',
     out: 'public/downloads/claude-code-advanced-04-schedule.pdf',
   },
+  'cc-15-handoffs': {
+    data: './pdf/cc-15-handoffs.data.mjs',
+    out: 'public/downloads/claude-code-advanced-05-handoffs.pdf',
+  },
   'cc-16-two-models': {
     data: './pdf/cc-16-two-models.data.mjs',
     out: 'public/downloads/claude-code-advanced-06-two-models.pdf',
