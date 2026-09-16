@@ -706,6 +706,25 @@ hr {
   gap: 1rem;
   margin: 1.6rem 0 2.6rem;
 }
+/*
+  A CARD IS A SURFACE, NOT A LINK, even when the whole thing is wrapped in an
+  anchor. Sam, 2026-09-16: "I don't like the underlining of the text".
+
+  The base `a` rule deliberately leaves underlines on, because an underline is
+  how a link is recognised inside a paragraph of prose. A card is different: the
+  border, the hover lift and the pointer already say it is clickable, so the
+  underline only adds noise across a heading and a description. This affected
+  every card on the page, not just the new band.
+*/
+.card,
+.card:hover,
+.card h3,
+.card p {
+  text-decoration: none;
+}
+.card h3 { color: var(--primary); }
+.card p { color: var(--ink-soft); }
+
 .card {
   position: relative;
   padding: 1.4rem 1.3rem 1.5rem;
@@ -870,4 +889,76 @@ hr {
   flex-wrap: wrap;
   gap: 0.7rem;
   margin: 1rem 0 0.5rem;
+}
+
+
+/* ---------- tables inside an article ---------- */
+/*
+  Sam, 2026-09-16: "Sections like these needs fixing, if it's a table fix it
+  properly." Markdown tables were rendering with no styling at all: no rules, no
+  padding, columns drifting apart and the header indistinguishable from the
+  body, which reads as broken rather than as a table.
+
+  These articles lean on tables hard. They are where the channel puts the
+  "before and after", the "still true / no longer true", the measured numbers.
+  A table that is hard to read is an argument that is hard to follow.
+*/
+main.wrap table,
+.prose table,
+article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.6rem 0 2rem;
+  font-size: 0.95rem;
+  display: block;
+  overflow-x: auto;
+}
+
+@media (min-width: 720px) {
+  main.wrap table,
+  .prose table,
+  article table {
+    display: table;
+  }
+}
+
+main.wrap thead th,
+.prose thead th,
+article thead th {
+  text-align: left;
+  font-weight: 700;
+  color: var(--ink);
+  border-bottom: 2px solid var(--primary);
+  padding: 0.6rem 0.9rem;
+  white-space: nowrap;
+}
+
+main.wrap tbody td,
+.prose tbody td,
+article tbody td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.65rem 0.9rem;
+  border-bottom: 1px solid var(--hairline);
+  color: var(--ink-soft);
+}
+
+/* The first column is the subject of each row, so it carries the emphasis. */
+main.wrap tbody td:first-child,
+.prose tbody td:first-child,
+article tbody td:first-child {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+main.wrap tbody tr:last-child td,
+.prose tbody tr:last-child td,
+article tbody tr:last-child td {
+  border-bottom: none;
+}
+
+main.wrap tbody tr:hover td,
+.prose tbody tr:hover td,
+article tbody tr:hover td {
+  background: color-mix(in srgb, var(--primary) 7%, transparent);
 }
