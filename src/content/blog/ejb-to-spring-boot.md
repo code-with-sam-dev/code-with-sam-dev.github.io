@@ -6,6 +6,7 @@ youtube: 'Ug5eZMkIZeo'
 tags: ['java', 'spring', 'ejb', 'architecture', 'migration', 'interviews']
 cover: '/covers/ejb-to-spring.jpg'
 duration: '18:14'
+sheet: '/downloads/ejb-to-spring-design-sheet.pdf'
 draft: false
 ---
 

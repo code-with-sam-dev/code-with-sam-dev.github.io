@@ -5,6 +5,7 @@ pubDate: 2026-09-15
 youtube: 'jTa3lUnbWfU'
 cover: '/covers/distributed-transactions.jpg'
 duration: '13:38'
+sheet: '/downloads/distributed-transactions-design-sheet.pdf'
 tags: ['java', 'spring', 'kafka', 'distributed-systems', 'interviews']
 draft: false
 ---

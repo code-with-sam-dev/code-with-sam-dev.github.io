@@ -5,6 +5,7 @@ pubDate: 2026-09-15
 youtube: '15MwUsnD8dM'
 cover: '/covers/tdd-for-java.jpg'
 duration: '13:11'
+sheet: '/downloads/tdd-for-java-design-sheet.pdf'
 tags: ['java', 'tdd', 'testing', 'junit', 'interviews']
 draft: false
 ---
