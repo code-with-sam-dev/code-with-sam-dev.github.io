@@ -75,6 +75,10 @@ const SHEETS = {
   // each episode." Same pattern as the Kafka sheets, with one difference that
   // matters: every claim is dated on the page, because this subject changes
   // with every release and a sheet outlives the version it describes.
+  'cc-00-install': {
+    data: './pdf/cc-00-install.data.mjs',
+    out: 'public/downloads/claude-code-00-install.pdf',
+  },
   'cc-01-harness': {
     data: './pdf/cc-01-harness.data.mjs',
     out: 'public/downloads/claude-code-01-harness.pdf',
