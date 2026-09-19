@@ -7,9 +7,11 @@
  * documented. That labelling is the point: a page arguing that agreement is
  * not verification cannot itself launder opinion as fact.
  *
- * THE ONE THING THAT IS NOT OPINION is that this channel is the worked example.
- * The Kafka series really was made with ChatGPT directing and Claude Code
- * building, and the artefacts are public.
+ * THE WORKED EXAMPLE IS THE READER'S PROBLEM, NEVER OURS. An earlier draft of
+ * this page used the channel's own production as the example, which is the one
+ * thing no page, video or sheet may ever do. It is also the nearest example to
+ * reach for on a page about running two models together, which is exactly why
+ * it has to be caught deliberately rather than left to notice.
  */
 import {CHANNEL_LINKS, docsLink, ANTHROPIC_TRADEMARK, CLOSING, SRC, PERISHABLE_NOTE}
   from './claude-code-common.mjs';
@@ -34,7 +36,7 @@ export const sheet = {
     inTitle: 'In scope',
     in: [
       'Why a second model helps, and which reason actually matters',
-      'Director and executor, with this channel as the worked example',
+      'Director and executor, and why the split has to be asymmetric',
       'Adversarial review, and the prompt that does it',
       'Why only artefacts travel between two models',
       'Agreement, disagreement, and which one is information',
@@ -47,6 +49,7 @@ export const sheet = {
       'Benchmarks, which age badly and rarely predict your work',
       'Any claim that two models are more accurate than one. They are not',
       'Automated multi-model voting, which compounds the trap rather than fixing it',
+      'Anything about how this channel is produced, which is not the subject',
     ],
     note: 'Nearly everything here is operational judgement rather than vendor documentation, and it is labelled that way throughout. A page about not laundering opinion as fact has to hold itself to that first.',
   },
@@ -89,12 +92,12 @@ export const sheet = {
       title: 'Director and executor, with a worked example',
       body: [
         'The division that works is that one model DIRECTS and reviews while the other EXECUTES with tools. The executor has the codebase, the terminal and the ability to run things. The director has distance.',
-        'This channel is the example and it is not theoretical. The Kafka series was made with ChatGPT as creative and technical director, deciding narration, structure and pacing, and Claude Code as the builder with the filesystem, the terminal, the renders and the repository. Ten episodes, nine runnable repo modules, nine design sheets.',
+        'A concrete shape for it: you are extracting a billing service out of a monolith. The director never sees the repository. It gets the current call graph, the invariants that must survive, and the deadline, and it produces a sequence of migrations with the risk on each one named. The executor gets that sequence, opens the code, runs the tests, and reports what it found that the plan did not anticipate.',
         'The reason the split works is symmetrical: the executor has everything except distance, and the director has nothing except distance.',
       ],
       claims: [
         {
-          text: 'The Kafka series on this channel was produced with ChatGPT directing and Claude Code building. The repository, the sheets and the episodes are the artefacts.',
+          text: 'The director works from a description and the executor works from the repository. The asymmetry is the point: a reviewer who has been editing the file all afternoon cannot see it any more.',
           source: SRC.OPERATIONAL,
         },
       ],
@@ -155,7 +158,7 @@ export const sheet = {
         'When the two disagree, that is genuinely useful, and useful in a specific way: it names the exact spot where you now have to consult a primary source.',
         'Not resolve it by asking a third model. Not go with whichever sounded more confident. Read the documentation, run the thing, or write the test that settles it.',
         'Disagreement points at where the uncertainty actually lives. Agreement tells you almost nothing, which is uncomfortable, because agreement is the outcome that feels like success.',
-        'What this channel does instead: every factual claim is written down with the page it came from and the date it was checked, and anything that cannot be traced to a primary source is labelled a judgement, out loud, in the same file. Both models\' output is treated as a draft.',
+        'What to do instead: write every factual claim down with the page it came from and the date it was checked, and label anything that cannot be traced to a primary source as a judgement, out loud, in the same file. Treat both models\' output as a draft.',
       ],
       claims: [
         {

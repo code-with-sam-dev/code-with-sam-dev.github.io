@@ -41,13 +41,16 @@ within one model: same mechanism, smaller scale.
 
 | | ChatGPT, the director | Claude Code, the builder |
 |---|---|---|
-| Decides | narration, structure, pacing | how to build it |
+| Decides | the sequence and the risk on each step | how to build it |
 | Holds | distance | the filesystem and terminal |
 | Can | say what comes next | actually run things |
 
-This channel is the worked example and it is not theoretical. The Kafka series
-was made exactly this way: ten episodes, nine runnable repo modules, nine design
-sheets.
+A concrete shape for it. You are extracting a billing service out of a
+monolith. The director never sees the repository: it gets the current call
+graph, the invariants that must survive the move, and the deadline, and it
+produces a sequence of migrations with the risk on each one named. The executor
+gets that sequence, opens the code, runs the tests, and reports what it found
+that the plan did not anticipate.
 
 The reason the split works is symmetrical. **The executor has everything except
 distance. The director has nothing except distance.**
@@ -115,11 +118,10 @@ Disagreement points at where the uncertainty actually lives. Agreement tells you
 almost nothing, which is uncomfortable, because agreement is the outcome that
 feels like success.
 
-What this channel does instead: every factual claim is written down with the
-page it came from and the date it was checked. Not the model that said it — the
-page, and the day. Anything that cannot be traced to a primary source is
-labelled a judgement, out loud, in the same file. Both models' output is treated
-as a draft.
+What to do instead: write every factual claim down with the page it came from
+and the date it was checked. Not the model that said it, the page and the day.
+Label anything that cannot be traced to a primary source as a judgement, out
+loud, in the same file. Treat both models' output as a draft.
 
 ## A second vendor is a second set of terms
 
