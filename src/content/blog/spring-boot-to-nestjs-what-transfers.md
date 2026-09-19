@@ -254,8 +254,7 @@ Then the scripts that produce each figure:
 | `load/idempotency-load.mjs` | fifty concurrent retries of one key |
 | `load/blocking-load.mjs` | the event loop under a blocking handler |
 
-Versions at the time of writing, September 2026: Java 25 LTS, Spring Boot
-4.1.1, Node 24 LTS, NestJS 11, TypeScript 7.0.2, TypeORM 1.1.1, PostgreSQL 18.
+Versions at the time of writing, September 2026: Java 25 LTS, Spring Boot 4.1.1, Node 24.21.0, NestJS 12.0.3, TypeScript 6.0.3, TypeORM 1.1.1, PostgreSQL 18.
 
 Every row in that transfer table has its own episode in the full series, forty
 of them, from installing Node through to running this in production. If a

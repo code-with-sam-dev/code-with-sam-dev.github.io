@@ -42,6 +42,7 @@ export const sheet = {
   intro: [
     'One payment system, built twice, on one docker compose file. Same contract, same request, separate databases, because one table with two object relational mappers writing to it is a defect generator rather than a comparison.',
     'The sheet is the transfer ledger from the end of the video, with the code that each row depends on. The repository is the full runnable truth; this is the one page you pin next to the editor.',
+    'Measured on Java 25, Spring Boot 4.1.1, Node 24.21.0, NestJS 12.0.3, TypeScript 6.0.3, TypeORM 1.1.1 and PostgreSQL 18, on 19 September 2026. Those came off the lock file and the Dockerfiles rather than the package.json ranges, which is the difference between what is declared and what actually installs.',
     PERISHABLE,
   ],
 
@@ -265,6 +266,15 @@ export const sheet = {
       ],
     },
   ],
+
+  /*
+    THE VERSIONS THIS WAS MEASURED ON, stated once and dated, because the sheet
+    outlives them. Read off the lock file and the Dockerfiles rather than from
+    the package.json declarations, which are RANGES: the first cut of this
+    release said NestJS 11 because it read "^12.0.1" as the version and rounded
+    the wrong way, and the card in the video said it too.
+  */
+  scaleNote: 'Measured on Java 25, Spring Boot 4.1.1, Node 24.21.0, NestJS 12.0.3, TypeScript 6.0.3, TypeORM 1.1.1 and PostgreSQL 18, on 19 September 2026.',
 
   checklist: {
     title: 'Before you call a NestJS service production ready',
