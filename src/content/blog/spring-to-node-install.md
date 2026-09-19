@@ -5,8 +5,8 @@ description: 'Every TypeScript tutorial starts at minute three, on a machine tha
 pubDate: 2026-09-19
 sheet: '/downloads/spring-to-node-00-install.pdf'
 tags: ['typescript', 'nodejs', 'nestjs', 'java', 'spring-boot']
-series: 'Spring Boot to TypeScript'
-episode: 0
+series: 'Spring Boot to NestJS'
+episode: 1
 duration: '16:07'
 draft: true
 ---
