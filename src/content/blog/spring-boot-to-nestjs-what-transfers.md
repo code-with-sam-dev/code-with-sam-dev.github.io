@@ -5,11 +5,12 @@ description: 'One payment system, built twice, on one docker compose file. Most 
 pubDate: 2026-09-19
 sheet: '/downloads/spring-to-nestjs-transfer.pdf'
 repo: 'https://github.com/code-with-sam-dev/spring-to-node'
+video: 'https://youtu.be/2oZyt6jGLqk'
 tags: ['nestjs', 'typescript', 'nodejs', 'spring-boot', 'java', 'postgresql']
 series: 'Spring Boot to NestJS'
 episode: 0
 duration: '21:52'
-draft: true
+draft: false
 ---
 
 Fifty concurrent retries of one idempotency key. Fifty payments created. Not a
