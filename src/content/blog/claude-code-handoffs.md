@@ -70,10 +70,10 @@ And the one people miss: **`/clear` takes a name.**
 The conversation you are walking away from is labelled *as you leave it*. That
 label is what you see later in `/resume`.
 
-There is no `/rename`. The naming happens on the way out, not afterwards, and
-that distinction is the whole trick. It is also the reason this is worth a
-paragraph: it is the kind of thing you only discover by reading the commands
-reference rather than by guessing at what ought to exist.
+This is the half of session naming almost nobody knows, and it pairs with
+`/rename` rather than replacing it. `/rename` names the session you are sitting
+in. `/clear <name>` names the one you are walking away from, in the one moment
+you still know what it was about. Two commands, two ends of the same session.
 
 ## The technique you have already used without calling it a handoff
 

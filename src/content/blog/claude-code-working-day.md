@@ -60,6 +60,43 @@ Put more bluntly: **done is a claim, output is a fact.** If all you get back is
 the word "done", you have not saved verification work. You have moved it to
 later, when you have forgotten the context.
 
+## Go and look: `/diff`
+
+Evidence works when the agent cooperates. `/diff` is how you check without
+needing it to.
+
+It shows the changes in your working tree without leaving the session: what
+Claude has edited so far, alongside anything else you had not committed. In a
+wide enough terminal it opens as a panel beside the conversation and stays
+there, refreshing every time a file is edited or a command runs.
+
+**The part that catches people is what the list leaves out.** By default it
+skips test files, skips generated files, and folds every change from before
+this session into a single line at the bottom:
+
+```
+/diff
+
+  src/checkout.ts            +42  -8
+  src/refund.ts              +11  -3
+
+  2 test files not shown
+  1 generated file not shown
+  31 changes from before this session, collapsed
+```
+
+All three expand with a click. The risk is not that they are hidden, it is
+that you did not know to look, and a review that silently omits the tests is
+exactly the review this whole article argues against.
+
+One more worth knowing: `Ctrl+X B` cycles what the panel compares against,
+from this session's changes, to everything you have not committed, to
+everything since your branch split from the default branch.
+
+At the time of writing, in September 2026, the panel needs a git repository
+and a terminal at least 110 columns wide. Without those, `/diff` opens a
+viewer in place of the prompt instead, or tells you why it cannot.
+
 ## Planning has a cost, and the documentation says so
 
 The shape is explore, plan, implement, commit. Explore in plan mode, ask for a

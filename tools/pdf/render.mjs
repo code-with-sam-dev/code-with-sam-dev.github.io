@@ -39,10 +39,31 @@ const claim = (c) => `
     <span class="src">${esc(c.source)}</span>
   </div>`;
 
+/*
+  A CODE BLOCK, because a sheet for a practical course that carries no code is
+  the wrong artefact.
+
+  Sam's rule: "also include code snippets in the pdf sheet". The sheet is what a
+  viewer pins next to their editor, and for a coding episode the thing they want
+  to keep is the code, not a paragraph describing it. The repository is the full
+  runnable truth; this is the one page.
+
+  It is DELIBERATELY not syntax highlighted. A sheet printed in grayscale has to
+  stay readable, and colour that survives neither printing nor a screenshot is
+  decoration rather than information.
+*/
+const codeBlock = (c) => `
+  <figure class="code">
+    ${c.caption ? `<figcaption>${esc(c.caption)}</figcaption>` : ''}
+    <pre>${c.lines.map(esc).join('\n')}</pre>
+    ${c.note ? `<p class="codenote">${esc(c.note)}</p>` : ''}
+  </figure>`;
+
 const section = (s, index) => `
   <section class="sec">
     <h2><span class="num">${String(index + 3).padStart(2, '0')}</span>${esc(s.title)}</h2>
     ${(s.body ?? []).map((p) => `<p class="body">${esc(p)}</p>`).join('')}
+    ${(s.code ?? []).map(codeBlock).join('')}
     ${(s.claims ?? []).map(claim).join('')}
   </section>`;
 
@@ -202,6 +223,24 @@ export function renderHtml(sheet, {avatarDataUri = ''} = {}) {
     font-family: 'JetBrains Mono', monospace; font-size: 7.8pt;
     color: var(--ink-soft); letter-spacing: .01em;
   }
+
+  /* ---------- code ---------- */
+  /* Kept whole. A snippet split across a page boundary is a snippet nobody can
+     retype, which is the only thing it is for. */
+  .code {
+    margin: 0 0 4.5mm; page-break-inside: avoid;
+    border: 1px solid var(--hairline); border-left: 2.5px solid var(--primary);
+    border-radius: 2mm; background: #fff; padding: 4mm 5mm;
+  }
+  .code figcaption {
+    font-family: 'JetBrains Mono', monospace; font-size: 7.8pt;
+    color: var(--ink-soft); margin: 0 0 2.5mm;
+  }
+  .code pre {
+    font-family: 'JetBrains Mono', monospace; font-size: 8.4pt; line-height: 1.5;
+    margin: 0; white-space: pre-wrap; word-break: break-word; color: var(--ink);
+  }
+  .code .codenote { margin: 2.5mm 0 0; font-size: 8.6pt; color: var(--ink-soft); }
 
   /* ---------- checklist ---------- */
   .check { border: 1px solid var(--primary); border-radius: 3mm; padding: 6mm; background: #fff; page-break-inside: avoid; }

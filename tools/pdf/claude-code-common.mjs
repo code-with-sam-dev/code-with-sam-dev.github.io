@@ -58,6 +58,7 @@ export const SRC = {
   WORKFLOWS: 'Claude Code docs, Dynamic workflows, checked September 2026',
   HOOKS: 'Claude Code docs, Hooks, checked September 2026',
   BEST: 'Claude Code docs, Best practices, checked September 2026',
+  INTERACTIVE: 'Claude Code docs, Interactive mode, checked September 2026',
   SCHEDULED: 'Claude Code docs, Scheduled tasks, checked September 2026',
   ROUTINES: 'Claude Code docs, Routines, checked September 2026',
   CHROME: 'Claude Code docs, Chrome, checked September 2026',

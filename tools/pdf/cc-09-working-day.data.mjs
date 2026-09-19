@@ -95,6 +95,30 @@ export const sheet = {
       ],
     },
     {
+      id: 'go-and-look',
+      title: 'Go and look: /diff',
+      body: [
+        'Evidence works when the agent cooperates. /diff is how you check without needing it to. It shows the changes in your working tree without leaving the session: what Claude has edited so far, alongside anything else you had not committed.',
+        'In a wide enough terminal it opens as a panel beside the conversation and stays there, refreshing every time a file is edited or a command runs.',
+        'THE PART THAT CATCHES PEOPLE IS WHAT THE LIST LEAVES OUT. By default it skips test files, skips generated files, and folds every change from before this session into a single line at the bottom. All three expand with a click. The risk is not that they are hidden, it is that you did not know to look, and a review that silently omits the tests is the exact failure this sheet argues against.',
+        'Ctrl+X B cycles what the panel compares against: this session\u2019s changes, then everything you have not committed, then everything since your branch split from the default branch.',
+      ],
+      claims: [
+        {
+          text: 'Run /diff to look over the changes in your working tree without leaving Claude Code, including the edits Claude has made so far alongside anything else you have not committed.',
+          source: SRC.INTERACTIVE,
+        },
+        {
+          text: 'The diff panel list skips test files and generated files, and collapses changes from before this session into one line at the bottom; click either count line to expand it.',
+          source: SRC.INTERACTIVE,
+        },
+        {
+          text: 'The panel needs fullscreen rendering, a git repository, and a terminal at least 110 columns wide.',
+          source: SRC.INTERACTIVE,
+        },
+      ],
+    },
+    {
       id: 'when-to-plan',
       title: 'Planning has a cost, and the documentation says so',
       body: [

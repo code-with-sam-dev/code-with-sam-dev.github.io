@@ -143,6 +143,14 @@ const SHEETS = {
     data: './pdf/cc-16-two-models.data.mjs',
     out: 'public/downloads/claude-code-advanced-06-two-models.pdf',
   },
+  'sn-00-install': {
+    data: './pdf/sn-00-install.data.mjs',
+    out: 'public/downloads/spring-to-node-00-install.pdf',
+  },
+  'sn-flagship': {
+    data: './pdf/sn-flagship.data.mjs',
+    out: 'public/downloads/spring-to-nestjs-transfer.pdf',
+  },
 
   // Modern Java. Same pattern, with the perishability note the Claude Code
   // sheets carry, for the same reason: a version claim is true for months and

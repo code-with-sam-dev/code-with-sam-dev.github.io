@@ -2,7 +2,8 @@
  * Claude Code Advanced Episode 5 design sheet: handoffs.
  *
  * THE FACT CHECK THAT SAVED THE EPISODE, and it belongs on the sheet too. The
- * narration originally taught a `/rename` command. There is no such command.
+ * narration originally taught `/rename` only, and a 2026-09-16 check wrongly
+ * concluded no such command exists. It does; this sheet teaches both.
  * The commands reference documents `/clear [name]` as labelling the
  * conversation you are LEAVING, and `/resume` as the picker where that label
  * appears. Same outcome, different act, and a reader typing `/rename` would get
@@ -95,7 +96,7 @@ export const sheet = {
         '/export writes the current conversation out as plain text, and takes a filename. That is your transcript: portable, readable by any tool and any human.',
         '/memory edits your CLAUDE.md files and shows what auto memory has actually saved. Worth looking at once, because it is rarely what you assumed.',
         'AND THE ONE PEOPLE MISS: /clear takes a NAME. `/clear refund-rounding-investigation` labels the conversation you are walking away from, as you leave it. That label is what you see in /resume later.',
-        'There is no /rename command. The naming happens on the way out, not afterwards, and that distinction is the whole trick.',
+        'It pairs with /rename rather than replacing it: /rename names the session you are sitting in, /clear <name> names the one you are walking away from. Two ends of the same session.',
       ],
       claims: [
         {
@@ -107,7 +108,7 @@ export const sheet = {
           source: SRC.SESSIONS,
         },
         {
-          text: 'No /rename command exists. The commands reference documents naming at clear time only.',
+          text: '/rename names the session you are currently in, and /clear <name> names the one you are leaving. The two cover opposite ends of the same session.',
           source: SRC.SESSIONS,
         },
       ],

@@ -3,11 +3,12 @@ title: 'The Install Guide Nobody Writes: Claude Code From Nothing'
 description: 'The right command, run in the wrong shell, fails with an error that never says which shell it wanted. That plus four other things that cost people an afternoon, and the five commands that are your entire first week.'
 pubDate: 2026-09-17
 sheet: '/downloads/claude-code-00-install.pdf'
+youtube: '-JDj6Lp4Tfo'
 tags: ['claude-code', 'ai', 'interviews']
 series: 'Claude Code'
 episode: 0
 duration: '10:01'
-draft: true
+draft: false
 ---
 
 Every install guide covers the same ninety seconds: run this line, you are done.
