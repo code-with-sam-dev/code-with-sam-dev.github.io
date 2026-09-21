@@ -4,6 +4,7 @@ description: 'The right command, run in the wrong shell, fails with an error tha
 pubDate: 2026-09-17
 sheet: '/downloads/claude-code-00-install.pdf'
 youtube: '-JDj6Lp4Tfo'
+cover: '/covers/cc-install.jpg'
 tags: ['claude-code', 'ai', 'interviews']
 series: 'Claude Code'
 episode: 0

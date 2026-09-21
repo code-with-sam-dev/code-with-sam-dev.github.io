@@ -1,6 +1,7 @@
 ---
 title: 'By The Time You Need A Handoff, It Is Too Late To Make One'
 youtube: '1unhvZBzWag'
+cover: '/covers/cc-handoffs.jpg'
 description: 'The model is unavailable. Usually not an outage, usually a usage limit at four in the afternoon. Exactly two things cross a session boundary on their own, and the list is shorter than you think.'
 pubDate: 2026-09-20
 sheet: '/downloads/claude-code-advanced-05-handoffs.pdf'
