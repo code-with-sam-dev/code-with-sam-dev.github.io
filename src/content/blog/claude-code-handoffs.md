@@ -1,14 +1,14 @@
 ---
 title: 'By The Time You Need A Handoff, It Is Too Late To Make One'
-youtube: 'E7Wt3i29QtA'
+youtube: '1unhvZBzWag'
 description: 'The model is unavailable. Usually not an outage, usually a usage limit at four in the afternoon. Exactly two things cross a session boundary on their own, and the list is shorter than you think.'
-pubDate: 2026-09-17
+pubDate: 2026-09-20
 sheet: '/downloads/claude-code-advanced-05-handoffs.pdf'
 tags: ['claude-code', 'ai', 'workflow']
 series: 'Claude Code Advanced'
 episode: 5
-duration: '8:50'
-draft: true
+duration: '9:08'
+draft: false
 ---
 
 The model you depend on is unavailable. Not gone forever, just unavailable: an

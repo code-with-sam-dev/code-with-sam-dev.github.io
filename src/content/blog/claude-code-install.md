@@ -7,7 +7,7 @@ youtube: '-JDj6Lp4Tfo'
 tags: ['claude-code', 'ai', 'interviews']
 series: 'Claude Code'
 episode: 0
-duration: '10:01'
+duration: '10:02'
 draft: false
 ---
 

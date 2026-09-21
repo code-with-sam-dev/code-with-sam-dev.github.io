@@ -1,6 +1,6 @@
 ---
 title: 'Six Servers. What Did That Actually Cost You?'
-youtube: 'E7Wt3i29QtA'
+youtube: '5PPJiHW1OIo'
 cover: '/covers/cc-mcp.jpg'
 start: 589
 description: 'Most people assume the answer is context. That used to be the right worry and mostly is not any more. The thing that replaced it is more serious and gets discussed far less.'
@@ -9,7 +9,7 @@ sheet: '/downloads/claude-code-07-mcp.pdf'
 tags: ['claude-code', 'ai', 'security']
 series: 'Claude Code'
 episode: 7
-duration: '7:52'
+duration: '8:07'
 draft: false
 ---
 

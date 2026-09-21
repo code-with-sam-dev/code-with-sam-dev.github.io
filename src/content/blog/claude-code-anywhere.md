@@ -1,6 +1,6 @@
 ---
 title: 'Your Laptop Is Shut. Is It Still Running?'
-youtube: 'E7Wt3i29QtA'
+youtube: 'h0w1BpKU8jQ'
 cover: '/covers/cc-anywhere.jpg'
 start: 824
 description: 'That question has three completely different answers, and which one applies to you was decided before you left the house. All three look identical on your phone.'
@@ -9,7 +9,7 @@ sheet: '/downloads/claude-code-advanced-02-anywhere.pdf'
 tags: ['claude-code', 'ai', 'workflow']
 series: 'Claude Code Advanced'
 episode: 2
-duration: '9:15'
+duration: '9:24'
 draft: false
 ---
 

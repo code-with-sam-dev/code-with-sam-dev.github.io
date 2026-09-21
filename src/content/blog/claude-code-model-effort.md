@@ -1,6 +1,6 @@
 ---
 title: 'You Turned It Up And It Got Worse'
-youtube: 'E7Wt3i29QtA'
+youtube: 'GwKWb_p_3Tk'
 cover: '/covers/cc-model-effort.jpg'
 start: 1012
 description: 'You had a hard problem, switched to the biggest model and turned reasoning all the way up. It second-guessed itself and talked itself out of the right answer. The documentation warns about this, in one short phrase.'
@@ -9,7 +9,7 @@ sheet: '/downloads/claude-code-05-model-effort.pdf'
 tags: ['claude-code', 'ai', 'interviews']
 series: 'Claude Code'
 episode: 5
-duration: '7:04'
+duration: '7:17'
 draft: false
 ---
 

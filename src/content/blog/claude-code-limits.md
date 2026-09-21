@@ -1,6 +1,6 @@
 ---
 title: 'It Never Tried To Log In'
-youtube: 'E7Wt3i29QtA'
+youtube: 'Zy9RGEqkGkE'
 cover: '/covers/cc-limits.jpg'
 start: 1182
 description: 'You are on a train, the session is on the laptop at your desk, and it just stopped at a login page. The reason is not the one people assume, and one of these limits is not a limit at all.'
@@ -9,7 +9,7 @@ sheet: '/downloads/claude-code-advanced-03-limits.pdf'
 tags: ['claude-code', 'ai', 'security']
 series: 'Claude Code Advanced'
 episode: 3
-duration: '9:30'
+duration: '9:29'
 draft: false
 ---
 

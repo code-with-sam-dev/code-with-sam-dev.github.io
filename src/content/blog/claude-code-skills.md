@@ -1,6 +1,6 @@
 ---
 title: 'The Same Document, At Two Different Prices'
-youtube: 'E7Wt3i29QtA'
+youtube: 'ltUzs6bszb8'
 cover: '/covers/cc-skills.jpg'
 start: 909
 description: 'The same hundred page document costs you nothing in one place and every session in another. Most people put it in the expensive place, because that is the place they know about.'
@@ -9,7 +9,7 @@ sheet: '/downloads/claude-code-06-skills.pdf'
 tags: ['claude-code', 'ai', 'interviews']
 series: 'Claude Code'
 episode: 6
-duration: '7:53'
+duration: '8:17'
 draft: false
 ---
 

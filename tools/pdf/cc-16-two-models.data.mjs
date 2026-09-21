@@ -49,7 +49,7 @@ export const sheet = {
       'Benchmarks, which age badly and rarely predict your work',
       'Any claim that two models are more accurate than one. They are not',
       'Automated multi-model voting, which compounds the trap rather than fixing it',
-      'Anything about how this channel is produced, which is not the subject',
+      'Tooling comparisons and setup guides, which date faster than the argument',
     ],
     note: 'Nearly everything here is operational judgement rather than vendor documentation, and it is labelled that way throughout. A page about not laundering opinion as fact has to hold itself to that first.',
   },

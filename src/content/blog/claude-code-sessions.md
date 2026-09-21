@@ -1,6 +1,6 @@
 ---
 title: 'Resuming Yesterday Made Today Worse'
-youtube: 'E7Wt3i29QtA'
+youtube: 'ExUGD0anRdg'
 cover: '/covers/cc-sessions.jpg'
 start: 782
 description: 'It forgot a decision you were sure it knew, and re-litigated something you had settled. The obvious conclusion is that resuming is unreliable. That conclusion is wrong, and the real reason has a name.'
@@ -9,7 +9,7 @@ sheet: '/downloads/claude-code-03-sessions.pdf'
 tags: ['claude-code', 'ai', 'interviews']
 series: 'Claude Code'
 episode: 3
-duration: '7:21'
+duration: '7:36'
 draft: false
 ---
 

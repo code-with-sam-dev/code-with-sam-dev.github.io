@@ -1,6 +1,6 @@
 ---
 title: 'Something In Your Conversation Is Being Deleted'
-youtube: 'E7Wt3i29QtA'
+youtube: '0sqJFk98nf8'
 cover: '/covers/cc-context.jpg'
 start: 547
 description: 'Not by you, and not at random. There is a fixed order, and the thing that goes first is not the thing you would have picked. Here is what is in your context window, what it costs, and the four controls you actually have.'
@@ -9,7 +9,7 @@ sheet: '/downloads/claude-code-02-context.pdf'
 tags: ['claude-code', 'ai', 'interviews']
 series: 'Claude Code'
 episode: 2
-duration: '6:37'
+duration: '6:58'
 draft: false
 ---
 

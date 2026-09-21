@@ -1,6 +1,6 @@
 ---
 title: 'It Never Logged In. It Still Reached Everything.'
-youtube: 'E7Wt3i29QtA'
+youtube: 'yCteCs_EBE4'
 cover: '/covers/cc-chrome.jpg'
 start: 741
 description: 'Claude in Chrome closes the loop between writing code and watching it run, by borrowing a browser session you are already signed into. That sentence explains both its power and exactly where it stops.'
@@ -9,7 +9,7 @@ sheet: '/downloads/claude-code-advanced-01-chrome.pdf'
 tags: ['claude-code', 'ai', 'testing']
 series: 'Claude Code Advanced'
 episode: 1
-duration: '9:00'
+duration: '10:12'
 draft: false
 ---
 

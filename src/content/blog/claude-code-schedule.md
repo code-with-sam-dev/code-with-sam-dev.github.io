@@ -1,16 +1,16 @@
 ---
 title: 'You Typed /loop And Walked Away'
-youtube: 'E7Wt3i29QtA'
+youtube: 'pV4eZ6Y2jfw'
 cover: '/covers/cc-schedule.jpg'
 start: 863
 description: 'Where is that actually running, and what happens to it when you close the terminal? Three answers, and picking the wrong one is not a small mistake.'
-pubDate: 2026-09-13
+pubDate: 2026-09-20
 sheet: '/downloads/claude-code-advanced-04-schedule.pdf'
 tags: ['claude-code', 'ai', 'workflow']
 series: 'Claude Code Advanced'
 episode: 4
-duration: '9:00'
-draft: true
+duration: '9:11'
+draft: false
 ---
 
 You want something checked every five minutes. The deploy, the build, a pull
