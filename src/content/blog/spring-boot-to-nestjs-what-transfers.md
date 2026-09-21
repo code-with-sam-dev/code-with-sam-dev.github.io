@@ -1,15 +1,16 @@
 ---
 title: 'Spring Boot to NestJS: Everything That Transfers'
+youtube: '9N3f6yvxE3w'
+duration: '21:52'
 cover: '/covers/sn-flagship.jpg'
 description: 'One payment system, built twice, on one docker compose file. Most of what a Spring developer knows transfers exactly, some of it transfers with different wiring, and nine things do not transfer at all. Every number here was measured, not estimated.'
 pubDate: 2026-09-19
 sheet: '/downloads/spring-to-nestjs-transfer.pdf'
 repo: 'https://github.com/code-with-sam-dev/spring-to-node'
-video: 'https://youtu.be/2oZyt6jGLqk'
+video: 'https://youtu.be/9N3f6yvxE3w'
 tags: ['nestjs', 'typescript', 'nodejs', 'spring-boot', 'java', 'postgresql']
 series: 'Spring Boot to NestJS'
 episode: 0
-duration: '21:52'
 draft: false
 ---
 

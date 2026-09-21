@@ -69,3 +69,52 @@ test('a declared youtube id is eleven url-safe characters', () => {
   }
   assert.deepEqual(wrong, [], `malformed youtube ids: ${wrong.join(', ')}`);
 });
+
+/*
+  CHECKING THE ID'S SHAPE WAS NOT ENOUGH, BECAUSE A MISSING ID HAS NO SHAPE.
+
+  The flagship article sat published with no `youtube` at all, so the template
+  took its other branch and told every reader "The episode is being published to
+  the channel. Subscribe and it will find you." The episode had been public at
+  9N3f6yvxE3w since 2026-09-19. The page was not broken, it was confidently
+  wrong, which is worse and which no build step can notice.
+
+  A published SERIES article is an episode's companion piece. If the episode is
+  not out yet the article should be a draft; if it is out the article must link
+  it. There is no third state worth shipping.
+*/
+test('every published series article links its episode', () => {
+  const orphans = articles
+    .map((f) => [f, frontmatter(f)])
+    .filter(([, fm]) => !isDraft(fm) && field(fm, 'series') && !field(fm, 'youtube'))
+    .map(([f]) => f);
+  assert.deepEqual(orphans, [],
+    `published series articles with no video: ${orphans.join(', ')}`);
+});
+
+/*
+  AND NO ARTICLE MAY POINT AT A VIDEO THAT WAS RETIRED.
+
+  The same flagship carried `video: https://youtu.be/2oZyt6jGLqk`, one of its own
+  superseded private cuts. A replacement gets a NEW id and orphans every link to
+  the old one; the standing rule lists end screens and Shorts, and the site is
+  just as exposed. A private video shows a reader an error page.
+*/
+const RETIRED = {
+  W1EFA5JrnxA: 'superseded Spring to Node flagship cut',
+  '2oZyt6jGLqk': 'superseded Spring to Node flagship cut',
+  XG7S6aVTFyk: 'superseded cc-04',
+  MJScMpusWFY: 'superseded cc-07',
+  SA3t4wqo23Q: 'superseded cc-06',
+  '5XgNZt0S-o8': 'superseded cc-16, deleted',
+};
+test('no article references a retired video id', () => {
+  const hits = [];
+  for (const f of articles) {
+    const text = readFileSync(`${DIR}/${f}`, 'utf8');
+    for (const [id, why] of Object.entries(RETIRED)) {
+      if (text.includes(id)) hits.push(`${f}: ${id} (${why})`);
+    }
+  }
+  assert.deepEqual(hits, [], `retired video ids referenced: ${hits.join(', ')}`);
+});
