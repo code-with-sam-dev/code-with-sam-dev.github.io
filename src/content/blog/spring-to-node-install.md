@@ -1,14 +1,15 @@
 ---
 title: 'Java to TypeScript: The Setup Nobody Shows You'
+youtube: 'HSwgZpnGPWw'
 cover: '/covers/sn-install.jpg'
 description: 'Every TypeScript tutorial starts at minute three, on a machine that already has everything installed. This is the part before that, run on a real machine, for Spring Boot developers who have never touched the Node ecosystem.'
-pubDate: 2026-09-19
+pubDate: 2026-09-21
 sheet: '/downloads/spring-to-node-00-install.pdf'
 tags: ['typescript', 'nodejs', 'nestjs', 'java', 'spring-boot']
 series: 'Spring Boot to NestJS'
 episode: 1
 duration: '16:07'
-draft: true
+draft: false
 ---
 
 Every TypeScript tutorial starts at minute three. A framework is already
