@@ -1,5 +1,8 @@
 ---
 title: 'What Do You Do While the AI Writes the Code?'
+youtube: 'EHkYB8duwdE'
+cover: '/covers/while-ai.jpg'
+duration: '11:13'
 description: 'Four jobs are left, and one of them makes the other three theatre if you skip it. With three studies read at the source, and a number that did not survive checking.'
 pubDate: 2026-09-15
 tags: ['ai', 'engineering', 'code-review', 'testing', 'interviews']
