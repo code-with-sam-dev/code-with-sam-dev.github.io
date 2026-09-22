@@ -199,6 +199,22 @@ hr {
 
 /* ---------- article list ---------- */
 
+/* THE HIDDEN ATTRIBUTE HAS TO WIN, EVERYWHERE.
+   Hiding an element in JavaScript with `el.hidden = true` leans on the user
+   agent's `[hidden] { display: none }`, which is the weakest rule in the
+   cascade. Any class rule that sets display, such as `.post-list li`, beats it,
+   and the element stays on screen with the attribute sitting on it doing
+   nothing.
+   That shipped: the search counted "19 of 39 articles" correctly and then
+   displayed all thirty nine, so an article with no match sat at the top of the
+   results. The matcher was never wrong. Only the step between the answer and
+   the screen was.
+   This is deliberately global rather than a rule per list. SearchFilters.astro
+   already had a scoped `.finder [hidden]` guard, which means the trap was known
+   and then walked into again one level up, because the results list is a
+   sibling of .finder and the scoped guard never reached it. */
+[hidden] { display: none !important; }
+
 .post-list {
   list-style: none;
   padding: 0;
