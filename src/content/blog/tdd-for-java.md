@@ -2,9 +2,9 @@
 title: 'TDD for Java: The Step Everyone Skips'
 description: 'A test that has never failed has never proved anything. The cycle on a real refund rule, the evidence with both halves attached, and the objection a sceptic raises at minute three answered honestly.'
 pubDate: 2026-09-15
-youtube: '15MwUsnD8dM'
+youtube: 'wQsdpSBQp5E'
 cover: '/covers/tdd-for-java.jpg'
-duration: '13:11'
+duration: '11:49'
 sheet: '/downloads/tdd-for-java-design-sheet.pdf'
 tags: ['java', 'tdd', 'testing', 'junit', 'interviews']
 draft: false

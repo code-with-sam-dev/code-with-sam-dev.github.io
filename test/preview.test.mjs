@@ -107,6 +107,16 @@ const RETIRED = {
   MJScMpusWFY: 'superseded cc-07',
   SA3t4wqo23Q: 'superseded cc-06',
   '5XgNZt0S-o8': 'superseded cc-16, deleted',
+  /*
+    Added 2026-09-22 after an audit of all 40 published episodes against their
+    articles. Both of these were sitting in PUBLISHED.tsv as the live id while
+    the real video was somewhere else, and both return 404 on their thumbnail.
+    The TDD one had a live consequence: tdd-for-java.md embedded 15MwUsnD8dM,
+    the ASSERTIONS episode, so a reader who clicked play on the TDD article got
+    a different video entirely.
+  */
+  DMZLmcnmmJU: 'superseded TDD for Java, private since 2026-09-15',
+  Vd8mJZRDNdM: 'superseded Codex flagship, dead',
 };
 test('no article references a retired video id', () => {
   const hits = [];
