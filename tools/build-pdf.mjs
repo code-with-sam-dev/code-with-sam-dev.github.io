@@ -151,6 +151,10 @@ const SHEETS = {
     data: './pdf/sn-01-typescript.data.mjs',
     out: 'public/downloads/spring-to-node-01-typescript.pdf',
   },
+  'sn-02-controllers': {
+    data: './pdf/sn-02-controllers.data.mjs',
+    out: 'public/downloads/spring-to-node-02-controllers.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
