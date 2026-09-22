@@ -1,6 +1,6 @@
 ---
 title: 'Spring to NestJS Controllers: Two Silent Bugs'
-youtube: ''
+youtube: 'CvlMM40YLvQ'
 cover: '/covers/sn-controllers.jpg'
 description: 'You port a Spring controller to NestJS line by line. It compiles, the application starts, the smoke test passes, and two things are already wrong. Nobody typed either of them.'
 pubDate: 2026-09-22
@@ -10,7 +10,7 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot']
 series: 'Spring Boot to NestJS'
 episode: 3
 duration: '9:02'
-draft: true
+draft: false
 ---
 
 A faithful port is the dangerous kind. You go annotation by annotation, the
