@@ -1,12 +1,11 @@
 /**
  * Support and sponsorship configuration.
  *
- * `DONATION_METHODS` is deliberately empty. Zimbabwe is not a supported
- * merchant country for Stripe, which rules out GitHub Sponsors and the Stripe
- * path on Ko-fi and Buy Me a Coffee, so no rail has been confirmed yet. The
- * support page renders the free ways to help regardless, and the money section
- * only appears once a real, tested link is added here. A dead donate button is
- * worse than none: it costs trust from exactly the people who wanted to give.
+ * `DONATION_METHODS` stayed empty until 2026-09-23 because Stripe does not
+ * support Zimbabwe as a merchant country, which ruled out the Stripe payout
+ * routes. The Buy Me a Coffee account Sam opened that day is set up in South
+ * Africa, which settles it. A dead donate button is worse than none, which is
+ * why the list only ever holds links that are live and paying out.
  *
  * To switch it on, add one entry and nothing else has to change.
  */
@@ -15,9 +14,29 @@ export type DonationMethod = {
   url: string;
   /** One line on what the viewer is actually doing by clicking. */
   note: string;
+  /** Which picture sits on the button. */
+  icon: 'coffee' | 'sadza';
 };
 
-export const DONATION_METHODS: DonationMethod[] = [];
+/*
+ * OPENED 2026-09-23. Sam set up https://buymeacoffee.com/codewithsam and asked
+ * for it big and first on the support page, coffee above sadza. Both go to the
+ * same page: two ways to say thanks, one account.
+ */
+export const DONATION_METHODS: DonationMethod[] = [
+  {
+    name: 'Buy me a coffee',
+    url: 'https://buymeacoffee.com/codewithsam',
+    note: 'Support Code with Sam',
+    icon: 'coffee',
+  },
+  {
+    name: 'Buy me sadza',
+    url: 'https://buymeacoffee.com/codewithsam',
+    note: 'Support Code with Sam',
+    icon: 'sadza',
+  },
+];
 
 /*
  * `CONTACT_EMAIL` used to live here and was rendered into two pages as a

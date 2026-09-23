@@ -13,6 +13,33 @@ const GITHUB = 'https://github.com/code-with-sam-dev';
   description="Ways to support Code with Sam, most of which cost nothing."
 >
   <h1>Support the channel</h1>
+
+  {
+    DONATION_METHODS.length > 0 && (
+      <section class="hero" aria-label="Support Code with Sam">
+        <p class="hero-kicker">☕ Support Code with Sam</p>
+        <div class="hero-buttons">
+          {DONATION_METHODS.map((m) => (
+            <a class={`give give-${m.icon}`} href={m.url} rel="noopener" target="_blank">
+              {m.icon === 'sadza' ? (
+                <img src="/support/sadza-96.png" width="44" height="44" alt="" aria-hidden="true" />
+              ) : (
+                <span class="cup" aria-hidden="true">☕</span>
+              )}
+              <span class="give-text">
+                <span class="give-name">{m.name}</span>
+                <span class="give-note">{m.note}</span>
+              </span>
+            </a>
+          ))}
+        </div>
+        <p class="hero-small">
+          Entirely optional, and nothing on this site is ever locked behind it.
+        </p>
+      </section>
+    )
+  }
+
   <p class="lede">
     Every episode takes real work to research, verify and put together: the
     explanation has to be correct, the code has to actually run, and the whole
@@ -70,36 +97,10 @@ const GITHUB = 'https://github.com/code-with-sam-dev';
     </li>
   </ul>
 
-  {
-    DONATION_METHODS.length > 0 ? (
-      <>
-        <h2>Contribute directly</h2>
-        <p>
-          Entirely optional, and nothing on this site is ever locked behind it.
-        </p>
-        <div class="cards">
-          {DONATION_METHODS.map((m) => (
-            <a class="card" href={m.url} rel="noopener">
-              <h3>{m.name}</h3>
-              <p>{m.note}</p>
-            </a>
-          ))}
-        </div>
-      </>
-    ) : (
-      <>
-        <h2>Contributing directly</h2>
-        <p>
-          Not open yet. When it is, it will be here. In the meantime the four
-          things above help more anyway.
-        </p>
-        <p>
-          If you represent a company and want to talk about sponsorship, that
-          has <a href={`${base}/sponsor`}>its own page</a>.
-        </p>
-      </>
-    )
-  }
+  <p>
+    If you represent a company and want to talk about sponsorship, that has
+    <a href={`${base}/sponsor`}>its own page</a>.
+  </p>
 
   <h2>Work with me</h2>
   <p>
@@ -110,3 +111,66 @@ const GITHUB = 'https://github.com/code-with-sam-dev';
 
   <Signup compact />
 </Base>
+
+<style>
+  .hero {
+    margin: 1.25rem 0 2rem;
+    padding: 1.5rem;
+    border: 2px solid var(--primary, #7c5cff);
+    border-radius: 18px;
+  }
+  .hero-kicker {
+    margin: 0 0 1rem;
+    font-weight: 700;
+    font-size: 1.15rem;
+  }
+  .hero-buttons {
+    display: grid;
+    gap: 0.9rem;
+    max-width: 28rem;
+  }
+  .give {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1rem 1.25rem;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 120ms ease;
+  }
+  .give:hover {
+    transform: translateY(-1px);
+  }
+  .give-coffee {
+    background: #ffdd00;
+    color: #111111;
+  }
+  .give-sadza {
+    background: var(--primary, #7c5cff);
+    color: #ffffff;
+  }
+  .cup {
+    font-size: 2.1rem;
+    line-height: 1;
+    width: 44px;
+    text-align: center;
+  }
+  .give-text {
+    display: grid;
+    gap: 0.1rem;
+  }
+  .give-name {
+    font-size: 1.35rem;
+  }
+  .give-note {
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.85;
+  }
+  .hero-small {
+    margin: 1rem 0 0;
+    font-size: 0.9rem;
+    opacity: 0.75;
+  }
+</style>
