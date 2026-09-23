@@ -1,5 +1,6 @@
 ---
 title: 'Spring to NestJS Modules: Registered Is Not Visible'
+youtube: 'WNAgcT3acsw'
 cover: '/covers/sn-modules.jpg'
 description: 'A service that exists, that Nest built, and that the module next door still cannot inject. Nothing is misspelled. The provider is private to its module.'
 pubDate: 2026-09-23
@@ -9,7 +10,7 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot']
 series: 'Spring Boot to NestJS'
 episode: 4
 duration: '6:02'
-draft: true
+draft: false
 ---
 
 In a typical Spring Boot application with one application context, a component
