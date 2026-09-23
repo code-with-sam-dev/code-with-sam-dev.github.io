@@ -83,7 +83,7 @@ export const SOCIALS: readonly SocialLink[] = [
     // support page: it is a second way to say thanks, not a second account.
     label: 'Buy me sadza',
     url: 'https://buymeacoffee.com/codewithsam',
-    note: 'Support Code with Sam, the Zimbabwean way',
+    note: 'Support Code with Sam',
     icon: 'sadza',
     support: true,
   },
