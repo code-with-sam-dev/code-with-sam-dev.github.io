@@ -18,5 +18,5 @@ export const CHANNEL_LINKS = [
   // Support, coffee above sadza, per Sam 2026-09-23. One page, two ways to
   // say thanks. Last, because a support link is an offer, never the headline.
   {label: '☕ Buy me a coffee', url: 'https://buymeacoffee.com/codewithsam'},
-  {label: 'Buy me sadza', url: 'https://buymeacoffee.com/codewithsam'},
+  {label: 'Buy me sadza', url: 'https://buymesadza.com/codewithsam'},
 ];

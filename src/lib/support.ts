@@ -21,7 +21,8 @@ export type DonationMethod = {
 /*
  * OPENED 2026-09-23. Sam set up https://buymeacoffee.com/codewithsam and asked
  * for it big and first on the support page, coffee above sadza. Both go to the
- * same page: two ways to say thanks, one account.
+ * own page: coffee on Buy Me a Coffee, sadza on Buy Me Sadza, which pays out in
+ * Zimbabwe (https://buymesadza.com/codewithsam, live 2026-09-23).
  */
 export const DONATION_METHODS: DonationMethod[] = [
   {
@@ -32,7 +33,7 @@ export const DONATION_METHODS: DonationMethod[] = [
   },
   {
     name: 'Buy me sadza',
-    url: 'https://buymeacoffee.com/codewithsam',
+    url: 'https://buymesadza.com/codewithsam',
     note: 'Support Code with Sam',
     icon: 'sadza',
   },

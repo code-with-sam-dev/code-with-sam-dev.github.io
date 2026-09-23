@@ -279,7 +279,7 @@ export const sheet = {
       url: 'https://github.com/code-with-sam-dev/kafka-payments/tree/main/episode-03-rebalancing',
     },
     {label: '☕ Buy me a coffee', url: 'https://buymeacoffee.com/codewithsam'},
-    {label: 'Buy me sadza', url: 'https://buymeacoffee.com/codewithsam'},
+    {label: 'Buy me sadza', url: 'https://buymesadza.com/codewithsam'},
   ],
 
   trademarks:

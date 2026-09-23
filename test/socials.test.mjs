@@ -68,3 +68,8 @@ test('the support cards are their own stacked section, not tiles in the grid', (
   assert.match(links, /ul\.support\s*\{\s*grid-template-columns:\s*minmax\(0, 22rem\)/);
   assert.equal((socials.match(/support: true/g) ?? []).length, 2);
 });
+
+test('sadza goes to Buy Me Sadza, not to the coffee page', () => {
+  const sadza = socials.slice(socials.indexOf("label: 'Buy me sadza'"));
+  assert.match(sadza.slice(0, 200), /https:\/\/buymesadza\.com\/codewithsam/);
+});

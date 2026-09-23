@@ -79,10 +79,10 @@ export const SOCIALS: readonly SocialLink[] = [
     support: true,
   },
   {
-    // Sam's own sadza, directly under the coffee, per his instruction. The same
-    // support page: it is a second way to say thanks, not a second account.
+    // Sam's own sadza, directly under the coffee, per his instruction. Its own
+    // platform, Buy Me Sadza, which pays out in Zimbabwe.
     label: 'Buy me sadza',
-    url: 'https://buymeacoffee.com/codewithsam',
+    url: 'https://buymesadza.com/codewithsam',
     note: 'Support Code with Sam',
     icon: 'sadza',
     support: true,

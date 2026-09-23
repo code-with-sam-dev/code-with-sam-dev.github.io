@@ -71,13 +71,65 @@ export const sheet = {
       ['Node LTS', '24.21.0 (tutorials often say 18 or 20)'],
       ['npm', '11.19.0, ships with that Node'],
       ['TypeScript', '7.0.2 (most material assumes 5.x)'],
-      ['Java', '21 LTS'],
+      ['Java', '25 LTS, pinned in pom.xml'],
       ['Spring Boot', '4.1.1 (Initializr REFUSES 3.5.6)'],
       ['Everything else', 'check it on the day you start'],
     ],
   },
 
   sections: [
+    {
+      /*
+        THE WHOLE INSTALL, FIRST. Sam, 2026-09-23: the sheet explained every
+        step and printed none of the commands, on the one episode whose content
+        IS the commands. Every line below is copied from the course README or
+        VERIFIED-INSTALL-LOG.md, both of which record what was actually run.
+      */
+      id: 'the-sequence',
+      title: 'The whole install, in the order it was run',
+      body: [
+        'Verified on macOS on 18 September 2026. On Linux the sequence is identical once nvm is installed from its own install script. On Windows use nvm-windows, or WSL2 and the Linux path.',
+      ],
+      code: [
+        {
+          caption: 'the Node path, ending at a verified endpoint',
+          lines: [
+            'git clone https://github.com/code-with-sam-dev/spring-to-node',
+            'cd spring-to-node',
+            'nvm install && nvm use                       # reads .nvmrc -> 24.21.0',
+            'node --version && npm --version              # v24.21.0, 11.19.0',
+            'cd nestjs-api',
+            'npm install                                  # reads package-lock.json',
+            'npm test',
+            'npm run build                                # TypeScript -> dist/',
+            'ls dist                                      # the JavaScript Node runs',
+            'npm run start:dev',
+            'curl -i http://localhost:3000/health         # HTTP/1.1 200 {"status":"UP"}',
+          ],
+        },
+        {
+          caption: 'the Spring Boot path, same repository',
+          lines: [
+            'cd spring-boot-api',
+            './mvnw test',
+            './mvnw spring-boot:run',
+            'curl -i http://localhost:8080/health         # HTTP/1.1 200 {"status":"UP"}',
+          ],
+          note: 'Java 25 is pinned in pom.xml. An older JAVA_HOME fails with "release version 25 not supported".',
+        },
+        {
+          caption: 'or both at once, with Docker',
+          lines: [
+            'docker compose up --build',
+            'curl -i http://localhost:8080/health',
+            'curl -i http://localhost:3000/health',
+          ],
+        },
+      ],
+      claims: [
+        {text: 'Both applications answered GET /health with HTTP 200 and {"status":"UP"} on the verification run.', source: SRC.RUN},
+      ],
+    },
     {
       id: 'layers',
       title: 'Four separate things, and people conflate them',
@@ -99,6 +151,22 @@ export const sheet = {
         'Install through a version manager rather than a system installer, because one project will eventually need a different version from another. If SDKMAN is your instinct from Java, that instinct is right even though the tools are not equivalent.',
         'Write both numbers in your README, and commit a version file so the repository helps the next person onto the right one.',
       ],
+      code: [
+        {
+          caption: 'is Node there, and which one',
+          lines: ['node --version', 'npm --version'],
+        },
+        {
+          caption: 'install it through a version manager',
+          lines: [
+            'nvm install 24',
+            'Downloading and installing node v24.21.0...',
+            'Checksums matched!',
+            'Now using node v24.21.0 (npm v11.19.0)',
+          ],
+          note: 'nvm itself comes from its own install script: https://github.com/nvm-sh/nvm',
+        },
+      ],
       claims: [
         {text: 'Node 24.21.0 was the current LTS, and 26.9.0 the current release, on 19 September 2026.', source: SRC.NODE},
         {text: 'nvm install 24 reported: Now using node v24.21.0 (npm v11.19.0).', source: SRC.RUN},
@@ -111,6 +179,39 @@ export const sheet = {
         'Write a file with a Payment type: an id, an amount that is a number, a currency. Compile it. Open the JavaScript that came out.',
         'The type is gone. Not renamed, not compiled into a class, not stored elsewhere. There is no Payment type in that file, because there is no such thing at runtime.',
         'Then break it on purpose. Put a string where the number belongs and the compiler stops you with TS2322. Fix it, compile again, and the generated JavaScript is identical to before. The types worked, and then they vanished.',
+      ],
+      code: [
+        {
+          caption: 'TypeScript into the project, never onto the machine',
+          lines: [
+            'npm init -y',
+            'npm install --save-dev typescript',
+            'npx tsc --version                            # Version 7.0.2',
+            'npx tsc --init',
+            'npx tsc',
+            'ls dist                                      # index.js  index.js.map',
+          ],
+        },
+        {
+          caption: 'dist/index.js: the type is gone',
+          lines: [
+            '"use strict";',
+            'Object.defineProperty(exports, "__esModule", { value: true });',
+            'const payment = {',
+            "    id: 'pay_001',",
+            '    amount: 100,',
+            "    currency: 'USD',",
+            '};',
+            'console.log(`Payment ${payment.id} for ${payment.amount} ${payment.currency}`);',
+          ],
+        },
+        {
+          caption: 'break it on purpose: a string where a number belongs',
+          lines: [
+            'npx tsc',
+            "src/index.ts(9,3): error TS2322: Type 'string' is not assignable to type 'number'.",
+          ],
+        },
       ],
       claims: [
         {text: 'After compiling, dist/index.js contains the object literal and the log line, and no trace of the declared type.', source: SRC.RUN},
@@ -126,6 +227,19 @@ export const sheet = {
         'Run tsc --init and the generated config sets no root directory and no output directory. The compiler has no idea where to put anything until you say.',
         'Generate a fresh NestJS project and it writes a vitest config and an oxlint config, not jest and eslint. Tutorials describing jest.config are not wrong, they are old.',
         'Ask Spring Initializr for Boot 3.5.6 and it refuses outright: the compatibility range is 4.0.0 and above.',
+      ],
+      code: [
+        {
+          caption: 'generate the NestJS project, and read what it wrote',
+          lines: [
+            'npx @nestjs/cli new nestjs-api',
+            'CREATE nestjs-api/.oxlintrc.json (206 bytes)',
+            'CREATE nestjs-api/vitest.config.ts (350 bytes)',
+            'CREATE nestjs-api/vitest.config.e2e.ts (245 bytes)',
+            'CREATE nestjs-api/src/main.ts (237 bytes)',
+            'CREATE nestjs-api/src/app.module.ts (255 bytes)',
+          ],
+        },
       ],
       claims: [
         {text: 'npm init -y in node-basics produced "name": "basics".', source: SRC.RUN},
