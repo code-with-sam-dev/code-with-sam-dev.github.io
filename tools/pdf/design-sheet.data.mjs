@@ -306,6 +306,8 @@ export const sheet = {
     {label: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61594191065024'},
     {label: 'GitHub', url: 'https://github.com/code-with-sam-dev'},
     {label: 'Contact', url: 'https://code-with-sam-dev.github.io/contact'},
+    {label: '☕ Buy me a coffee', url: 'https://buymeacoffee.com/codewithsam'},
+    {label: 'Buy me sadza', url: 'https://buymeacoffee.com/codewithsam'},
   ],
 
   trademarks:

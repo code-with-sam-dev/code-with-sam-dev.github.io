@@ -27,25 +27,33 @@ export interface SocialLink {
   readonly url: string;
   /** Shown under the label. Says what the account is actually for. */
   readonly note: string;
+  /** The glyph drawn beside it, see SocialIcon.astro. */
+  readonly icon: 'youtube' | 'linkedin' | 'x' | 'tiktok' | 'instagram' | 'facebook' | 'github' | 'coffee' | 'sadza';
+  /** A way to support the channel rather than an account to follow. Drawn in
+   *  its own stacked section, coffee above sadza, per Sam. */
+  readonly support?: boolean;
 }
 
 export const SOCIALS: readonly SocialLink[] = [
-  {label: 'YouTube', url: CHANNEL_URL, note: 'Every episode, long form'},
+  {label: 'YouTube', url: CHANNEL_URL, note: 'Every episode, long form', icon: 'youtube'},
   {
     label: 'LinkedIn',
     url: 'https://www.linkedin.com/company/code-with-sam-dev',
     note: 'Write-ups and working notes',
+    icon: 'linkedin',
   },
-  {label: 'X', url: 'https://x.com/CodeWithSamDev', note: 'Threads and links'},
+  {label: 'X', url: 'https://x.com/CodeWithSamDev', note: 'Threads and links', icon: 'x'},
   {
     label: 'TikTok',
     url: 'https://www.tiktok.com/@codewithsamdev',
     note: 'Shorts',
+    icon: 'tiktok',
   },
   {
     label: 'Instagram',
     url: 'https://www.instagram.com/codewithsamdev',
     note: 'Reels',
+    icon: 'instagram',
   },
   {
     // Claimed username rather than the profile.php id, so it can be spoken
@@ -53,10 +61,30 @@ export const SOCIALS: readonly SocialLink[] = [
     label: 'Facebook',
     url: 'https://www.facebook.com/codewithsamdev',
     note: 'Reels',
+    icon: 'facebook',
   },
   {
     label: 'GitHub',
     url: 'https://github.com/code-with-sam-dev',
     note: 'The code for every episode',
+    icon: 'github',
+  },
+  {
+    // Opened 2026-09-23. Listed last and plainly: a support link is an offer,
+    // never an ask, and it sits in the same register as the subscribe line.
+    label: 'Buy me a coffee',
+    url: 'https://buymeacoffee.com/codewithsam',
+    note: 'Support Code with Sam',
+    icon: 'coffee',
+    support: true,
+  },
+  {
+    // Sam's own sadza, directly under the coffee, per his instruction. The same
+    // support page: it is a second way to say thanks, not a second account.
+    label: 'Buy me sadza',
+    url: 'https://buymeacoffee.com/codewithsam',
+    note: 'Support Code with Sam, the Zimbabwean way',
+    icon: 'sadza',
+    support: true,
   },
 ] as const;

@@ -8,28 +8,54 @@
  * complete list and everything else can point here.
  */
 import {SOCIALS} from '../lib/channel';
+import SocialIcon from './SocialIcon.astro';
 
 interface Props {
   /** A heading is right in a footer, wrong when the page already has one. */
   heading?: string;
 }
 const {heading} = Astro.props;
+const platforms = SOCIALS.filter((s) => !s.support);
+const support = SOCIALS.filter((s) => s.support);
 ---
 
 <nav class="socials" aria-label="Code with Sam elsewhere">
   {heading && <h2>{heading}</h2>}
   <ul>
     {
-      SOCIALS.map((s) => (
+      platforms.map((s) => (
         <li>
           <a href={s.url} rel="me noopener" target="_blank">
-            <span class="label">{s.label}</span>
-            <span class="note">{s.note}</span>
+            <SocialIcon name={s.icon} />
+            <span class="text">
+              <span class="label">{s.label}</span>
+              <span class="note">{s.note}</span>
+            </span>
           </a>
         </li>
       ))
     }
   </ul>
+  {
+    support.length > 0 && (
+      <>
+        <h2 class="support-heading">☕ Support Code with Sam</h2>
+        <ul class="support">
+          {support.map((s) => (
+            <li>
+              <a href={s.url} rel="noopener" target="_blank">
+                <SocialIcon name={s.icon} />
+                <span class="text">
+                  <span class="label">{s.label}</span>
+                  <span class="note">{s.note}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
 </nav>
 
 <style>
@@ -45,9 +71,16 @@ const {heading} = Astro.props;
     gap: 0.5rem;
     grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
   }
+  .support-heading {
+    margin-top: 1.25rem !important;
+  }
+  .socials ul.support {
+    grid-template-columns: minmax(0, 22rem);
+  }
   .socials a {
-    display: grid;
-    gap: 0.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
     padding: 0.6rem 0.75rem;
     border: 2px solid var(--hairline, #d8d8d2);
     border-radius: 10px;
@@ -56,6 +89,10 @@ const {heading} = Astro.props;
   }
   .socials a:hover {
     border-color: var(--primary, #5b3ce0);
+  }
+  .text {
+    display: grid;
+    gap: 0.1rem;
   }
   .label {
     font-weight: 600;

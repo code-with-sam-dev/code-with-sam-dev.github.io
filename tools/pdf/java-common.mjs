@@ -9,15 +9,7 @@
  * one field a reader actually clicks, so a missing value has to be obvious.
  */
 
-export const CHANNEL_LINKS = [
-  {label: 'Site', url: 'https://code-with-sam-dev.github.io'},
-  {label: 'YouTube', url: 'https://www.youtube.com/@CodewithSam-Dev'},
-  {label: 'LinkedIn', url: 'https://www.linkedin.com/company/code-with-sam-dev'},
-  {label: 'X', url: 'https://x.com/CodeWithSamDev'},
-  {label: 'TikTok', url: 'https://www.tiktok.com/@codewithsamdev'},
-  {label: 'Instagram', url: 'https://www.instagram.com/codewithsamdev'},
-  {label: 'GitHub', url: 'https://github.com/code-with-sam-dev'},
-];
+export {CHANNEL_LINKS} from './channel-links.mjs';
 
 /**
  * Companion repositories that ACTUALLY EXIST on GitHub today.
