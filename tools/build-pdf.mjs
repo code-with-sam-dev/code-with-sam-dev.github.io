@@ -167,6 +167,14 @@ const SHEETS = {
     data: './pdf/fq-flagship.data.mjs',
     out: 'public/downloads/spring-to-quarkus-build-time.pdf',
   },
+  'fd-flagship': {
+    data: './pdf/fd-flagship.data.mjs',
+    out: 'public/downloads/spring-to-dotnet-di-validation.pdf',
+  },
+  'fm-flagship': {
+    data: './pdf/fm-flagship.data.mjs',
+    out: 'public/downloads/spring-to-micronaut-compile-time.pdf',
+  },
 
   // Modern Java. Same pattern, with the perishability note the Claude Code
   // sheets carry, for the same reason: a version claim is true for months and
