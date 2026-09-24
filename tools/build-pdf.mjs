@@ -163,6 +163,10 @@ const SHEETS = {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
   },
+  'fq-flagship': {
+    data: './pdf/fq-flagship.data.mjs',
+    out: 'public/downloads/spring-to-quarkus-build-time.pdf',
+  },
 
   // Modern Java. Same pattern, with the perishability note the Claude Code
   // sheets carry, for the same reason: a version claim is true for months and
