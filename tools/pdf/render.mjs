@@ -91,9 +91,11 @@ const linkIcon = (label) => {
   return g ? `<svg class="li-icon" viewBox="0 0 24 24" aria-hidden="true">${g}</svg>` : '<span class="li-icon"></span>';
 };
 
-const section = (s, index) => `
+// The first section number follows whatever came before it: 01 the board and
+// 02 the scale when there is a board, 01 the scale alone when there is not.
+const section = (first) => (s, index) => `
   <section class="sec">
-    <h2><span class="num">${String(index + 3).padStart(2, '0')}</span>${esc(s.title)}</h2>
+    <h2><span class="num">${String(index + first).padStart(2, '0')}</span>${esc(s.title)}</h2>
     ${(s.body ?? []).map((p) => `<p class="body">${esc(p)}</p>`).join('')}
     ${(s.code ?? []).map(codeBlock).join('')}
     ${(s.claims ?? []).map(claim).join('')}
@@ -366,7 +368,7 @@ export function renderHtml(sheet, {avatarDataUri = ''} = {}) {
   <p class="assume">${esc(sheet.scale.note)}</p>
 </div>
 
-${sheet.sections.map(section).join('')}
+${sheet.sections.map(section(sheet.board ? 3 : 2)).join('')}
 
 <div class="check">
   <h2>${esc(sheet.checklist.title)}</h2>
