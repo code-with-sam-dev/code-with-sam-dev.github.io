@@ -179,6 +179,10 @@ const SHEETS = {
     data: './pdf/fk-flagship.data.mjs',
     out: 'public/downloads/graphql-federation-kafka.pdf',
   },
+  'gq-flagship': {
+    data: './pdf/gq-flagship.data.mjs',
+    out: 'public/downloads/graphql-spring-boot.pdf',
+  },
 
   // Modern Java. Same pattern, with the perishability note the Claude Code
   // sheets carry, for the same reason: a version claim is true for months and
