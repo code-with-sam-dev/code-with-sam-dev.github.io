@@ -1,11 +1,15 @@
 ---
 title: 'GraphQL Federation and Kafka, with Spring Boot and Micronaut'
+youtube: 'oyaep6Gri78'
+duration: '29:09'
+cover: '/covers/fk-flagship.jpg'
 description: 'One checkout split the way real teams split it: orders in Spring Boot, payments in Micronaut, composed by the Apollo Router, with Kafka between them. Every failure a senior interviewer asks about, built and measured.'
 pubDate: 2026-09-25
 sheet: '/downloads/graphql-federation-kafka.pdf'
 repo: 'https://github.com/code-with-sam-dev/spring-micronaut-federation'
+video: 'https://youtu.be/oyaep6Gri78'
 tags: ['graphql', 'federation', 'kafka', 'micronaut', 'spring-boot', 'java', 'outbox']
-draft: true
+draft: false
 ---
 
 Kafka was down. I placed an order anyway. One version of this checkout made the
