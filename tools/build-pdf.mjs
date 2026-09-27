@@ -187,6 +187,10 @@ const SHEETS = {
     data: './pdf/go-flagship.data.mjs',
     out: 'public/downloads/spring-boot-to-go.pdf',
   },
+  'opus-test': {
+    data: './pdf/opus-test.data.mjs',
+    out: 'public/downloads/opus-5-5-tested.pdf',
+  },
 
   // Modern Java. Same pattern, with the perishability note the Claude Code
   // sheets carry, for the same reason: a version claim is true for months and
