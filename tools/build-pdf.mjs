@@ -183,6 +183,10 @@ const SHEETS = {
     data: './pdf/gq-flagship.data.mjs',
     out: 'public/downloads/graphql-spring-boot.pdf',
   },
+  'go-flagship': {
+    data: './pdf/go-flagship.data.mjs',
+    out: 'public/downloads/spring-boot-to-go.pdf',
+  },
 
   // Modern Java. Same pattern, with the perishability note the Claude Code
   // sheets carry, for the same reason: a version claim is true for months and
