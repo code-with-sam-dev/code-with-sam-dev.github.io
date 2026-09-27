@@ -1,12 +1,15 @@
 ---
 title: 'Opus 5.5, Tested in Claude Code: 27 Real Runs'
+youtube: 'ut6PSjCW6GQ'
+duration: '7:17'
 cover: '/covers/opus-test.jpg'
 description: 'Anthropic says Opus 5.5 is over 30% faster, 40% cheaper and Fable level. Three real coding jobs, hidden tests and every run kept: the raw speed gain was modest, the big difference appeared once the model became an agent.'
 pubDate: 2026-09-27
 sheet: '/downloads/opus-5-5-tested.pdf'
 repo: 'https://github.com/code-with-sam-dev/claude-code-opus-test'
+video: 'https://youtu.be/ut6PSjCW6GQ'
 tags: ['claude-code', 'opus', 'benchmarks', 'ai-coding']
-draft: true
+draft: false
 ---
 
 Anthropic says Opus 5.5 "generates output more than 30% faster than Opus 5",
