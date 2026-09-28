@@ -7,6 +7,7 @@ tags: ['java', 'spring', 'ejb', 'architecture', 'migration', 'interviews']
 cover: '/covers/ejb-to-spring.jpg'
 duration: '18:14'
 sheet: '/downloads/ejb-to-spring-design-sheet.pdf'
+repo: 'https://github.com/code-with-sam-dev/ejb-migration-demos'
 draft: false
 ---
 

@@ -6,6 +6,7 @@ youtube: 'wQsdpSBQp5E'
 cover: '/covers/tdd-for-java.jpg'
 duration: '11:49'
 sheet: '/downloads/tdd-for-java-design-sheet.pdf'
+repo: 'https://github.com/code-with-sam-dev/tdd-demos'
 tags: ['java', 'tdd', 'testing', 'junit', 'interviews']
 draft: false
 ---

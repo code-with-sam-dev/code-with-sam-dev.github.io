@@ -6,6 +6,7 @@ duration: '11:13'
 description: 'Four jobs are left, and one of them makes the other three theatre if you skip it. With three studies read at the source, and a number that did not survive checking.'
 pubDate: 2026-09-15
 sheet: '/downloads/while-the-ai-writes-the-code.pdf'
+repo: 'https://github.com/code-with-sam-dev/while-ai-demos'
 tags: ['ai', 'engineering', 'code-review', 'testing', 'interviews']
 draft: false
 ---

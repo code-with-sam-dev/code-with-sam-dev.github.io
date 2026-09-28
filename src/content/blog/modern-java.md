@@ -8,6 +8,7 @@ series: 'Modern Java'
 episode: 1
 cover: '/covers/modern-java.jpg'
 sheet: '/downloads/modern-java-design-sheet.pdf'
+repo: 'https://github.com/code-with-sam-dev/java-demos'
 duration: '17:44'
 draft: false
 terminal:

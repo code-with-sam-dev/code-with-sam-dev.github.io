@@ -8,6 +8,7 @@ series: 'Tricky Senior Engineer Interview Questions'
 cover: '/covers/java-quadratic-loop.jpg'
 duration: '0:59'
 sheet: '/downloads/java-quadratic-loop-design-sheet.pdf'
+repo: 'https://github.com/code-with-sam-dev/java-demos'
 draft: false
 terminal:
   path: 'java-gotchas / measured on Java 21'

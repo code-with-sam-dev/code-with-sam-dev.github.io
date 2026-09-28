@@ -6,6 +6,7 @@ youtube: 'jTa3lUnbWfU'
 cover: '/covers/distributed-transactions.jpg'
 duration: '13:38'
 sheet: '/downloads/distributed-transactions-design-sheet.pdf'
+repo: 'https://github.com/code-with-sam-dev/txn-demos'
 tags: ['java', 'spring', 'kafka', 'distributed-systems', 'interviews']
 draft: false
 ---

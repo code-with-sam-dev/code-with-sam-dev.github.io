@@ -22,7 +22,7 @@ export {CHANNEL_LINKS} from './channel-links.mjs';
  * So a sheet asks for a repo link and gets one only if the repo is published.
  * Add a name here on the day it goes public, not on the day it is written.
  */
-const PUBLISHED_REPOS = new Set(['kafka-payments']);
+const PUBLISHED_REPOS = new Set(['kafka-payments', 'assertions-demos', 'tdd-demos', 'txn-demos', 'while-ai-demos', 'ejb-migration-demos', 'java-demos']);
 
 /**
  * The runnable code link, or NOTHING.
