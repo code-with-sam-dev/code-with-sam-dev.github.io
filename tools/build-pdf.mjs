@@ -195,6 +195,10 @@ const SHEETS = {
     data: './pdf/sa-flagship.data.mjs',
     out: 'public/downloads/spring-ai-claude-support-agent.pdf',
   },
+  'dbs-measured': {
+    data: './pdf/dbs-measured.data.mjs',
+    out: 'public/downloads/database-scaling-measured.pdf',
+  },
 
   // Modern Java. Same pattern, with the perishability note the Claude Code
   // sheets carry, for the same reason: a version claim is true for months and

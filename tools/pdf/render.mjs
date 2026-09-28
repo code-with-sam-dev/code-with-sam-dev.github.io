@@ -280,6 +280,9 @@ export function renderHtml(sheet, {avatarDataUri = ''} = {}) {
   }
   .code pre {
     font-family: 'JetBrains Mono', monospace; font-size: 8.4pt; line-height: 1.5;
+    /* Ligatures draw != as one glyph and the PDF text layer then copies it as '=',
+       so a reader who copies a snippet gets code that does not compile. */
+    font-variant-ligatures: none; font-feature-settings: 'liga' 0, 'calt' 0;
     margin: 0; padding: 3.5mm 5mm 4mm; white-space: pre-wrap; word-break: break-word; color: #e6e8ee;
   }
   .code .codenote { margin: 0; padding: 0 5mm 3.5mm; font-size: 8.6pt; color: #9aa3b2; }
