@@ -212,6 +212,10 @@ const SHEETS = {
     data: './pdf/while-ai-writes.data.mjs',
     out: 'public/downloads/while-the-ai-writes-the-code.pdf',
   },
+  'assertions': {
+    data: './pdf/assertions.data.mjs',
+    out: 'public/downloads/junit-assertj-hamcrest.pdf',
+  },
   'tdd-java': {
     data: './pdf/tdd-java.data.mjs',
     out: 'public/downloads/tdd-for-java-design-sheet.pdf',

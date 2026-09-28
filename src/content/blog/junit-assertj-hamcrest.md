@@ -4,6 +4,7 @@ youtube: '15MwUsnD8dM'
 cover: '/covers/junit-assertj-hamcrest.jpg'
 description: 'Three libraries on your classpath all export a method called assertThat, and you almost certainly never chose between them. Most of the time it does not matter. This is about the times it does.'
 pubDate: 2026-09-15
+sheet: '/downloads/junit-assertj-hamcrest.pdf'
 tags: ['java', 'testing', 'junit', 'tdd', 'interviews']
 duration: '13:11'
 draft: false
