@@ -159,6 +159,10 @@ const SHEETS = {
     data: './pdf/sn-03-modules.data.mjs',
     out: 'public/downloads/spring-to-node-03-modules.pdf',
   },
+  'sn-04-async': {
+    data: './pdf/sn-04-async.data.mjs',
+    out: 'public/downloads/spring-to-node-04-async.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
@@ -202,6 +206,10 @@ const SHEETS = {
   'srd': {
     data: './pdf/srd.data.mjs',
     out: 'public/downloads/stop-reading-the-code.pdf',
+  },
+  'ccm': {
+    data: './pdf/ccm.data.mjs',
+    out: 'public/downloads/claude-code-mistakes.pdf',
   },
 
   // Modern Java. Same pattern, with the perishability note the Claude Code
