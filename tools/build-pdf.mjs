@@ -163,6 +163,10 @@ const SHEETS = {
     data: './pdf/sn-04-async.data.mjs',
     out: 'public/downloads/spring-to-node-04-async.pdf',
   },
+  'sn-05-config': {
+    data: './pdf/sn-05-config.data.mjs',
+    out: 'public/downloads/spring-to-node-05-config.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
