@@ -199,6 +199,10 @@ const SHEETS = {
     data: './pdf/dbs-measured.data.mjs',
     out: 'public/downloads/database-scaling-measured.pdf',
   },
+  'srd': {
+    data: './pdf/srd.data.mjs',
+    out: 'public/downloads/stop-reading-the-code.pdf',
+  },
 
   // Modern Java. Same pattern, with the perishability note the Claude Code
   // sheets carry, for the same reason: a version claim is true for months and
