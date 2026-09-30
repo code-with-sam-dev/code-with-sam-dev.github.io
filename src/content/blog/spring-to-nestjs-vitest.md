@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'testing']
 series: 'Spring Boot to NestJS'
 episode: 17
 duration: '4:03'
-draft: true
+youtube: 'c-QKot5iSfA'
+draft: false
 ---
 
 A NestJS project created today with `nest new`, one `vi.fn()` shared by two tests, each
