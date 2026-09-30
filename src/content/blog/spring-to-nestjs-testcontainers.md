@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'testing']
 series: 'Spring Boot to NestJS'
 episode: 19
 duration: '3:18'
-draft: true
+youtube: 'lWkNmha4T9Q'
+draft: false
 ---
 
 Last episode the same two tests counted 1 and 2, then 3 and 4 on the next run. With a Postgres
