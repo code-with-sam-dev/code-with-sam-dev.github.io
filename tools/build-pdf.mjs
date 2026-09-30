@@ -211,6 +211,10 @@ const SHEETS = {
     data: './pdf/sn-16-vitest.data.mjs',
     out: 'public/downloads/spring-to-node-16-vitest.pdf',
   },
+  'sn-17-integration': {
+    data: './pdf/sn-17-integration.data.mjs',
+    out: 'public/downloads/spring-to-node-17-integration.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
