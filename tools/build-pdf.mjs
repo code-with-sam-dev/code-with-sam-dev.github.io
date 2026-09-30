@@ -203,6 +203,10 @@ const SHEETS = {
     data: './pdf/sn-14-transactions.data.mjs',
     out: 'public/downloads/spring-to-node-14-transactions.pdf',
   },
+  'sn-15-mongo': {
+    data: './pdf/sn-15-mongo.data.mjs',
+    out: 'public/downloads/spring-to-node-15-mongo.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
