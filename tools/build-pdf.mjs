@@ -227,6 +227,10 @@ const SHEETS = {
     data: './pdf/sn-20-rate-limiting.data.mjs',
     out: 'public/downloads/spring-to-node-20-rate-limiting.pdf',
   },
+  'sn-21-http-clients': {
+    data: './pdf/sn-21-http-clients.data.mjs',
+    out: 'public/downloads/spring-to-node-21-http-clients.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
