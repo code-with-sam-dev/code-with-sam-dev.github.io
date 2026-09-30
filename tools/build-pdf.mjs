@@ -175,6 +175,10 @@ const SHEETS = {
     data: './pdf/sn-07-errors.data.mjs',
     out: 'public/downloads/spring-to-node-07-errors.pdf',
   },
+  'sn-08-middleware': {
+    data: './pdf/sn-08-middleware.data.mjs',
+    out: 'public/downloads/spring-to-node-08-middleware.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
