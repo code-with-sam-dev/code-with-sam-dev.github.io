@@ -8,7 +8,7 @@ repo: 'https://github.com/code-with-sam-dev/spring-to-node'
 tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'security']
 series: 'Spring Boot to NestJS'
 episode: 20
-duration: '3:52'
+duration: '4:10'
 draft: true
 ---
 
@@ -31,15 +31,15 @@ forgetting protects the route instead of exposing it.
 
 ## 401 or 403
 
-A guard that returns `false` gives 403. A missing token is unauthenticated, which is a 401, so throw
-`UnauthorizedException` for it and keep 403 for a caller who is known but not allowed.
+A guard that returns `false` gives 403. A missing or invalid token is unauthenticated, which is a 401, so
+throw `UnauthorizedException` for it and keep 403 for a caller who is known but not allowed.
 
 ## Method authorization
 
 `@PreAuthorize("hasRole('ADMIN')")` did nothing until `@EnableMethodSecurity` was on: a plain user
 got 200 and a direct call ran. With it, 403, and the direct call was refused. A Nest `@Roles` guard
-refused a user through the route, but the service called directly still ran. A guard protects the
-route, not the method.
+refused a user through the route, but the service called directly still ran. This guard protects
+entry through the route, not the method.
 
 The full code for every measurement is in the repository, and the free design sheet above has the
 checklist on one page.
