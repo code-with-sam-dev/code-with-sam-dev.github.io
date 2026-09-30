@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot']
 series: 'Spring Boot to NestJS'
 episode: 14
 duration: '4:18'
-draft: true
+youtube: '8kypbLtu6S8'
+draft: false
 ---
 
 Twenty orders with three lines each, and a loop that adds up every order's lines without
