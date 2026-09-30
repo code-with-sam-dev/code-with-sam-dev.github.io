@@ -1,5 +1,6 @@
 ---
 title: 'Spring to NestJS TypeORM Entities and Repositories: Changed, Not Saved'
+youtube: 'P6-2Ncyo_Ac'
 cover: '/covers/sn-typeorm.jpg'
 description: 'Load an entity, change a field, commit, and never call save. Hibernate writes it; TypeORM writes nothing. Measured on both stacks, with save() against update(), a 64 bit value that loses its last digit, and a TypeORM default that changed between major versions.'
 pubDate: 2026-09-30
@@ -9,7 +10,7 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot']
 series: 'Spring Boot to NestJS'
 episode: 13
 duration: '4:47'
-draft: true
+draft: false
 ---
 
 Load an account, change the owner, commit the transaction, and never call save. In
