@@ -63,10 +63,10 @@ export const sheet = {
       id: 'transaction',
       title: 'Where a test transaction stops',
       body: ['A QueryRunner transaction only covers writes made through runner.manager. The injected repository and a supertest request use their own connections.'],
-      code: [{caption: 'cleanup.spec.ts', lines: [
-        "await notes.save({ text: 'injected' });              // kept",
-        "await runner.manager.save(CleanNote, { text: 'runner' }); // rolled back",
-      ]}],
+      code: [
+        {caption: 'cleanup.spec.ts, kept after the rollback', lines: ["await notes.save({ text: 'injected' });"]},
+        {caption: 'cleanup.spec.ts, rolled back', lines: ["await runner.manager.save(CleanNote, { text: 'runner' });"]},
+      ],
       claims: [{text: 'after both rolled-back tests, 1 row left: "injected"', source: RUN}],
     },
   ],
