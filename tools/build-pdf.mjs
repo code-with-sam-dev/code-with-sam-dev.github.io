@@ -235,6 +235,10 @@ const SHEETS = {
     data: './pdf/sn-22-resilience.data.mjs',
     out: 'public/downloads/spring-to-node-22-resilience.pdf',
   },
+  'sn-23-caching': {
+    data: './pdf/sn-23-caching.data.mjs',
+    out: 'public/downloads/spring-to-node-23-caching.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
