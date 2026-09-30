@@ -219,6 +219,10 @@ const SHEETS = {
     data: './pdf/sn-18-testcontainers.data.mjs',
     out: 'public/downloads/spring-to-node-18-testcontainers.pdf',
   },
+  'sn-19-guards': {
+    data: './pdf/sn-19-guards.data.mjs',
+    out: 'public/downloads/spring-to-node-19-guards.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
