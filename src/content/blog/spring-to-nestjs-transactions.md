@@ -8,8 +8,9 @@ repo: 'https://github.com/code-with-sam-dev/spring-to-node'
 tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot']
 series: 'Spring Boot to NestJS'
 episode: 15
-duration: '4:40'
-draft: true
+duration: '4:32'
+youtube: '9euDppRduTk'
+draft: false
 ---
 
 A debit and a credit inside a TypeORM transaction, then an error. The transaction rolled
