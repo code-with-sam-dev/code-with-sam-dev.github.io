@@ -179,6 +179,10 @@ const SHEETS = {
     data: './pdf/sn-08-middleware.data.mjs',
     out: 'public/downloads/spring-to-node-08-middleware.pdf',
   },
+  'sn-09-swagger': {
+    data: './pdf/sn-09-swagger.data.mjs',
+    out: 'public/downloads/spring-to-node-09-swagger.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
