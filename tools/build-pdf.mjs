@@ -243,6 +243,10 @@ const SHEETS = {
     data: './pdf/sn-24-scheduling.data.mjs',
     out: 'public/downloads/spring-to-node-24-scheduling.pdf',
   },
+  'sn-25-queues': {
+    data: './pdf/sn-25-queues.data.mjs',
+    out: 'public/downloads/spring-to-node-25-queues.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
