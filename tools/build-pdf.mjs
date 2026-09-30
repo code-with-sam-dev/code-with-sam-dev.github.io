@@ -207,6 +207,10 @@ const SHEETS = {
     data: './pdf/sn-15-mongo.data.mjs',
     out: 'public/downloads/spring-to-node-15-mongo.pdf',
   },
+  'sn-16-vitest': {
+    data: './pdf/sn-16-vitest.data.mjs',
+    out: 'public/downloads/spring-to-node-16-vitest.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
