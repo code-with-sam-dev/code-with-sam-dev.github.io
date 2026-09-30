@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'testing']
 series: 'Spring Boot to NestJS'
 episode: 18
 duration: '3:39'
-draft: true
+youtube: 'CuczSxtn1M4'
+draft: false
 ---
 
 Two integration tests against a real PostgreSQL, each inserting one row and counting. Under
