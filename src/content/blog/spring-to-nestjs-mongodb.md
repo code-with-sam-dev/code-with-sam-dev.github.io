@@ -8,8 +8,9 @@ repo: 'https://github.com/code-with-sam-dev/spring-to-node'
 tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'mongodb']
 series: 'Spring Boot to NestJS'
 episode: 16
-duration: '4:10'
-draft: true
+duration: '4:08'
+youtube: 'lKsCpo70Z40'
+draft: false
 ---
 
 One account with a balance of 100, and two requests at the same time: one debits 30, the
