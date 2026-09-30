@@ -239,6 +239,10 @@ const SHEETS = {
     data: './pdf/sn-23-caching.data.mjs',
     out: 'public/downloads/spring-to-node-23-caching.pdf',
   },
+  'sn-24-scheduling': {
+    data: './pdf/sn-24-scheduling.data.mjs',
+    out: 'public/downloads/spring-to-node-24-scheduling.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
