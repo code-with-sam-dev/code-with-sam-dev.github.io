@@ -1,5 +1,6 @@
 ---
 title: 'Spring to NestJS CORS, Cookies and Sessions: 10,000 Sessions, No Expiry'
+youtube: '6qc1iRXhFLc'
 cover: '/covers/sn-sessions.jpg'
 description: 'A session is the same idea on both stacks: a cookie with an identifier, and state on the server. In NestJS you install that server side yourself, and inherit express-session defaults: a MemoryStore and no expiry. Measured, along with the two browser paths CORS actually takes.'
 pubDate: 2026-09-30
@@ -9,7 +10,7 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot']
 series: 'Spring Boot to NestJS'
 episode: 12
 duration: '5:04'
-draft: true
+draft: false
 ---
 
 The same NestJS server with express-session, started twice. With `NODE_ENV=development` it
