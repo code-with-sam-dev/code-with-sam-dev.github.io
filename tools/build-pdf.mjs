@@ -191,6 +191,10 @@ const SHEETS = {
     data: './pdf/sn-11-sessions.data.mjs',
     out: 'public/downloads/spring-to-node-11-sessions.pdf',
   },
+  'sn-12-typeorm': {
+    data: './pdf/sn-12-typeorm.data.mjs',
+    out: 'public/downloads/spring-to-node-12-typeorm.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
