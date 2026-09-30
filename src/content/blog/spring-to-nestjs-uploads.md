@@ -9,7 +9,7 @@ repo: 'https://github.com/code-with-sam-dev/spring-to-node'
 tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot']
 series: 'Spring Boot to NestJS'
 episode: 11
-duration: '4:48'
+duration: '4:47'
 draft: false
 ---
 
