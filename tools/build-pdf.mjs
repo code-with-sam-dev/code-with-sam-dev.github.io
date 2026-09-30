@@ -171,6 +171,10 @@ const SHEETS = {
     data: './pdf/sn-06-validation.data.mjs',
     out: 'public/downloads/spring-to-node-06-validation.pdf',
   },
+  'sn-07-errors': {
+    data: './pdf/sn-07-errors.data.mjs',
+    out: 'public/downloads/spring-to-node-07-errors.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
