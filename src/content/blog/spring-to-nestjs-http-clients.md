@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot']
 series: 'Spring Boot to NestJS'
 episode: 22
 duration: '4:54'
-draft: true
+youtube: '3qKNEh1rpjU'
+draft: false
 ---
 
 The API you call takes ten seconds to answer. Spring's `RestClient`, the `HttpService` from
