@@ -279,6 +279,10 @@ const SHEETS = {
     data: './pdf/sn-33-rxjs.data.mjs',
     out: 'public/downloads/spring-to-node-33-rxjs.pdf',
   },
+  'sn-34-docker': {
+    data: './pdf/sn-34-docker.data.mjs',
+    out: 'public/downloads/spring-to-node-34-docker.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
