@@ -295,6 +295,10 @@ const SHEETS = {
     data: './pdf/sn-37-shutdown.data.mjs',
     out: 'public/downloads/spring-to-node-37-shutdown.pdf',
   },
+  'sn-38-email-i18n': {
+    data: './pdf/sn-38-email-i18n.data.mjs',
+    out: 'public/downloads/spring-to-node-38-email-i18n.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
