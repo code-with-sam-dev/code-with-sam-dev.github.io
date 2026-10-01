@@ -8,8 +8,9 @@ repo: 'https://github.com/code-with-sam-dev/spring-to-node'
 tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot']
 series: 'Spring Boot to NestJS'
 episode: 23
-duration: '5:13'
-draft: true
+duration: '5:14'
+youtube: 'xsNqGrqbbhY'
+draft: false
 ---
 
 One request to the service while the payments API was down, and the payments API received nine
