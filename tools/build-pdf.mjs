@@ -287,6 +287,10 @@ const SHEETS = {
     data: './pdf/sn-35-logging.data.mjs',
     out: 'public/downloads/spring-to-node-35-logging.pdf',
   },
+  'sn-36-opentelemetry': {
+    data: './pdf/sn-36-opentelemetry.data.mjs',
+    out: 'public/downloads/spring-to-node-36-opentelemetry.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
