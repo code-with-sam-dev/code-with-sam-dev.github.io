@@ -255,6 +255,10 @@ const SHEETS = {
     data: './pdf/sn-27-rabbitmq.data.mjs',
     out: 'public/downloads/spring-to-node-27-rabbitmq.pdf',
   },
+  'sn-28-events': {
+    data: './pdf/sn-28-events.data.mjs',
+    out: 'public/downloads/spring-to-node-28-events.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
