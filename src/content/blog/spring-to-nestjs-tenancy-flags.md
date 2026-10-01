@@ -1,7 +1,7 @@
 ---
 title: 'Multi Tenancy and Feature Flags, Spring to NestJS: Tenant A Saw Tenant B'
 cover: '/covers/sn-tenancy.jpg'
-description: 'The last episode of the series. Two requests in flight, and one tenant read the other\'s id. Measured on both stacks: ThreadLocal and AsyncLocalStorage, the cost of request scope, and a rollout that 791 users saw differently.'
+description: 'The last episode of the series. Two requests in flight, and one tenant read the other''s id. Measured on both stacks: ThreadLocal and AsyncLocalStorage, the cost of request scope, and a rollout that 791 users saw differently.'
 pubDate: 2026-10-01
 sheet: '/downloads/spring-to-node-39-tenancy-flags.pdf'
 repo: 'https://github.com/code-with-sam-dev/spring-to-node'
