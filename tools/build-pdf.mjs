@@ -259,6 +259,10 @@ const SHEETS = {
     data: './pdf/sn-28-events.data.mjs',
     out: 'public/downloads/spring-to-node-28-events.pdf',
   },
+  'sn-29-websockets': {
+    data: './pdf/sn-29-websockets.data.mjs',
+    out: 'public/downloads/spring-to-node-29-websockets.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
