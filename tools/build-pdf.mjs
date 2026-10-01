@@ -299,6 +299,10 @@ const SHEETS = {
     data: './pdf/sn-38-email-i18n.data.mjs',
     out: 'public/downloads/spring-to-node-38-email-i18n.pdf',
   },
+  'sn-39-tenancy-flags': {
+    data: './pdf/sn-39-tenancy-flags.data.mjs',
+    out: 'public/downloads/spring-to-node-39-tenancy-flags.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
