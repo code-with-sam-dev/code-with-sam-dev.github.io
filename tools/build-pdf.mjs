@@ -271,6 +271,10 @@ const SHEETS = {
     data: './pdf/sn-31-graphql.data.mjs',
     out: 'public/downloads/spring-to-node-31-graphql.pdf',
   },
+  'sn-32-grpc': {
+    data: './pdf/sn-32-grpc.data.mjs',
+    out: 'public/downloads/spring-to-node-32-grpc.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
