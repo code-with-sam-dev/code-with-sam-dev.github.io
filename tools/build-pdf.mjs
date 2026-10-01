@@ -251,6 +251,10 @@ const SHEETS = {
     data: './pdf/sn-26-kafka.data.mjs',
     out: 'public/downloads/spring-to-node-26-kafka.pdf',
   },
+  'sn-27-rabbitmq': {
+    data: './pdf/sn-27-rabbitmq.data.mjs',
+    out: 'public/downloads/spring-to-node-27-rabbitmq.pdf',
+  },
   'sn-flagship': {
     data: './pdf/sn-flagship.data.mjs',
     out: 'public/downloads/spring-to-nestjs-transfer.pdf',
