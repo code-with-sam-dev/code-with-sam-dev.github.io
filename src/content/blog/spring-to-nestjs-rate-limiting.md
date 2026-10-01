@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'security']
 series: 'Spring Boot to NestJS'
 episode: 21
 duration: '4:57'
-draft: true
+youtube: '4cO-54kSLIc'
+draft: false
 ---
 
 Three requests a minute per client. Behind a proxy, client one used its three and client two's very
