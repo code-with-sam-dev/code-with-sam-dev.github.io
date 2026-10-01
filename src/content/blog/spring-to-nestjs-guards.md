@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'security']
 series: 'Spring Boot to NestJS'
 episode: 20
 duration: '4:10'
-draft: true
+youtube: 'AVfNH8f-Qpw'
+draft: false
 ---
 
 A payments API with a guard on the payments controller. Someone adds a refunds endpoint and writes
