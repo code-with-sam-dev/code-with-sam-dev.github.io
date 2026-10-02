@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot']
 series: 'Spring Boot to NestJS'
 episode: 25
 duration: '4:45'
-draft: true
+youtube: 'AFcCQK9Slyc'
+draft: false
 ---
 
 A job that settles payments every second. The service scales to two instances, and every tick ran
