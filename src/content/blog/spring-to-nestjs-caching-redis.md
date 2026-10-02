@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'redis']
 series: 'Spring Boot to NestJS'
 episode: 24
 duration: '4:26'
-draft: true
+youtube: 'd_Vqui40gHk'
+draft: false
 ---
 
 Alice opened her account page: 1200. Bob opened his: 1200, with Alice's name on it. On Spring Boot
