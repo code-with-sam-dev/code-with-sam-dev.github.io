@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'events']
 series: 'Spring Boot to NestJS'
 episode: 29
 duration: '3:49'
-draft: true
+youtube: '10jZ0GoGDkc'
+draft: false
 ---
 
 A payment is declined and the transaction rolls back. The payment is not in the database, and the
