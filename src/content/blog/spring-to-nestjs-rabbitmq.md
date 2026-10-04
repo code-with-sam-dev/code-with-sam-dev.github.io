@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'rabbitmq']
 series: 'Spring Boot to NestJS'
 episode: 28
 duration: '4:24'
-draft: true
+youtube: 'r33i1WN2I6Q'
+draft: false
 ---
 
 One payment that can never be settled, sent to a queue. Spring Boot's listener container, with its
