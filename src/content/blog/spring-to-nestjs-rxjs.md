@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'rxjs']
 series: 'Spring Boot to NestJS'
 episode: 34
 duration: '3:40'
-draft: true
+youtube: 'l4AP75udGcQ'
+draft: false
 ---
 
 A customer closes the tab half a second into a two second charge. On Spring WebFlux, the cancellation
