@@ -8,8 +8,9 @@ repo: 'https://github.com/code-with-sam-dev/spring-to-node'
 tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'redis']
 series: 'Spring Boot to NestJS'
 episode: 26
-duration: '4:38'
-draft: true
+duration: '4:39'
+youtube: '2zFbjqqpkpg'
+draft: false
 ---
 
 Five receipt emails handed to the background so the request could answer fast. It answered in 12
