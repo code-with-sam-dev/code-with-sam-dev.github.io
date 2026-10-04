@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'sse']
 series: 'Spring Boot to NestJS'
 episode: 31
 duration: '3:38'
-draft: true
+youtube: 'pO49v6J_p8U'
+draft: false
 ---
 
 A browser subscribed to a payment status stream for 70 seconds and received 33 of those updates more
