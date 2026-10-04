@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'logging']
 series: 'Spring Boot to NestJS'
 episode: 36
 duration: '3:52'
-draft: true
+youtube: 'SLWsnQt14UM'
+draft: false
 ---
 
 One payment request logs from four places: the controller, a service, and two places that run later.
