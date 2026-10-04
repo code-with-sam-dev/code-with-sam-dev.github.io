@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'kubernetes']
 series: 'Spring Boot to NestJS'
 episode: 38
 duration: '3:18'
-draft: true
+youtube: 'yxDzpYqNyBE'
+draft: false
 ---
 
 A deploy sends a stop signal to a NestJS service half a second into a three second payment. With Nest
