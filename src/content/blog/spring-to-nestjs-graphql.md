@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'graphql']
 series: 'Spring Boot to NestJS'
 episode: 32
 duration: '3:53'
-draft: true
+youtube: 'hlg_bMEhjVg'
+draft: false
 ---
 
 A GraphQL query hits a resolver whose SQL fails. Spring for GraphQL gave the client a generic internal
