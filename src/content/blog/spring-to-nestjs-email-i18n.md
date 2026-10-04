@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'i18n']
 series: 'Spring Boot to NestJS'
 episode: 39
 duration: '4:01'
-draft: true
+youtube: 'wY1a2mXQa2M'
+draft: false
 ---
 
 A customer in Paris pays, and the receipt comes back in German: no French translation, and a server
