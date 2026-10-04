@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'docker']
 series: 'Spring Boot to NestJS'
 episode: 35
 duration: '4:28'
-draft: true
+youtube: 'k6q0M-lb_cM'
+draft: false
 ---
 
 Change one line in a NestJS service and build the image. Our own course Dockerfile handed the builder
