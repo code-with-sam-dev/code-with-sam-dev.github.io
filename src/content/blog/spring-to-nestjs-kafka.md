@@ -8,8 +8,9 @@ repo: 'https://github.com/code-with-sam-dev/spring-to-node'
 tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'kafka']
 series: 'Spring Boot to NestJS'
 episode: 27
-duration: '4:37'
-draft: true
+duration: '4:38'
+youtube: 'nvkqgJmlsJQ'
+draft: false
 ---
 
 Moving a payments consumer from Spring to NestJS one service at a time: the Spring consumer uses
