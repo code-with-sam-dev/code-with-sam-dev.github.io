@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'feature-flags']
 series: 'Spring Boot to NestJS'
 episode: 40
 duration: '4:15'
-draft: true
+youtube: 'b0JMrdVoWLc'
+draft: false
 ---
 
 Two customers call a NestJS payment service at almost the same moment, and acme's request answers with
