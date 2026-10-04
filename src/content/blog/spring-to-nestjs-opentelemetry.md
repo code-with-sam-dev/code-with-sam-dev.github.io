@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'opentelemetry']
 series: 'Spring Boot to NestJS'
 episode: 37
 duration: '3:43'
-draft: true
+youtube: 'GvA9Ksevcqc'
+draft: false
 ---
 
 A hundred payments go through a Spring Boot service, and every one calls a NestJS ledger that traces
