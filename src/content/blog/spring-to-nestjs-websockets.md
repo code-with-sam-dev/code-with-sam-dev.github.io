@@ -8,8 +8,9 @@ repo: 'https://github.com/code-with-sam-dev/spring-to-node'
 tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'websockets']
 series: 'Spring Boot to NestJS'
 episode: 30
-duration: '4:07'
-draft: true
+duration: '4:08'
+youtube: 'C1DFZ4keG9U'
+draft: false
 ---
 
 One client stops reading, and the server sends it fifty thousand messages of 1 KB. Spring closed
