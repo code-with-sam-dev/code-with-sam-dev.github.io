@@ -9,7 +9,8 @@ tags: ['nestjs', 'typescript', 'nodejs', 'java', 'spring-boot', 'grpc']
 series: 'Spring Boot to NestJS'
 episode: 33
 duration: '3:45'
-draft: true
+youtube: 'ZCJ1SsWyq6g'
+draft: false
 ---
 
 One `payments.proto`, served by Spring Boot and by NestJS. A payment of 1999 cents arrives and the
