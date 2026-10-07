@@ -67,6 +67,16 @@ const codeBlock = (c) => `
   </figure>`;
 
 /*
+  TWO BLOCKS SIDE BY SIDE, for a sheet that compares two stacks. A code entry
+  of the form {pair: [left, right]} draws both blocks in two columns, so the
+  Spring class and the FastAPI module sit next to each other the way they do on
+  screen in the video. Any other entry is an ordinary full width block, so no
+  existing sheet changes.
+*/
+const codeOrPair = (c) =>
+  c.pair ? `<div class="pair">${c.pair.map(codeBlock).join('')}</div>` : codeBlock(c);
+
+/*
   ONE GLYPH PER CHANNEL LINK, the same drawings as SocialIcon.astro on the site,
   so a reader finds a platform by its mark. Sam, 2026-09-23: "documents don't
   have icons like on the site". Links with no platform (a docs page, a download)
@@ -97,7 +107,7 @@ const section = (first) => (s, index) => `
   <section class="sec">
     <h2><span class="num">${String(index + first).padStart(2, '0')}</span>${esc(s.title)}</h2>
     ${(s.body ?? []).map((p) => `<p class="body">${esc(p)}</p>`).join('')}
-    ${(s.code ?? []).map(codeBlock).join('')}
+    ${(s.code ?? []).map(codeOrPair).join('')}
     ${(s.claims ?? []).map(claim).join('')}
   </section>`;
 
@@ -286,6 +296,10 @@ export function renderHtml(sheet, {avatarDataUri = ''} = {}) {
     margin: 0; padding: 3.5mm 5mm 4mm; white-space: pre-wrap; word-break: break-word; color: #e6e8ee;
   }
   .code .codenote { margin: 0; padding: 0 5mm 3.5mm; font-size: 8.6pt; color: #9aa3b2; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; page-break-inside: avoid; }
+  .pair .code { margin-bottom: 4.5mm; }
+  .pair .code pre { font-size: 7.4pt; padding: 3mm 3.5mm 3.5mm; }
+  .pair .code .codenote { font-size: 7.8pt; padding: 0 3.5mm 3mm; }
 
   /* ---------- checklist ---------- */
   .check { border: 1px solid var(--primary); border-radius: 3mm; padding: 6mm; background: #fff; page-break-inside: avoid; }

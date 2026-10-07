@@ -359,6 +359,10 @@ const SHEETS = {
     data: './pdf/sb4.data.mjs',
     out: 'public/downloads/spring-boot-4-what-actually-changed.pdf',
   },
+  'py': {
+    data: './pdf/py.data.mjs',
+    out: 'public/downloads/spring-to-python-fastapi.pdf',
+  },
 
   // Modern Java. Same pattern, with the perishability note the Claude Code
   // sheets carry, for the same reason: a version claim is true for months and
