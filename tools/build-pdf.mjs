@@ -355,6 +355,10 @@ const SHEETS = {
     data: './pdf/cicd-eks.data.mjs',
     out: 'public/downloads/gitlab-ci-to-aws-eks.pdf',
   },
+  'sb4': {
+    data: './pdf/sb4.data.mjs',
+    out: 'public/downloads/spring-boot-4-what-actually-changed.pdf',
+  },
 
   // Modern Java. Same pattern, with the perishability note the Claude Code
   // sheets carry, for the same reason: a version claim is true for months and
