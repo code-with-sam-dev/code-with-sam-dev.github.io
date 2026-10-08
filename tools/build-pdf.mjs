@@ -363,6 +363,10 @@ const SHEETS = {
     data: './pdf/py.data.mjs',
     out: 'public/downloads/spring-to-python-fastapi.pdf',
   },
+  'oop': {
+    data: './pdf/oop.data.mjs',
+    out: 'public/downloads/java-object-relationships.pdf',
+  },
 
   // Modern Java. Same pattern, with the perishability note the Claude Code
   // sheets carry, for the same reason: a version claim is true for months and
