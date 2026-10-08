@@ -1,5 +1,6 @@
 ---
 title: 'Spring AI Refund Agent With No Approver: 4 Failures and the Java That Stops Them'
+youtube: 'JgeHMvreomQ'
 cover: '/covers/spring-ai-refund-agent-no-approver.jpg'
 description: 'A Spring AI MCP server lets an agent refund anything under $20 with nobody approving it. Forty $19.99 refunds pass the check and $799.60 leaves. Four failures, each measured on real runs: the $20 loophole, the race, the lost answer and the kill switch, with the Java that bounds each one, the real agent transcripts and nine tests that need no model.'
 pubDate: 2026-10-08
@@ -7,7 +8,7 @@ sheet: '/downloads/spring-ai-refund-agent-no-approver.pdf'
 repo: 'https://github.com/code-with-sam-dev/spring-ai-refund-limits'
 tags: ['java', 'spring', 'ai', 'payments']
 duration: '10:33'
-draft: true
+draft: false
 ---
 
 An AI agent is allowed to refund anything under twenty dollars, with nobody

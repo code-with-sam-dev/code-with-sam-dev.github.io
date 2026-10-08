@@ -29,8 +29,7 @@ const SRC = {
 
 export const sheet = {
   channel: 'Code with Sam',
-  // PLACEHOLDER: replace with the episode's youtu.be link when it publishes.
-  video: {url: 'https://www.youtube.com/@CodewithSam-Dev', label: 'Watch on YouTube'},
+  video: {url: 'https://youtu.be/JgeHMvreomQ', label: 'Watch on YouTube'},
   siteUrl: 'https://code-with-sam-dev.github.io',
   title: 'No approver. $799.60.',
   subtitle: 'A Spring AI refund agent with no approver: four failures, each measured, and the Java that bounds each one',
