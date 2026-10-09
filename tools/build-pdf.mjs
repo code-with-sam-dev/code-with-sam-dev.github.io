@@ -367,6 +367,10 @@ const SHEETS = {
     data: './pdf/oop.data.mjs',
     out: 'public/downloads/java-object-relationships.pdf',
   },
+  'spring-boot-transactional-flash-sale': {
+    data: './pdf/spring-boot-transactional-flash-sale.data.mjs',
+    out: 'public/downloads/spring-boot-transactional-flash-sale.pdf',
+  },
   'spring-ai-refund-agent-no-approver': {
     data: './pdf/spring-ai-refund-agent-no-approver.data.mjs',
     out: 'public/downloads/spring-ai-refund-agent-no-approver.pdf',
