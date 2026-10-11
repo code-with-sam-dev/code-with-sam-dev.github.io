@@ -1587,13 +1587,10 @@ bin/assistant.sh --spring.profiles.active=break              # adds GET /break/q
 The tests:
 
 ```sh
-bin/tests.sh            # 43 offline tests, no network, one line each
+bin/tests.sh            # 44 offline tests, no network, one line each
 bin/tests.sh testnet    # plus 6 integration tests that pay on Tempo testnet
 ./mvnw verify -Ptestnet # the same, plain Maven
 ```
-
-(The README's count of 43 predates the twenty-thread test; the offline suite
-now runs 44.)
 
 To connect an AI assistant, start both applications and open the project in
 any MCP host. Claude Code picks up `.mcp.json` from the project root.
