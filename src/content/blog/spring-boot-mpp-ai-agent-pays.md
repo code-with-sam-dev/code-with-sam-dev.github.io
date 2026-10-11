@@ -2,6 +2,7 @@
 title: 'I Built a Spring Boot AI Agent That Pays for APIs: HTTP 402, MPP and MCP in Java'
 description: 'A Spring Boot courier API answers HTTP 402 Payment Required. A hand-written Java client reads the challenge, pays five test cents on the Tempo test network and asks again with proof of payment. An AI assistant calls it over MCP. Then it breaks twice: it pays five dollars when the price changes, and pays twice when a paid response is lost. The fixes are a payment policy that refuses before anything is signed and a recovery workflow that never pays again. Every payment is a real testnet transaction you can open.'
 pubDate: 2026-10-11
+cover: '/covers/spring-boot-mpp-ai-agent-pays.jpg'
 sheet: '/downloads/spring-boot-mpp-ai-agent-pays.pdf'
 repo: 'https://github.com/code-with-sam-dev/spring-boot-mpp-courier'
 tags: ['java', 'spring', 'ai', 'payments']
