@@ -375,6 +375,10 @@ const SHEETS = {
     data: './pdf/spring-ai-refund-agent-no-approver.data.mjs',
     out: 'public/downloads/spring-ai-refund-agent-no-approver.pdf',
   },
+  'spring-boot-mpp-ai-agent-pays': {
+    data: './pdf/spring-boot-mpp-ai-agent-pays.data.mjs',
+    out: 'public/downloads/spring-boot-mpp-ai-agent-pays.pdf',
+  },
 
   // Modern Java. Same pattern, with the perishability note the Claude Code
   // sheets carry, for the same reason: a version claim is true for months and
