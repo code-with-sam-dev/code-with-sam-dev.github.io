@@ -291,6 +291,10 @@ const SHEETS = {
     data: './pdf/sn-36-opentelemetry.data.mjs',
     out: 'public/downloads/spring-to-node-36-opentelemetry.pdf',
   },
+  'cmj-01-first-program': {
+    data: './pdf/cmj-01-first-program.data.mjs',
+    out: 'public/downloads/complete-modern-java-01-first-program.pdf',
+  },
   'sn-37-shutdown': {
     data: './pdf/sn-37-shutdown.data.mjs',
     out: 'public/downloads/spring-to-node-37-shutdown.pdf',
