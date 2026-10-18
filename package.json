@@ -17,6 +17,6 @@
     "astro": "5.14.1"
   },
   "devDependencies": {
-    "simple-icons": "^16.30.0"
+    "simple-icons": "^16.33.0"
   }
 }
