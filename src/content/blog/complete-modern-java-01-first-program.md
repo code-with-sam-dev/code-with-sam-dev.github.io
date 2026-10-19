@@ -7,7 +7,8 @@ sheet: '/downloads/complete-modern-java-01-first-program.pdf'
 repo: 'https://github.com/code-with-sam-dev/complete-modern-java'
 tags: ['java', 'typescript', 'beginners']
 duration: '10:08'
-draft: true
+draft: false
+youtube: 'kVCc-XGgtJc'
 ---
 
 Sarah buys two loaves of bread and one carton of milk. Three items, three
