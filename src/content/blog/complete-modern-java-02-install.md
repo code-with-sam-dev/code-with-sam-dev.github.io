@@ -7,7 +7,8 @@ sheet: '/downloads/complete-modern-java-02-install.pdf'
 repo: 'https://github.com/code-with-sam-dev/complete-modern-java'
 tags: ['java', 'beginners', 'intellij']
 duration: '7:00'
-draft: true
+draft: false
+youtube: 'IQ5hSXXnaEo'
 ---
 
 On this Mac, the terminal answers `java -version` with Java 11, from 2022. Java is
