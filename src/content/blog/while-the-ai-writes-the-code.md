@@ -9,6 +9,8 @@ sheet: '/downloads/while-the-ai-writes-the-code.pdf'
 repo: 'https://github.com/code-with-sam-dev/while-ai-demos'
 tags: ['ai', 'engineering', 'code-review', 'testing', 'interviews']
 draft: false
+series: 'The Lazy Software Engineer'
+episode: 2
 ---
 
 Your agent just wrote four hundred lines in ninety seconds. Honest question:

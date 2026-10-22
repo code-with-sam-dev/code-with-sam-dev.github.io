@@ -5,6 +5,7 @@ cover: '/covers/sn-install.jpg'
 description: 'Every TypeScript tutorial starts at minute three, on a machine that already has everything installed. This is the part before that, run on a real machine, for Spring Boot developers who have never touched the Node ecosystem.'
 pubDate: 2026-09-21
 sheet: '/downloads/spring-to-node-00-install.pdf'
+repo: 'https://github.com/code-with-sam-dev/spring-to-node'
 tags: ['typescript', 'nodejs', 'nestjs', 'java', 'spring-boot']
 series: 'Spring Boot to NestJS'
 episode: 1

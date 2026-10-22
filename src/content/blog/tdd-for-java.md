@@ -9,6 +9,8 @@ sheet: '/downloads/tdd-for-java-design-sheet.pdf'
 repo: 'https://github.com/code-with-sam-dev/tdd-demos'
 tags: ['java', 'tdd', 'testing', 'junit', 'interviews']
 draft: false
+series: 'Testing and TDD for Java'
+episode: 1
 ---
 
 You already write tests. You write them after the code, they pass on the first

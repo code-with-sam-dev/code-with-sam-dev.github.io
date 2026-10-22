@@ -9,6 +9,8 @@ repo: 'https://github.com/code-with-sam-dev/spring-boot-mpp-courier'
 tags: ['java', 'spring', 'ai', 'payments']
 duration: '14:43'
 draft: false
+series: 'Spring Boot 4 for Working Java Developers'
+episode: 3
 ---
 
 A Spring Boot application asks a courier API for a delivery quote. The API

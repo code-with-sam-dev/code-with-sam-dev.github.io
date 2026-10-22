@@ -9,6 +9,8 @@ repo: 'https://github.com/code-with-sam-dev/java-object-relationships'
 tags: ['java', 'oop', 'uml', 'design']
 duration: '15:10'
 draft: false
+series: 'Java Design, Measured'
+episode: 1
 ---
 
 Three payments go into a ledger. The ledger holds three. The subclass written

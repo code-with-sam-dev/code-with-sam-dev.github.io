@@ -10,6 +10,8 @@ repo: 'https://github.com/code-with-sam-dev/spring-graphql-in-depth'
 video: 'https://youtu.be/7VgEcSodl6Q'
 tags: ['graphql', 'spring-boot', 'java', 'n-plus-one', 'api-design']
 draft: false
+series: 'GraphQL'
+episode: 2
 ---
 
 Twenty one REST calls became one GraphQL request. Same screen, one round trip.

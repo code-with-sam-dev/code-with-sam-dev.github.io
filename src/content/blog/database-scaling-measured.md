@@ -10,6 +10,8 @@ repo: 'https://github.com/code-with-sam-dev/database-scaling-measured'
 video: 'https://youtu.be/7q42Crma6GE'
 tags: ['postgres', 'redis', 'spring-boot', 'system-design']
 draft: false
+series: 'System Design, Measured'
+episode: 1
 ---
 
 Ten million orders. One customer wants their pending orders, newest first, and

@@ -7,9 +7,10 @@ pubDate: 2026-10-07
 sheet: '/downloads/spring-to-python-fastapi.pdf'
 repo: 'https://github.com/code-with-sam-dev/spring-to-python'
 tags: ['spring-boot', 'python', 'fastapi', 'java']
-series: 'Spring Boot to Other Stacks'
 duration: '14:40'
 draft: false
+series: 'Spring Boot to Other Stacks'
+episode: 5
 ---
 
 A payments endpoint in FastAPI. It calls a payment provider that takes two

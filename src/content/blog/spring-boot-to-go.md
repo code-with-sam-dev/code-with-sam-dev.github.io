@@ -10,6 +10,8 @@ repo: 'https://github.com/code-with-sam-dev/spring-to-go'
 video: 'https://youtu.be/z_Ymxg8MAwo'
 tags: ['go', 'spring-boot', 'java', 'context', 'goroutines']
 draft: false
+series: 'Spring Boot to Other Stacks'
+episode: 4
 ---
 
 I sent a payment of minus five to a Go service. It answered 400: amount must be

@@ -9,6 +9,8 @@ sheet: '/downloads/distributed-transactions-design-sheet.pdf'
 repo: 'https://github.com/code-with-sam-dev/txn-demos'
 tags: ['java', 'spring', 'kafka', 'distributed-systems', 'interviews']
 draft: false
+series: 'Tricky Senior Engineer Interview Questions'
+episode: 2
 ---
 
 A method writes to the database, charges a card over HTTP, and writes to the

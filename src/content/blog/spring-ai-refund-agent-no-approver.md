@@ -9,6 +9,8 @@ repo: 'https://github.com/code-with-sam-dev/spring-ai-refund-limits'
 tags: ['java', 'spring', 'ai', 'payments']
 duration: '10:33'
 draft: false
+series: 'Spring AI for Java Developers'
+episode: 2
 ---
 
 An AI agent is allowed to refund anything under twenty dollars, with nobody

@@ -10,6 +10,8 @@ repo: 'https://github.com/code-with-sam-dev/spring-micronaut-federation'
 video: 'https://youtu.be/oyaep6Gri78'
 tags: ['graphql', 'federation', 'kafka', 'micronaut', 'spring-boot', 'java', 'outbox']
 draft: false
+series: 'GraphQL'
+episode: 1
 ---
 
 Kafka was down. I placed an order anyway. One version of this checkout made the

@@ -9,6 +9,8 @@ repo: 'https://github.com/code-with-sam-dev/spring-boot-flash-sale'
 tags: ['java', 'spring', 'performance', 'databases']
 duration: '9:01'
 draft: false
+series: 'Spring Boot 4 for Working Java Developers'
+episode: 2
 ---
 
 A shop runs a flash sale. Twenty people a second try to buy the same pair of

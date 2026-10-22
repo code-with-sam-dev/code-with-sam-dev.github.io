@@ -10,6 +10,8 @@ repo: 'https://github.com/code-with-sam-dev/spring-ai-support-agent'
 video: 'https://youtu.be/7rWOtB4-Kdw'
 tags: ['spring-ai', 'spring-boot', 'mcp', 'claude-code']
 draft: false
+series: 'Spring AI for Java Developers'
+episode: 1
 ---
 
 A customer writes: charged twice for order 1043, please refund the duplicate.

@@ -9,6 +9,8 @@ repo: 'https://github.com/code-with-sam-dev/assertions-demos'
 tags: ['java', 'testing', 'junit', 'tdd', 'interviews']
 duration: '13:11'
 draft: false
+series: 'Testing and TDD for Java'
+episode: 2
 ---
 
 Open your last Spring Boot project and look at the test classpath. Not the code,

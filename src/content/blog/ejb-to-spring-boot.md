@@ -9,6 +9,8 @@ duration: '18:14'
 sheet: '/downloads/ejb-to-spring-design-sheet.pdf'
 repo: 'https://github.com/code-with-sam-dev/ejb-migration-demos'
 draft: false
+series: 'Solutions and Software Architect Interviews'
+episode: 1
 ---
 
 There is a meeting that happens in a lot of companies, and it always ends the
