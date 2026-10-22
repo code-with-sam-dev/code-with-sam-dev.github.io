@@ -6,6 +6,8 @@ cover: '/covers/complete-modern-java-01-first-program.jpg'
 sheet: '/downloads/complete-modern-java-01-first-program.pdf'
 repo: 'https://github.com/code-with-sam-dev/complete-modern-java'
 tags: ['java', 'typescript', 'beginners']
+series: 'Complete Modern Java'
+episode: 1
 duration: '10:08'
 draft: false
 youtube: 'kVCc-XGgtJc'

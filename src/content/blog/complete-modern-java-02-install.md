@@ -6,6 +6,8 @@ cover: '/covers/complete-modern-java-02-install.jpg'
 sheet: '/downloads/complete-modern-java-02-install.pdf'
 repo: 'https://github.com/code-with-sam-dev/complete-modern-java'
 tags: ['java', 'beginners', 'intellij']
+series: 'Complete Modern Java'
+episode: 2
 duration: '7:00'
 draft: false
 youtube: 'IQ5hSXXnaEo'
