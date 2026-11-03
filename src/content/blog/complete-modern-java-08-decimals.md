@@ -1,5 +1,5 @@
 ---
-title: 'Why 0.1 + 0.2 Is Not 0.3 in Java (Complete Beginner)'
+title: 'Java double vs BigDecimal: Why 0.1 + 0.2 Isn''t 0.3'
 description: 'Episode 8 of Complete Modern Java. Why 1.10 + 2.20 prints 3.3000000000000003: doubles store binary, where one tenth never ends. The proof with BigDecimal, then two ways to keep money exact, whole cents and BigDecimal from text, in Java and TypeScript.'
 pubDate: 2026-11-12
 cover: '/covers/complete-modern-java-08-decimals.jpg'
