@@ -291,6 +291,54 @@ const SHEETS = {
     data: './pdf/sn-36-opentelemetry.data.mjs',
     out: 'public/downloads/spring-to-node-36-opentelemetry.pdf',
   },
+  'cmj-14-arrays': {
+    data: './pdf/cmj-14-arrays.data.mjs',
+    out: 'public/downloads/complete-modern-java-14-arrays.pdf',
+  },
+  'cmj-13-methods': {
+    data: './pdf/cmj-13-methods.data.mjs',
+    out: 'public/downloads/complete-modern-java-13-methods.pdf',
+  },
+  'cmj-12-loops': {
+    data: './pdf/cmj-12-loops.data.mjs',
+    out: 'public/downloads/complete-modern-java-12-loops.pdf',
+  },
+  'cmj-11-and-or-else-if': {
+    data: './pdf/cmj-11-and-or-else-if.data.mjs',
+    out: 'public/downloads/complete-modern-java-11-and-or-else-if.pdf',
+  },
+  'cmj-10-if-else': {
+    data: './pdf/cmj-10-if-else.data.mjs',
+    out: 'public/downloads/complete-modern-java-10-if-else.pdf',
+  },
+  'cmj-09-number-limits': {
+    data: './pdf/cmj-09-number-limits.data.mjs',
+    out: 'public/downloads/complete-modern-java-09-number-limits.pdf',
+  },
+  'cmj-08-decimals': {
+    data: './pdf/cmj-08-decimals.data.mjs',
+    out: 'public/downloads/complete-modern-java-08-decimals.pdf',
+  },
+  'cmj-07-operators': {
+    data: './pdf/cmj-07-operators.data.mjs',
+    out: 'public/downloads/complete-modern-java-07-operators.pdf',
+  },
+  'cmj-06-values-and-types': {
+    data: './pdf/cmj-06-values-and-types.data.mjs',
+    out: 'public/downloads/complete-modern-java-06-values-and-types.pdf',
+  },
+  'cmj-05-debugger': {
+    data: './pdf/cmj-05-debugger.data.mjs',
+    out: 'public/downloads/complete-modern-java-05-debugger.pdf',
+  },
+  'cmj-04-read-your-first-errors': {
+    data: './pdf/cmj-04-read-your-first-errors.data.mjs',
+    out: 'public/downloads/complete-modern-java-04-read-your-first-errors.pdf',
+  },
+  'cmj-03-node-typescript': {
+    data: './pdf/cmj-03-node-typescript.data.mjs',
+    out: 'public/downloads/complete-modern-java-03-node-typescript.pdf',
+  },
   'cmj-02-install': {
     data: './pdf/cmj-02-install.data.mjs',
     out: 'public/downloads/complete-modern-java-02-install.pdf',
