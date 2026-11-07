@@ -291,6 +291,18 @@ const SHEETS = {
     data: './pdf/sn-36-opentelemetry.data.mjs',
     out: 'public/downloads/spring-to-node-36-opentelemetry.pdf',
   },
+  'cmj-17-encapsulation': {
+    data: './pdf/cmj-17-encapsulation.data.mjs',
+    out: 'public/downloads/complete-modern-java-17-encapsulation.pdf',
+  },
+  'cmj-16-classes': {
+    data: './pdf/cmj-16-classes.data.mjs',
+    out: 'public/downloads/complete-modern-java-16-classes-and-objects.pdf',
+  },
+  'cmj-15-loops': {
+    data: './pdf/cmj-15-loops.data.mjs',
+    out: 'public/downloads/complete-modern-java-15-loop-over-an-array.pdf',
+  },
   'cmj-14-arrays': {
     data: './pdf/cmj-14-arrays.data.mjs',
     out: 'public/downloads/complete-modern-java-14-arrays.pdf',
