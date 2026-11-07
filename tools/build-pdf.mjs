@@ -291,6 +291,10 @@ const SHEETS = {
     data: './pdf/sn-36-opentelemetry.data.mjs',
     out: 'public/downloads/spring-to-node-36-opentelemetry.pdf',
   },
+  'cmj-20-cart': {
+    data: './pdf/cmj-20-cart.data.mjs',
+    out: 'public/downloads/complete-modern-java-20-shopping-cart.pdf',
+  },
   'cmj-19-arraylist': {
     data: './pdf/cmj-19-arraylist.data.mjs',
     out: 'public/downloads/complete-modern-java-19-arraylist.pdf',
