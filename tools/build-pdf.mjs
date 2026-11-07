@@ -291,6 +291,10 @@ const SHEETS = {
     data: './pdf/sn-36-opentelemetry.data.mjs',
     out: 'public/downloads/spring-to-node-36-opentelemetry.pdf',
   },
+  'cmj-25-interfaces': {
+    data: './pdf/cmj-25-interfaces.data.mjs',
+    out: 'public/downloads/complete-modern-java-25-interfaces.pdf',
+  },
   'cmj-24-static': {
     data: './pdf/cmj-24-static.data.mjs',
     out: 'public/downloads/complete-modern-java-24-static-and-constants.pdf',
