@@ -8,7 +8,7 @@ repo: 'https://github.com/code-with-sam-dev/complete-modern-java'
 tags: ['java', 'typescript', 'beginners']
 series: 'Complete Modern Java'
 episode: 23
-duration: '5:02'
+duration: '5:03'
 youtube: 'WRrOqI0dd7g'
 draft: false
 ---
