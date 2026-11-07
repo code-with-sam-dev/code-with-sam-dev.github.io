@@ -291,6 +291,10 @@ const SHEETS = {
     data: './pdf/sn-36-opentelemetry.data.mjs',
     out: 'public/downloads/spring-to-node-36-opentelemetry.pdf',
   },
+  'cmj-19-arraylist': {
+    data: './pdf/cmj-19-arraylist.data.mjs',
+    out: 'public/downloads/complete-modern-java-19-arraylist.pdf',
+  },
   'cmj-18-exceptions': {
     data: './pdf/cmj-18-exceptions.data.mjs',
     out: 'public/downloads/complete-modern-java-18-exceptions.pdf',
