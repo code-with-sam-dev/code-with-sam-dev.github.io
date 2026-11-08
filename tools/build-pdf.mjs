@@ -291,6 +291,10 @@ const SHEETS = {
     data: './pdf/sn-36-opentelemetry.data.mjs',
     out: 'public/downloads/spring-to-node-36-opentelemetry.pdf',
   },
+  'cmj-28-abstract': {
+    data: './pdf/cmj-28-abstract.data.mjs',
+    out: 'public/downloads/complete-modern-java-28-abstract-classes.pdf',
+  },
   'cmj-27-composition': {
     data: './pdf/cmj-27-composition.data.mjs',
     out: 'public/downloads/complete-modern-java-27-composition.pdf',
